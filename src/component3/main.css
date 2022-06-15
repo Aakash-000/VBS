@@ -1,0 +1,91 @@
+.main_content{
+    padding:2rem 15rem;
+}
+.main_image{
+    padding:2rem 4rem;
+    width:100%;
+    height: 100%;
+    display: flex;
+}
+
+.main_subone{
+    padding:1em;
+    display: flex;
+    flex-wrap: wrap;
+    position:relative;
+}
+.main_subone h3{
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding:0px 0px;
+    letter-spacing: 1px;
+}
+.main_subone  a{
+    margin-top: 5px;
+    margin-left:5px;
+    text-decoration: none;
+    color: rgb(1, 14, 26);
+    font-family: sans-serif;
+}
+.main_subone::after {
+    content: '';
+    width:100%;
+  }
+.main_subone_three{
+    order:1;
+    height:10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.main_subone .main_subone_one{
+    order: 2;
+    padding:2em 5em 1em 1em;
+    flex-direction: column;
+}
+.main_subone .main_subone_two{
+    order:3;
+    padding: 0 0 0 6px;
+}
+
+
+@media only screen and (max-width:700px){
+        .main_content{
+            
+        }
+        .main_image{
+            flex-direction: column;
+        }
+        .main_image img{
+            width:40%;
+            height:40%;
+            border: none;
+        }
+        .main_subone{
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .main_subone h3{
+            font-size: 4vw;
+            letter-spacing: 2px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .main_subone a{
+            text-decoration: none;
+            color: rgb(1, 14, 26);
+            font-family: sans-serif;
+        }
+        .main_subone h1{
+            font-size:4vw;
+        }
+        .main_subone .main_subone_one{
+            font-size: 3vw;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            
+        }
+        .main_aubone .main_subone_two{
+            font-size: 3vw;
+            color:rgb(27, 2, 2);
+           
+            
+        }
+
+}

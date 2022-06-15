@@ -1,0 +1,39 @@
+.navbar{
+    background: #999999;
+}
+.navbar_logo{
+    padding:1rem 3.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar_logo img{
+    width:135px;
+    height:100px;
+}
+.navbar_link{
+    display: flex;
+    align-items: center;
+}
+.navbar_link p a{
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0rem 1.2rem;
+    font-size: 20px;
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.react_fact{
+    position:relative;
+    margin-right:700px;
+}
+.navbar_logo h1{
+    color:#321456;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+@media screen and (max-width:1310px){
+        .navbar_logo h1{
+            display:none;
+        }
+}

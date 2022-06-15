@@ -1,0 +1,11 @@
+.navbar_logo img{
+    height: 50px;
+    display: flex;
+}
+.navbar_logo{
+    padding: 1.5rem 4rem;
+}
+.navbar{
+    background: #555555;
+    box-shadow: 0px 2.98534px 7.9865px rgb(170, 166, 166);
+}
