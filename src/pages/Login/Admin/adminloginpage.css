@@ -1,0 +1,10 @@
+.admin_page{
+    padding-top: 5vw;
+}
+span { 
+    color:black;
+    display: hidden;
+}
+input:invalid[focused=true] ~ span{
+    display: block;
+}

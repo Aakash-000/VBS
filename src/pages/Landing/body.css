@@ -1,0 +1,72 @@
+.landing_page{
+    margin-top: 5vw;
+}
+.image_sec .img-fluid{
+    width:95%;
+    height: 85%;
+}
+.slider_bar{
+    margin:0 1.6vw;
+}
+.card-text{
+    font-family: 'Roboto',sans-serif;
+}
+.card-title{
+    font-family: 'Raleway', sans-serif;
+    font-size: 50px;
+    font-weight: 500;
+}
+.text_sec{
+    padding-top: 2vw;
+    margin-left:5vw;
+}
+.text_sec .hero_button{
+    cursor: pointer;
+    font-size: 1.3vw;
+    font-weight: 400;
+    letter-spacing: 2px;
+    padding: 0.7vw 1.3vw;
+    border:none;
+    border-radius:2vw;
+    background-color: #1D3557;
+    color: #F1FAEE;
+}
+.text_sec .hero_button:hover{
+    background: #E63946;
+    color: rgb(8, 12, 37);
+}
+.icon_grid{
+    background-color: white;
+    border-bottom:1px solid rgb(207, 207, 214);
+    /* box-shadow: 0px 1px 1px 0px rgb(196, 204, 196); */
+}
+.make_grid{
+    display: flex;
+    flex-direction: row;
+    margin:2.5vw 2vw;
+    gap:2vw;
+}
+.card_head{
+    font-size: 2.3vw;
+    font-weight: 490;
+}
+.box_card{
+    box-shadow: 0 0 0 1.5px rgb(233, 240, 239);
+}
+.icon_heading{
+    font-size: 3.5vw;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    text-align: center;
+}
+.gicon{
+    margin-right:0.7vw;
+}
+.card_body_head{
+    display: flex;
+    justify-content: center;
+}
+.card_body_sub{
+    display:flex;
+    flex-direction: column;
+}

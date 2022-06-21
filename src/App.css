@@ -1,9 +1,6 @@
 *{
     margin:0px;
+    padding: 0;
     scroll-behavior: smooth;
     box-sizing: inherit;
 }
-body{
-    text-decoration: none;
-}
-

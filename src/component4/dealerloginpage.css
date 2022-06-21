@@ -1,0 +1,73 @@
+.dealer{
+    background: rgb(93, 45, 57);
+    font-family: montserrat,'sans-serif'; 
+}
+.header p{
+    padding-top: 4vw;
+    padding-bottom: 1vw;
+    color:antiquewhite;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.button_point{
+    text-align: center;
+    margin-bottom: 1.2rem;
+}
+button{
+    border: none;
+    padding:0.5em 2em;
+    font-size: 20px;
+    border-radius: 7px;
+}
+button:active{
+    transform: translate(2px,4px);
+    transition: all 0.15s ease 0s;
+}
+.header p{
+    
+    font-size:30px;
+    text-align: center;
+}
+span{
+    color:antiquewhite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: none;
+}
+input:invalid[focused="true"] ~ span{
+    display: block;
+}
+.admin_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.admin_form .form_field{
+    gap:5px;
+}
+.admin_form .form_field{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.admin_form .form_field label{
+    font-size: 20px;
+    color:antiquewhite;
+}
+.admin_form .form_field input {
+    box-sizing: border-box;
+    font-size:30px;
+    height: 45px;
+    border:none;
+    outline: none;
+    border-radius: 5px;
+    background:antiquewhite;
+}
+.form_field_button{
+    text-align: center;
+}
+.form_field_button button{
+    font-size:20px;
+    color:rgb(41, 0, 0);
+    border:none;
+    border-radius:5px;
+    cursor: pointer;
+}
