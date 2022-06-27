@@ -14,5 +14,5 @@ export default[{
     {
         icon: <Reacticonthree/>,
         head:'Book Venue', 
-        text:'Book the venue of your fit.Look at the available date for venue and register for Cutomer Account.You can now book the venue happily.'  
+        text:'Book the venue of your fit.Look at the available date for venue and register for Cutomer Account.You can now book the venue.'  
     }]

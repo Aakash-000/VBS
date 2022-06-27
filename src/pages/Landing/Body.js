@@ -12,8 +12,8 @@ export default function Body() {
             <div className='container-fluid'>
               <div className='row'>
               <div className='text_sec col-4 .col-md-2'>
-              <h5 className="card-title">Explore Best class venue of your fit!</h5>
-              <p className="card-text">Discover the list of legally registered venues and book match of your best fit.Our service of making your reach to top class Venue from any remote location safer,easier and faster is for free.Book venue right now.</p>
+              <h5 className="title card-title">Explore Best class venue of your fit!</h5>
+              <p className="text card-text">Discover the list of legally registered venues and book match of your best fit.Our service of making your reach to top class Venue from any remote location safer,easier and faster is for free.Book venue right now.</p>
               <button className='hero_button'>Book Now</button>
               </div>
               <div className='slider_bar col-7 .col-md-4'>
@@ -40,7 +40,9 @@ export default function Body() {
                 </div>))}
                 </div>
                 </div>
-              <p>This is our service page.</p>  
+              <div className='container'>
+                Trust our Service
+                </div>  
               </div> 
   )
 }

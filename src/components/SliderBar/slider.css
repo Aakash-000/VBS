@@ -154,29 +154,28 @@ article h4 {
   margin-top: 1rem;
   color: rgb(26, 18, 18);
 }
-.prev,
-.next {
+.section-center .prev,
+.section-center .next {
   position: absolute;
   top: 200px;
   background-color: #A8DADC;
   opacity: 0.6;
-  width:0vw;
   color: black;
   display: grid;
   place-items: center;
   border-color: transparent;
-  font-size: 1rem;
-  border-radius: 5vw;
+  font-size: 2rem;
   cursor: pointer;
+  
 }
-.prev:hover,
-.next:hover {
+.section-center .prev:hover,
+.section-center .next:hover {
   background: grey;
 }
-.prev {
+.section-center .prev {
   left: 0vw;
 }
-.next {
+.section-center .next {
   right: 0vw;
 }
 @media (min-width: 800px) {

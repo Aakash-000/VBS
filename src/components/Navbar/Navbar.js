@@ -61,6 +61,7 @@ export default function Navbar() {
             <button id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><FaOdnoklassniki className='buttonicon'/>Customer</button>
             <ul className="dropdown-menu" onClick={(()=>SetMobileRes(false))} aria-labelledby="dropdownMenuLink">
             <li><Link to="/customerlogin" className="dropdown-item">Login</Link></li>
+            <li><Link to="/customerregistration" className="dropdown-item">Register</Link></li>
             </ul>
             </div>
             <div className="dropdown">
