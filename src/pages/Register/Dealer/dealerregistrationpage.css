@@ -37,7 +37,7 @@ span{
 .dreg_form{
     margin:0 20vw;
     border-radius: 2vw;
-    box-shadow: 0 1px 2px 2.5px rgb(196, 202, 200);
+    box-shadow: 0 0 0 1.5px rgb(171, 180, 178);
     padding:1vw;
     background-color:rgb(253, 254, 255);
 }
@@ -67,7 +67,7 @@ span{
 }
 .dreg_form .dreg_field button{
     border:none;
-    font-size: 1.8vw;
+    font-size: 1.7vw;
     width:30%;
     background-color: #1D3557;
     color: #F1FAEE;

@@ -40,7 +40,7 @@ export const routes = [
         path: "/dealeraccount/:id",
         component: <Dealeraccountpage/>
     },{
-        path:"/forcustomer/venue/:id",
+        path:"/explorevenue/venue/:id",
         component: <Venuecarddetailpage/>
     }
 ];

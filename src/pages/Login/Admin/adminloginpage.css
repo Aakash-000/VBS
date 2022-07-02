@@ -14,6 +14,7 @@
     border-radius: 0.4vw;
     border:1px solid black;
     height:2.6vw; 
+    padding:0.2vw;
 }
 
 .admin_control_form .form_field_admin input:invalid[focused=true] ~ span{
@@ -25,6 +26,13 @@
     font-size: 2.9vw;
     font-weight: 350;
     margin:3vw 0vw;
+}
+.admin_control_form .heading_alog{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    gap:1vw;
 }
 .form_field_admin{
     display: flex;

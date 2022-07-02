@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react'
+import {Reacticoneight} from '../../../assets/icons/Reacticon.js'
 import './customerloginpage.css'
 
 
@@ -19,7 +20,7 @@ export default function Customerloginpage() {
   return (
     <div className='customer_page container'>
         <form className='customer_form' onsubmit={submitHandler}>
-        <h1>Customer Login</h1>
+        <h1 className='heading_clog'><Reacticoneight/>Customer Login</h1>
         <div className='form_field_customer'>
         <label htmlFor='username'>UserName :</label>
         <input autoComplete="off" type="text" pattern='^[a-zA-Z ]{5,16}$' required={true} name='username' id="username" onBlur={handleFocus} focused={focused.toString()} onChange={e=>setCustomerDetail({...CustomerDetail,username:e.target.value})} value={CustomerDetail.username}/>

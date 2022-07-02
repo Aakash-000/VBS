@@ -2,6 +2,7 @@ import './searchbar.css'
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import Dealercardlist from '../../component4/Dealercardlist.js';
+import {Reacticonseven} from '../../assets/icons/Reacticon.js'
 import './searchbar.css'
 
 
@@ -10,7 +11,7 @@ export const Searchbar = () =>{
     return (
     <div>
     <div className='search_bar'>
-    <input type="text" name="search" autoComplete="off" id="search"  value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} placeholder='Search For Location'/>
+    <input type="text" name="search" autoComplete="off" id="search"  value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} placeholder='Search For Location'/><Reacticonseven/>
     </div>
     <Dealercardlist filterSearch={searchTerm}/>
     </div>

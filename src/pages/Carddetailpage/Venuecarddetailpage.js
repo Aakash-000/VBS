@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import './venuecarddetailpage.css'
 import axios from 'axios';
 
-export const PI=3.14;
 
 export default function Venuecarddetailpage() {
   const[getregvenue,setgetregvenue] = useState([]);

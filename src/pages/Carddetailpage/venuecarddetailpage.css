@@ -18,13 +18,13 @@
     margin: 8vw auto;
 }
 .card_detail_image img{
-        width:70vw;
-        border-radius: 2vw;
-        border:2px solid rgb(151, 149, 146);
-        display: block;
+    width:70vw;
+    border-radius: 2vw;
+    border:2px solid rgb(151, 149, 146);
+    display: block;
 }
 .card_detail_main{
-    background: rgb(66, 39, 46);
+    background: rgb(255, 255, 255);
 }
 .card_detail_image_overlay{
     position: absolute;
@@ -68,7 +68,6 @@
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight:lighter;
     position: absolute;
-    border:2px solid rgb(54, 36, 8);
     border-radius: 1vw;
     top: 3%;
     left: 50%;
@@ -81,7 +80,6 @@
     font-size: 3.5vw;
     font-weight:lighter;
     font-family:'   Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    
     position: absolute;
     top: 60%;
     left: 50%;
@@ -148,7 +146,6 @@
         font-family:'   Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         background: #b4f8f6;
         position: absolute;
-        border: 1px solid rgb(39, 9, 9);
         border-radius: 2vw;
         top: 20%;
         left: 50%;

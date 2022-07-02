@@ -9,7 +9,7 @@ import {FaLinkedin} from 'react-icons/fa'
 import {Link} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-
+import {Reacticonfive,Reacticonsix} from '../../assets/icons/Reacticon.js'
 export default function Navbar() {
   const[MobileRes,SetMobileRes] = useState(false);
  
@@ -46,26 +46,26 @@ export default function Navbar() {
         </div>
         <div className={MobileRes ? ('navbar_sub_mobile') : ('navbar_sub')}>
             <Link to="/aboutus">
-            <button><FaChalkboardTeacher className='buttonicon'/>Aboutus</button>
+            <button className='about_but'><Reacticonfive className='buttonicon'/>Aboutus</button>
             </Link>
             <Link to="/explorevenue">
-            <button className='styl_exp'><FaChalkboardTeacher className='buttonicon'/>Explore</button>
+            <button className='styl_exp'><Reacticonsix className='buttonicon'/>Explore</button>
             </Link>
-            <div className="dropdown" >
-            <button id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><FaChalkboardTeacher className='buttonicon'/>Admin</button>
+            <div className="drop_down dropdown" >
+            <button id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><FaChalkboardTeacher size={20} className='buttonicon'/>Admin</button>
             <ul className="dropdown-menu" onClick={(()=>SetMobileRes(false))} aria-labelledby="dropdownMenuLink">
             <li><Link to="/adminlogin" className="dropdown-item">Login</Link></li>
             </ul>
             </div>
-            <div className="dropdown">
-            <button id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><FaOdnoklassniki className='buttonicon'/>Customer</button>
+            <div className="drop_down dropdown">
+            <button id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><FaOdnoklassniki size={20} className='buttonicon'/>Customer</button>
             <ul className="dropdown-menu" onClick={(()=>SetMobileRes(false))} aria-labelledby="dropdownMenuLink">
             <li><Link to="/customerlogin" className="dropdown-item">Login</Link></li>
             <li><Link to="/customerregistration" className="dropdown-item">Register</Link></li>
             </ul>
             </div>
-            <div className="dropdown">
-            <button id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><HiUserGroup className='buttonicon'/>Dealer</button>
+            <div className="drop_down dropdown">
+            <button id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><HiUserGroup size={20} className='buttonicon'/>Dealer</button>
             <ul className="dropdown-menu" onClick={(()=>SetMobileRes(false))} aria-labelledby="dropdownMenuLink">
             <li><Link to="/dealerlogin" className="dropdown-item">Login</Link></li>
             <li><Link to="/dealerregistration" className="dropdown-item">Register</Link></li>

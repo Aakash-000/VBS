@@ -41,3 +41,13 @@
         font-size: 4vw;
     }
 }
+.grid_layout .grid_layout_row{
+    gap:1vw;
+    padding:0vw 1vw;
+}
+.grid_layout .grid_layout_row .grid_layout_col{
+    width:311px;
+}  
+.grid_layout .grid_layout_row .grid_layout_link{
+    width:325px;
+} 

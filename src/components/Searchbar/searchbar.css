@@ -9,5 +9,7 @@
     height:40px;
     font-size: 20px;
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: 0.7vw;
+    border:1px solid black;
+    padding:0.2vw;
 }

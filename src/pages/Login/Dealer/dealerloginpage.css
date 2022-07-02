@@ -14,8 +14,15 @@
     border-radius: 0.4vw;
     border:1px solid black;
     height:2.6vw;
+    padding:0.2vw;
 }
-
+.dealer_form .heading_dlog{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    gap:1vw;
+}
 .dealer_form .form_field_dealer input:invalid[focused=true] ~ span{
     display: block;
     width: 50%;
