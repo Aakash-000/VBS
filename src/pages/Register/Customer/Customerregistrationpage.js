@@ -5,6 +5,7 @@ import {useNavigate,Link} from 'react-router-dom';
 import {Reacticonfour} from '../../../assets/icons/Reacticon.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import Navbar from '../../../components/Navbar/Navbar.js'
 
 export default function Customerregistrationpage() {
   const errorMsg = [{id:'1',forName: "*Please include at least ten letter with no special characters in your Venue Name"},
@@ -19,19 +20,22 @@ export default function Customerregistrationpage() {
     const[fileUpload,setFileUpload]=useState(null);
     const[focused,setFocused] = useState(false);
     const[response,setResponse] = useState([]);
-    const[customerDetail,setCustomerDetail] = useState({email:"",userName:"",address:"",contactNumber:"",password:""});
+    const[customerDetail,setCustomerDetail] = useState({email:"",name:"",city_name:"",mobile_no:"",password:""});
 
-    useEffect(async()=>{
-      let response = await axios.get('https://venue-booking-system2.herokuapp.com/venue');
-      setResponse(response.data.data);
-    },[])
-    console.log(response);
 
-      async function submitHandler(e){
+      async function register(){
+        let response = await axios.post('https://venue-booking-system2.herokuapp.com/register/client',JSON.stringify(customerDetail),
+        {headers:{'Content-Type':'application/json'
+        }});
+
+        console.log(response);
+        setCustomerDetail(()=>({...customerDetail,email:" ",name:" ",city_name:" ",mobile_no:" ",password:" "}));
+        navigate('/customerlogin');
+      }
+
+       function submitHandler(e){
       e.preventDefault();
-      let response = await axios.post('https://venue-booking-system2.herokuapp.com/venue/create',customerDetail);
-      setCustomerDetail(()=>({...customerDetail,email:" ",userName:" ",address:" ",contactNumber:" ",password:" "}));
-      navigate('/customerregistration');
+        register();
       }
       
 
@@ -46,58 +50,11 @@ export default function Customerregistrationpage() {
  }
  
   return (
-    // <div className='dealer_registration'>
-    //     <form className='admin_form' onSubmit={submitHandler}>
-    //     <h1 style={{textAlign:'center',color:'rgb(250,235,215)',fontWeight:'lighter',padding:'0.5em 0em',fontSize:'35px'}}>If you are a new user first register your venue and then login</h1> 
-    //     <h1 style={{textAlign:'center',color:'rgb(250,235,215)',fontWeight:'lighter',padding:'0.5em 0em',fontSize:'35px'}}>If you have registered your venue already Click here to <Link to="/Dealerloginpage"><button type="submit">Login</button></Link></h1> 
-    //     <h1 style={{textAlign:'center',color:'rgb(250,235,215)',fontWeight:'lighter',padding:'0.5em 0em',fontSize:'25px'}}>*NOTE: Remember your username, email and password you used to add venue.</h1> 
-    //     <div className='form_field'>
-    //     <label htmlFor='email'>Email:</label>
-    //     <input autoComplete="off" type="text" name='email' pattern='^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,email:e.target.value})} value={dealerDetail.email}/>
-    //     <span>*Please write valid email</span>{console.log(focused)}
-    //     </div>
-    //     <div className='form_field'>
-    //     <label htmlFor='file'>VenueImage :</label>
-    //     <input type="file" name="file" id="file" required={true} accept=".jpg, .jpeg, .png, .svg, .gif" multiple  onBlur={handleFocus} focused={focused.toString()} onChange={e=>{setFileUpload(e.target.files)}}/>
-    //     <span>{errorMsg.map((item)=>(item.forImage))}</span>
-    //     </div>
-    //     <div className='form_field'>
-    //     <label htmlFor='name'>VenueName :</label>
-    //     <input autoComplete="off" type="text" name='venuename' id='name' required={true} pattern='^[a-zA-Z ]{10,200}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,venueName:e.target.value})} value={dealerDetail.venueName}/>
-    //     <span>{errorMsg.map((item)=>(item.forName))}</span>
-    //     </div>
-    //     <div className='form_field'>
-    //     <label htmlFor='username'>YourUserName :</label>
-    //     <input autoComplete="off" type="text" name='username' id='username' required={true} pattern='^[a-zA-Z ]{3,16}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,userName:e.target.value})} value={dealerDetail.userName}/>
-    //     <span>{errorMsg.map((item)=>(item.forUserName))}</span>
-    //     </div>
-    //     <div className='form_field'>
-    //     <label htmlFor='location'>Location :</label>
-    //     <input autoComplete="off" type="text" name='address'  required={true} id='address' pattern='^[a-zA-Z ]{5,200}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,address:e.target.value})} value={dealerDetail.address}/>
-    //     <span>{errorMsg.map((item)=>(item.forLocation))}</span>
-    //     </div>
-    //     <div className='form_field'>
-    //     <label htmlFor='number'>ContactNumber :</label>
-    //     <input type="text" name='number' id='number' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setDealerDetail({...dealerDetail,contactNumber:e.target.value})} value={dealerDetail.contactNumber}/>
-    //      <span>{errorMsg.map((item)=>(item.forConNum))}</span>
-    //     </div>
-    //     <div className='form_field'>
-    //     <label htmlFor='password'>Password :</label>
-    //     <input type="password" name='password' id='password' onBlur={handleFocus} focused={focused.toString()} pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} onChange={e=>setDealerDetail({...dealerDetail,password:e.target.value})} value={dealerDetail.password}/>
-    //     <span>{errorMsg.map((item)=>(item.forPassword))}</span>
-    //     </div>
-    //     <div className='form_field_comment'>
-    //     <label htmlFor='description'>Description :</label>
-    //     <textarea placeholder="Write specaility about Your Venue" name='comment' pattern='^[a-zA-Z ]{50,200}$'  onBlur={handleFocus} focused={focused.toString()} required={true} id='comment' onChange={e=>setDealerDetail({...dealerDetail,comment:e.target.value})} value={dealerDetail.comment}/>
-    //     <span>{errorMsg.map((item)=>(item.forComment))}</span>
-    //     </div>
-    //     <div className='form_field_button'>
-    //     <button type="submit">Add Venue</button>
-    //     </div>
-    //     </form>
-    // </div>
+    <div> 
+      <Navbar/>
     <div className='customer_reg_page container-fluid'>
-      <form class="creg_form row g-3">
+      
+      <form class="creg_form row g-3" onSubmit={submitHandler}>
         <h1 className='heading_creg'><Reacticonfour className='reg_icon'/>Customer Registration</h1>
       
     <div class="creg_field col-md-6">
@@ -107,7 +64,7 @@ export default function Customerregistrationpage() {
   </div>
   <div class="creg_field col-md-6">
   <label for="username" class="form-label">User Name</label>
-  <input autoComplete="off" type="text" name='username' id='username' required={true} pattern='^[a-zA-Z ]{3,16}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,userName:e.target.value})} value={customerDetail.userName}/>
+  <input autoComplete="off" type="text" name='name' id='username' required={true} pattern='^[a-zA-Z ]{3,16}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,name:e.target.value})} value={customerDetail.name}/>
     <span>{errorMsg.map((item)=>(item.forUserName))}</span>
     </div>
 
@@ -120,19 +77,25 @@ export default function Customerregistrationpage() {
    
   <div class="creg_field col-md-6">
     <label for="address" class="form-label">Address</label>
-    <input autoComplete="off" type="text" name='address'  required={true} id='address' pattern='^[a-zA-Z ]{5,200}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,address:e.target.value})} value={customerDetail.address}/>
+    <input autoComplete="off" type="text" name='city_name'  required={true} id='address' pattern='^[a-zA-Z ]{5,200}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,city_name:e.target.value})} value={customerDetail.city_name}/>
     <span>{errorMsg.map((item)=>(item.forLocation))}</span>
     </div>
     <div class="creg_field col-md-6">
     <label for="contactnumber" class="form-label">Contact Number</label>
-    <input type="text" name='number' id='number' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setCustomerDetail({...customerDetail,contactNumber:e.target.value})} value={customerDetail.contactNumber}/>
+    <input type="text" name='mobile_number' id='number' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setCustomerDetail({...customerDetail,mobile_no:e.target.value})} value={customerDetail.mobile_no}/>
     <span>{errorMsg.map((item)=>(item.forConNum))}</span>
   </div>
 
   <div class="creg_field col-12">
-    <button type="submit" >Add Venue</button>
+    <button type="submit" >Register</button>
   </div>
     </form>
     </div>
+    </div>
   )
 }
+
+
+
+
+

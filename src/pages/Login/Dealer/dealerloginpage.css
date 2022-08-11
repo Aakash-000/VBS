@@ -1,5 +1,5 @@
 .dealer_page{
-    margin-top: 1.5vw;
+    margin-top: 1vw;
     padding:1vw;
 }
 .form_field_dealer span { 
@@ -44,7 +44,7 @@
     font-size:1.5vw;
 }
 .form_field_dealer button{
-    width: 25%;
+    width: 100%;
     background-color: #1D3557;
     color: #F1FAEE;
     font-size: 1.8vw;
@@ -59,10 +59,21 @@
     background-color:rgb(39, 66, 104);
     color: rgb(234, 255, 226);
 }
+
 .dealer_form{
     box-shadow: 0 0 0 1.5px rgb(171, 180, 178);
     margin: 0 16vw;
     padding:1vw;
     background-color:rgb(253, 254, 255);
     border-radius:2vw;
+}
+.dealer_page .dealer_registration pre{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.15vw;
+    color:rgb(30, 3, 43);
+    gap:0.4vw;
 }

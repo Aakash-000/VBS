@@ -1,11 +1,12 @@
 .admin_page{
-    margin-top: 1.5vw;
+    margin-top: 1vw;
     padding:1vw;
 }
 .form_field_admin span { 
     color:black;
     display: hidden;
 }
+
 .admin_control_form .form_field_admin input:invalid[focused=true]{
     border:1px solid #E63946;
 }
@@ -16,7 +17,6 @@
     height:2.6vw; 
     padding:0.2vw;
 }
-
 .admin_control_form .form_field_admin input:invalid[focused=true] ~ span{
     display: block;
     width: 50%;

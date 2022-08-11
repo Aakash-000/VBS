@@ -1,6 +1,7 @@
 .customer_page{
-        margin-top: 1.5vw;
+        margin-top: 1vw;
         padding:1vw;
+        background-color: white;
     }
     .form_field_customer span { 
         color:black;
@@ -59,6 +60,7 @@
         background-color:rgb(39, 66, 104);
         color: rgb(234, 255, 226);
     }
+    
     .customer_form{
         box-shadow: 0 0 0 1.5px rgb(171, 180, 178);
         margin: 0 16vw;
@@ -66,3 +68,27 @@
         background-color:rgb(253, 254, 255);
         border-radius: 2vw;
     }
+    .customer_page .customer_registration pre{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.15vw;
+        color:rgb(30, 3, 43);
+        gap:0.4vw;
+    }
+   .invalid{
+       margin: 10px;
+       display: flex;
+       flex-direction:row;
+       justify-content: center;
+       z-index: 999;
+   }
+   .invalid .invalid_status{
+    font-size: 20px;
+    color:#f1eff3;
+    background-color:  #E63946;
+    padding:5px;
+    border-radius: 15px;
+   }

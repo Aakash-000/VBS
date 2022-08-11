@@ -1,46 +1,4 @@
-.item h1{
-    font-size: 40px;
-}
-.item{
-    position: relative;
-    text-align: center;
-    border:2px solid rgb(172, 158, 138);
-    border-radius: 15px;
-    transition: 0.5s ease-in-out;
-}
-.item:hover{
-    transform:scale(0.9);
-}
-.item .span_element h1{
-    z-index:1;
-    position: absolute;
-    bottom: -12px;
-    text-decoration: none;
-    font-size: 1.8vw;
-    font-weight: lighter;
-    font-family:'Oxygen',sans-serif;
-    color:lightcyan;
-    opacity: 1;
-    background-color: rgb(32, 24, 24); 
-    width: 100%;
-    padding: 5px 0px;
-    border-radius: 12px;
-}
-.item .span_element{
-    border-radius: 15px;
-    opacity: 1;
-}
-.item img{
-    z-index:-1;
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 15px;
-}
-@media screen and (max-width:768px) {
-    .item .span_element h1{
-        font-size: 4vw;
-    }
-}
+
 .grid_layout .grid_layout_row{
     gap:1vw;
     padding:0vw 1vw;

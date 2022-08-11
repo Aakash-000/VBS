@@ -1,6 +1,9 @@
 .landing_page{
-    margin-top: 5vw;
-  
+    margin-top: 0vw;
+}
+.upper{
+    background-color: rgb(197, 188, 155);
+    padding-top:2.5vw;
 }
 .image_sec .img-fluid{
     width:95%;
@@ -80,6 +83,7 @@
 }
 .gicon{
     margin-right:0.7vw;
+    color:#23013f;
 }
 .card_body_head{
     display: flex;

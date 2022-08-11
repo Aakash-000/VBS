@@ -4,12 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Sliderbar from '../../components/SliderBar/Sliderbar';
 import Icongridelement from './Icongridelement.js'
+import Navbar from '../../components/Navbar/Navbar.js'
 export default function Body() {
 
          
   return (
             <div className='landing_page'>
-            <div className='container-fluid'>
+              <Navbar/>
+            <div className='upper container-fluid'>
               <div className='row'>
               <div className='text_sec col-4 .col-md-2'>
               <h5 className="title card-title">Explore Best class venue of your fit!</h5>
@@ -24,7 +26,7 @@ export default function Body() {
             <div className='icon_grid container'>
               <div className="icon_heading">Service for Everyone</div>
             </div>
-            <div className="container-fluid">
+            <div className="lower container-fluid">
             <div className="make_grid grid">
             {Icongridelement.map((value,index)=>(
               <div className="grid_layer g-col-6 g-col-md-4" key={index}>

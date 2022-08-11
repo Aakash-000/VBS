@@ -1,14 +1,18 @@
 import React,{useState,useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import './adminloginpage.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min'
 import {Reacticoneight} from '../../../assets/icons/Reacticon.js'
+import Navbar from '../../../components/Navbar/Navbar.js'
+
+
 export default function Adminloginpage() {
   const errorMsg = [{id:'1',forName: "*Please include at least five letter with no special characters in your name"},
   {id:'2',forPassword:"*At least one uppercase character ,seven char long and Please include three letter one number one specialcharacter"},
   {id:'3',forConfirmPassword:"*Password should match!"}]
 
-  const[AdminDetail,setAdminDetail] = useState({username:"",password:"",confirmpassword:""});
+  const[AdminDetail,setAdminDetail] = useState({username:"",password:""});
   const[focused,setFocused] = useState(false);
   const submitHandler = e => {
     e.preventDefault();
@@ -19,7 +23,10 @@ export default function Adminloginpage() {
   }
  
   return (
+    <div>
+       <Navbar/>
      <div className='admin_page container'>
+        
         <form className='admin_control_form' onsubmit={submitHandler}>
         <h1 className='heading_alog'><Reacticoneight/>Admin Login</h1>
         <div className='form_field_admin'>
@@ -35,12 +42,15 @@ export default function Adminloginpage() {
         {/* <div className='form_field'>
         <label htmlFor='password'>ConfirmPassword :</label>
         <input type="password" name='confirmpassword' pattern = {AdminDetail.password} required={true} onBlur={handleFocus} focused={focused.toString()} id="confirmpassword" onChange={e=>setAdminDetail({...AdminDetail,confirmpassword:e.target.value})} value={AdminDetail.confirmpassword}/>
-        <span>{errorMsg.map((item)=>(item.forConfirmPassword))}</span>
+        <span>{errorMs  g.map((item)=>(item.forConfirmPassword))}</span>
         </div> */}
         <div className="form_field_admin">
+         <Link to='/adminaccount'>
          <button type="submit">Login</button>
+         </Link>
          </div>
        </form>
+      </div>
       </div>
   )
 }

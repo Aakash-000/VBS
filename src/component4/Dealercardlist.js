@@ -7,6 +7,7 @@ import Staticelement from '../components/SliderBar/Staticelement.js'
 export default function Dealercardlist({filterSearch}) {
     const [getregvenue,setgetregvenue] = useState([]);
     const[getImage,setgetImage] = useState([]);
+    
     useEffect(async()=>{
         let response = await axios.get('https://venue-booking-system2.herokuapp.com/venue');
         setgetregvenue(response.data.data);

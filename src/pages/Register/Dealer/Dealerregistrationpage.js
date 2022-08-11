@@ -5,6 +5,7 @@ import {useNavigate,Link} from 'react-router-dom';
 import {Reacticonfour} from '../../../assets/icons/Reacticon.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import Navbar from '../../../components/Navbar/Navbar.js'
 
 export default function Dealerregistrationpage() {
   const errorMsg = [{id:'1',forName: "*Please include at least ten letter with no special characters in your Venue Name"},
@@ -16,38 +17,54 @@ export default function Dealerregistrationpage() {
   {id:'7',forPassword:"*At least seven char long and Please include three letter one number one specialcharacter"}]
     
     const navigate = useNavigate();
-    const[fileUpload,setFileUpload]=useState(null);
+    // const[venueFile,setimageFile]=useState(null);
     const[focused,setFocused] = useState(false);
-    const[response,setResponse] = useState([]);
     const[dealerDetail,setDealerDetail] = useState({email:"",venueName:"",userName:"",address:"",contactNumber:"",password:""});
 
-    useEffect(async()=>{
-      let response = await axios.get('https://venue-booking-system2.herokuapp.com/venue');
-      setResponse(response.data.data);
-    },[])
-    console.log(response);
+    // useEffect(async()=>{
+    //   let response = await axios.get('https://venue-booking-system2.herokuapp.com/register');
+    //   setResponse(response.data.data);
+    // },[])
+    // console.log(response);
 
-      async function submitHandler(e){
-      e.preventDefault();
-      let response = await axios.post('https://venue-booking-system2.herokuapp.com/venue/create',dealerDetail);
-      setDealerDetail(()=>({...dealerDetail,email:" ",venueName:" ",userName:" ",address:" ",contactNumber:" ",password:" "}));
-      navigate('/dealerregistration');
+      async function register(){
+        try{
+          // let formData = new FormData();
+          // formData.append('email',dealerDetail.email);
+          // formData.append('venueName', dealerDetail.venueName);
+          // formData.append('userName', dealerDetail.userName);
+          // formData.append('address', dealerDetail.address);
+          // formData.append('contactNumber', dealerDetail.password);
+          // formData.append('venueFile', venueFile,venueFile.name);
+          let response = await axios.post('https://venue-booking-system2.herokuapp.com/register/venue',
+          JSON.stringify(dealerDetail),
+          {headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+          setDealerDetail(()=>({...dealerDetail,email:'',venueName:'',userName:'',address:'',contactNumber:'',password:''}));
+          navigate('/dealerlogin');
+          console.log(response);
+        }catch(err){
+          console.log(err);
+        }
       }
-      
 
-  //   const submitHandler = async(e) => {            
-  //   e.preventDefault();
-  //   console.log(dealerDetail);
-  //   console.log(fileUpload);
-  // }
-  console.log(response);
+    const submitHandler = (e)=> {            
+    e.preventDefault();
+    register();
+    }
+
   function handleFocus(e){
     setFocused(true);
  }
  
   return (
+    <div > 
+      <Navbar/>
     <div className='dealer_reg_page container-fluid'>
-      <form class="dreg_form row g-3">
+       
+      <form class="dreg_form row g-3" onSubmit={submitHandler}>
         <h1 className='heading_dreg'><Reacticonfour className='reg_icon'/>Dealer Registration</h1>
       
     <div class="dreg_field col-md-6">
@@ -57,7 +74,7 @@ export default function Dealerregistrationpage() {
   </div>
   <div class="dreg_field col-md-6">
   <label for="username" class="form-label">User Name</label>
-  <input autoComplete="off" type="text" name='username' id='username' required={true} pattern='^[a-zA-Z ]{3,16}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,userName:e.target.value})} value={dealerDetail.userName}/>
+  <input autoComplete="off" type="text" name='userName' id='username' required={true} pattern='^[a-zA-Z ]{3,16}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,userName:e.target.value})} value={dealerDetail.userName}/>
     <span>{errorMsg.map((item)=>(item.forUserName))}</span>
     </div>
 
@@ -69,7 +86,7 @@ export default function Dealerregistrationpage() {
   </div>
   <div class="dreg_field col-md-6">
   <label for="venuename" class="form-label">Venue Name</label>
-  <input autoComplete="off" type="text" name='venuename' id='name' required={true} pattern='^[a-zA-Z ]{10,200}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,venueName:e.target.value})} value={dealerDetail.venueName}/>
+  <input autoComplete="off" type="text" name='venueName' id='name' required={true} pattern='^[a-zA-Z ]{10,200}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,venueName:e.target.value})} value={dealerDetail.venueName}/>
   <span>{errorMsg.map((item)=>(item.forName))}</span>
     </div>
     
@@ -81,24 +98,25 @@ export default function Dealerregistrationpage() {
     </div>
     <div class="dreg_field col-md-6">
     <label for="contactnumber" class="form-label">Contact Number</label>
-    <input type="text" name='number' id='number' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setDealerDetail({...dealerDetail,contactNumber:e.target.value})} value={dealerDetail.contactNumber}/>
+    <input type="text" name='contactNumber' id='number' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setDealerDetail({...dealerDetail,contactNumber:e.target.value})} value={dealerDetail.contactNumber}/>
     <span>{errorMsg.map((item)=>(item.forConNum))}</span>
   </div>
   
-  <div class="dreg_field col-md-12">
+  {/* <div class="dreg_field col-md-12">
     <label for="file" class="form-label">Choose Image</label>
-    <input type="file" name="file" id="file" required={true} accept=".jpg, .jpeg, .png, .svg, .gif" multiple  onBlur={handleFocus} focused={focused.toString()} onChange={e=>{setFileUpload(e.target.files)}}/>
+    <input type="file" name="imageFile" id="file" required={true} accept=".jpg, .jpeg, .png, .svg, .gif" onBlur={handleFocus} focused={focused.toString()} onChange={e=>{setimageFile(e.target.files[0])}} />
     <span>{errorMsg.map((item)=>(item.forImage))}</span>
-    </div>
-  <div class="dreg_field col-md-12">
+    </div> */}
+  {/* <div class="dreg_field col-md-12">
     <label for="desc" class="form-label">Description</label>
     <textarea name='desc' pattern='^[a-zA-Z ]{50,200}$' onBlur={handleFocus} focused={focused.toString()} required={true} id='desc' onChange={e=>setDealerDetail({...dealerDetail,comment:e.target.value})} value={dealerDetail.comment}/>
     <span>{errorMsg.map((item)=>(item.forComment))}</span>
-  </div>
+  </div> */}
   <div class="dreg_field col-12">
     <button type="submit" >Add Venue</button>
   </div>
     </form>
+    </div>
     </div>
   )
 }

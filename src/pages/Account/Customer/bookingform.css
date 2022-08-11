@@ -1,0 +1,72 @@
+.book_model_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border:none;
+    box-shadow: 0 0 0 1.5px rgb(218, 224, 223);
+    background-color:rgb(253, 254, 255);
+}
+.book_model_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    padding:20px;
+    position: relative;
+}
+.book_model_header .book_model_title{
+    text-align: center;
+}
+.book_model_header .book_model_button{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    right: 50px;
+}
+.book_model_body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:10px;
+}
+.book_model_body #venue_booking_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    padding:20px;
+}
+.book_model_body #venue_booking_form .booking_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+.book_model_body #venue_booking_form .booking_form input{
+    border-radius:5px;
+    border: 1px solid black;
+    height:30px;
+    width: 300px;
+    padding:5px;
+}
+.book_model_footer{
+    display: flex;
+    flex-direction: row;
+    margin:20px 0px;
+}
+.book_model_footer button{
+    border:none;
+    border-radius: 20px;
+    padding:6px 30px 6px 30px;
+    background-color: #23013f;
+    color: rgb(234, 255, 226);
+    font-size: 20px;
+}
