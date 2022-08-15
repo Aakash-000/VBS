@@ -23,7 +23,7 @@ export default function Customerloginpage() {
       try{
           let response = await axios.post('https://venue-booking-system2.herokuapp.com/login',JSON.stringify(CustomerDetail),
           {headers:{'Content-Type':'application/json'}});
-
+            
           if(response.data.data.email === CustomerDetail.username){
             console.log(response);
             navigate(`/customeraccount/${response.data.data.email}`);

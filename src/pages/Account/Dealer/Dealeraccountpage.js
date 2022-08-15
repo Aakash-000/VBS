@@ -12,7 +12,7 @@ export default function Dealeraccount() {
   const [sidebar, setSidebar] = useState(false);    
 
   const showSidebar = () => setSidebar(!sidebar);                                                               
-        
+
   return (
     <>
       <IconContext.Provider value={{ color: "#011627" }}>
@@ -46,6 +46,7 @@ export default function Dealeraccount() {
             })}
           </ul>
         </nav>
+        </IconContext.Provider>
         {/* <div className='body_content container-fluid'>
         <div class="card col-lg-12">
         <img src="..." class="card-img-top" alt="..."/>
@@ -78,7 +79,7 @@ export default function Dealeraccount() {
         </div>
         </div>
         </div> */}
-      </IconContext.Provider>
     </>
   );
 }
+

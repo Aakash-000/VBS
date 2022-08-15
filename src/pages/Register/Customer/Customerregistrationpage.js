@@ -17,9 +17,7 @@ export default function Customerregistrationpage() {
   {id:'7',forPassword:"*At least seven char long and Please include three letter one number one specialcharacter"}]
     
     const navigate = useNavigate();
-    const[fileUpload,setFileUpload]=useState(null);
     const[focused,setFocused] = useState(false);
-    const[response,setResponse] = useState([]);
     const[customerDetail,setCustomerDetail] = useState({email:"",name:"",city_name:"",mobile_no:"",password:""});
 
 
@@ -44,7 +42,6 @@ export default function Customerregistrationpage() {
   //   console.log(dealerDetail);
   //   console.log(fileUpload);
   // }
-  console.log(response);
   function handleFocus(e){
     setFocused(true);
  }

@@ -7,6 +7,11 @@ span{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: none;
 }
+.dreg_field input[type=file]:invalid[focused="true"] ~ span{
+    display:block;
+    width: fit-content;
+    color:#E63946;
+}
 .dreg_form .dreg_field input:invalid[focused="true"]{
     border:1px solid #E63946;
 }
@@ -88,4 +93,17 @@ span{
     padding:0vw;
     height:2.35vw;
     cursor: pointer;
+}
+.container_row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.upload_image_card{
+    height:20vh;
+    border-radius: 20px;
+    background-color:rgb(253, 254, 255);
+    box-shadow: rgba(0,0,0,0.35) 0px 2px 10px;
 }

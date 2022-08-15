@@ -38,7 +38,7 @@ export const SidebarDataforDealer = [
 export const SidebarDataforadmin =[
         {foradmin:{
             title:'Home',
-                path:'#',
+                path:'/adminaccount',
                 icon:<Reacticontwelve/>
         }},
         {foradmin:{
@@ -52,8 +52,8 @@ export const SidebarDataforadmin =[
                 icon:<Reacticonsix/>
         }},
         {foradmin:{
-            title:'Booking Request',
-        path:'/vabookingreq',
+            title:'Booking Request Status',
+        path:'/aabookingreq',
         icon:<Reacticonthree/>
         }},
         {foradmin:{

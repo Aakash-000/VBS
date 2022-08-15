@@ -48,7 +48,7 @@ export default function Dealerloginpage() {
     <span>{errorMsg.map((item)=>(item.forPassword))}</span>
     </div>
     <div className="form_field_dealer">
-     <Link to="/dealeraccount"><button type="submit">Login</button></Link>
+     <button type="submit">Login</button>
      </div>
      <div className='dealer_registration'>
      <Link to="/dealerregistration"><pre><Reacticonnine className='dot_icon_new'/>Haven't registered yet.Register now!</pre></Link>

@@ -60,21 +60,14 @@ export default function Customeraccount() {
   const {email} = useParams();
   const [sidebar, setSidebar] = useState(true);
   const[customerdetail,setcustomerDetail] = useState([]);
-  const[noToken,setnoToken] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+
     const config = {  
       headers:{
         Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
       }
     }
 
-    useEffect(() => {
-        if(sessionStorage.length == 0){
-          setnoToken(true);
-        }else{
-          setnoToken(false);
-        }
-    }, [noToken])
 
 
     useEffect(async()=>{
@@ -107,9 +100,8 @@ export default function Customeraccount() {
     
 
   return (
-    <>{noToken ? (<div className='logout_message'><Reacticonfifteen /><strong>You are logged out from the page.Please login to continue.</strong></div>)
-      : 
-    (<div>
+    <>
+   <div>
         <IconContext.Provider value={{ color: "#011627" }}>
           <div className="sidebarc sticky-top">
             <Link to="#" className="sidemenuc-bars">
