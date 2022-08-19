@@ -11,9 +11,10 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {Reacticonfive,Reacticonsix} from '../../assets/icons/Reacticon.js'
 export default function Navbar() {
   const[MobileRes,SetMobileRes] = useState(false);
- 
+  const[navonScroll,setnavonScroll] = useState(false);
+
   return (
-        <nav class="navbar sticky-top">
+        <nav className={'navbar sticky-top'}>
          <div className='navbar_logo'>
         <Link to="/" style={{textDecoration:'none'}}><img src={logo} alt="Navbar Logo"/></Link>
         </div>
@@ -21,18 +22,18 @@ export default function Navbar() {
             <Link to="/aboutus">
             <button className='about_but'><Reacticonfive className='buttonicon'/>Aboutus</button>
             </Link>
-            <Link to="/explorevenue">
+            <Link to="/explorevenue">       
             <button className='styl_exp'><Reacticonsix className='buttonicon'/>Explore</button>
             </Link>
             
-            <Link to="/adminlogin"><button onClick={(()=>SetMobileRes(false))} aria-expanded="false"><FaChalkboardTeacher size={17.5} className='buttonicon'/>Admin</button>
+            <Link to="/adminlogin"><button onClick={(()=>SetMobileRes(false))} aria-expanded="false"><FaChalkboardTeacher size={16} className='buttonicon'/>Admin</button>
             </Link> 
             
           
-            <Link to="/customerlogin"><button onClick={(()=>SetMobileRes(false))} aria-expanded="false"><FaOdnoklassniki size={17.5} className='buttonicon'/>Customer</button>
+            <Link to="/customerlogin"><button onClick={(()=>SetMobileRes(false))} aria-expanded="false"><FaOdnoklassniki size={16} className='buttonicon'/>Customer</button>
             </Link>  
             
-            <Link to="/dealerlogin"><button onClick={(()=>SetMobileRes(false))} aria-expanded="false"><HiUserGroup size={17.5} className='buttonicon'/>Dealer</button>
+            <Link to="/dealerlogin"><button onClick={(()=>SetMobileRes(false))} aria-expanded="false"><HiUserGroup size={16} className='buttonicon'/>Dealer</button>
             </Link>
             <IoLogoGithub className='mediaicon'/>
             <BsFacebook className='mediaicon'/>

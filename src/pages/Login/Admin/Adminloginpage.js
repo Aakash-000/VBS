@@ -55,7 +55,7 @@ export default function Adminloginpage() {
         <h1 className='heading_alog'><Reacticoneight/>Admin Login</h1>
         <div className='form_field_admin'>
         <label htmlFor='username'>Email :</label>
-        <input autocomplete="off" type="text" required={true} name='username' id="username" onBlur={handleFocus} focused={focused.toString()} onChange={e=>setAdminDetail({...AdminDetail,username:e.target.value})} value={AdminDetail.username}/>
+        <input autocomplete="off" type="text" required={true} pattern='^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' name='username' id="username" onBlur={handleFocus} focused={focused.toString()} onChange={e=>setAdminDetail({...AdminDetail,username:e.target.value})} value={AdminDetail.username}/>
         <span>{errorMsg.map((item)=>(item.forName))}</span>
         </div>
         <div className='form_field_admin'>

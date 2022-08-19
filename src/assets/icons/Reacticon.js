@@ -38,14 +38,14 @@ export  const Reacticonfour =()=>{
 export  const Reacticonfive =()=>{
     return (
         <div>
-            <AiOutlineInfoCircle size={20}/>
+            <AiOutlineInfoCircle size={17}/>
         </div>
     )
 }
 export  const Reacticonsix =()=>{
     return (
         <div>
-            <FaGlobe size={20}/>
+            <FaGlobe size={17} />
         </div>
     )
 }

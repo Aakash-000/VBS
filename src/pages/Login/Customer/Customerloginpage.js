@@ -65,7 +65,7 @@ export default function Customerloginpage() {
         <h1 className='heading_clog'><Reacticoneight/>Customer Login</h1>
         <div className='form_field_customer'>
       <label htmlFor='email'>Email:</label>
-      <input autoComplete="off" type="email" name='email' pattern='^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setCustomerDetail({...CustomerDetail,username:e.target.value})} value={CustomerDetail.username}/>
+      <input autoComplete="off" type="email" name='email' pattern='^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setCustomerDetail({...CustomerDetail,username:e.target.value})} value={CustomerDetail.username}/>
       <span>{errorMsg.map((item)=>(item.forEmail))}</span>
       </div>
         <div className='form_field_customer'>

@@ -2,14 +2,53 @@ import React,{useState,useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './bookingform.css'
-
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
 export default function Bookingform() {
 
-    const [bookingDetail,setbookingDetail] = useState({date:null,offeredPayment:'',requiredCapacity:''})
-    const submitHandler = (e)=>{
-      e.preventDefault();
-      console.log(bookingDetail)
+    const {clientemail,id} = useParams();
+    const[bookingDetail,setbookingDetail] = useState({bookingDate:"",calculatedPayment:"",requiredCapacity:"",functionType:""})
+    const prevBooked = [];
+    const[booked,setBooked] = useState([]);
+    const[isAvailable,setisAvailable] = useState(true);
+                                             
+
+    const config = {      
+      headers:{                                                                                                 
+        Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token')),
+        "Content-Type" : "application/json"
+      }
     }
+
+      useEffect(()=>{
+          
+      })
+
+      async function bookNow(){
+        try{
+          let response = await axios.post(`https://venue-booking-system2.herokuapp.com/client-/book-venue/${id}/${clientemail}`
+          ,JSON.stringify(bookingDetail),
+          config
+          );
+          console.log(response);
+          // setBooked(response.data.data)   
+          // if(booked.includes(bookingDetail.date)){
+          //   setisAvailable(false)
+          // }else{
+          //   prevBooked.push(bookingDetail.date);
+          // }
+      }catch(err){
+        console.log(err)
+        setbookingDetail(()=>({...bookingDetail,bookingDate:"",calculatedPayment:"",requiredCapacity:"",functionType:""}))
+      }
+      
+    }
+      
+      const submitHandler = (e) =>{
+      e.preventDefault();
+      bookNow()
+       }
+
     return (
         <div className='booking_form_customer'>
         <div className='book_button'>
@@ -28,18 +67,28 @@ export default function Bookingform() {
       <form id='venue_booking_form' onSubmit={submitHandler}>
       <div className='booking_form'>
       <label htmlFor='date'>DateBooked:</label>
-      <input autoComplete="off" type="date" name='date' id='date' required={true}  onChange={e=>setbookingDetail({...bookingDetail,date:e.target.value})} value={bookingDetail.date}/>
+      <input autoComplete="off" type="date" name='date' id='date' required={true}  onChange={e=>setbookingDetail({...bookingDetail,bookingDate:e.target.value})} value={bookingDetail.bookingDate}/>
       </div>
       <div className='booking_form'>
-      <label htmlFor='offeredPayment'>OfferedPayment:</label>
-      <input autoComplete="off" type="number" name='offeredPayment' id='date' required={true}  onChange={e=>setbookingDetail({...bookingDetail,offeredPayment:e.target.value})} value={bookingDetail.offeredPayment}/>
+      <label htmlFor='date'>FunctionType:</label>
+      <select value={bookingDetail.functionType} onChange={e=>setbookingDetail({...bookingDetail,functionType:e.target.value})}>
+      <option value="Marriage">Marriage</option>
+      <option value="Family Party">Family Party</option>
+      <option value="Conclave">Conclave</option>
+      <option value="Education Functions">College Functions</option>
+      <option value="Convention">Convention</option>
+     </select>
+      </div>
+      <div className='booking_form'>
+      <label htmlFor='offeredPayment'>CalculatedPayment:</label>
+      <input autoComplete="off" type="text" name='offeredPayment' id='date' placeholder={`0`} required={true}  onChange={e=>setbookingDetail({...bookingDetail,calculatedPayment:e.target.value})} value={bookingDetail.calculatedPayment}/>
       </div>
       <div className='booking_form'>
       <label htmlFor='requiredCapacity'>RequiredCapacity:</label>
-      <input autoComplete="off" type="number" name='requiredCapacity' id='date' required={true}  onChange={e=>setbookingDetail({...bookingDetail,requiredCapacity:e.target.value})} value={bookingDetail.requiredCapacity}/>
+      <input autoComplete="off" type="text" name='requiredCapacity' id='date' required={true}  onChange={e=>setbookingDetail({...bookingDetail,requiredCapacity:e.target.value})} value={bookingDetail.requiredCapacity}/>
       </div>
       <div className="book_model_footer ">
-        <button type="submit" >Submit</button>
+        <button type="submit" disabled={!isAvailable} >Submit</button>
       </div>
       </form>
       </div>

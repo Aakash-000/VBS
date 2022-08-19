@@ -11,6 +11,7 @@ import {Reacticonsixteen,Reacticonseventeen} from '../../../assets/icons/Reactic
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import axios from 'axios'
+import { type } from "@testing-library/user-event/dist/type/index.js";
 
 export default function Adminaccount() {
   const[noToken,setnoToken] = useState(false);
@@ -128,6 +129,8 @@ export function Venueaccept(){
   const [sidebar, setSidebar] = useState(false);    
   const [pendingVenuelist,setpendingVenuelist] = useState([]);
   const {adminemail} = useParams();
+  const[accept,setAccept] = useState(false);
+  const[cancel,setCancel] = useState(false);
   const showSidebar = () => setSidebar(!sidebar); 
   const navigate = useNavigate();
   
@@ -137,7 +140,7 @@ export function Venueaccept(){
     }else {
       setnoToken(true)
     }
-  }, [noToken , []])
+  }, [noToken])
 
   const config = {  
     headers:{
@@ -150,32 +153,51 @@ export function Venueaccept(){
     .then(response => {
       console.log(response) 
       setpendingVenuelist(response.data.data)
+      setAccept(false)
+      setCancel(false)
     })
     .catch(err=> {console.log(err)});
-  },[])
+  },[accept,cancel])
 
+  
   async function handleAccept(key){
     try{
-      let response = await axios.put(`https://svenue-booking-system2.herokuapp.com/admin-/update/${pendingVenuelist[key].id}`,
-        JSON.stringify({
-            email:pendingVenuelist[key].email,
-            contactNumber:pendingVenuelist[key].contactNumber,
-            description:pendingVenuelist[key].description,
-            userName:pendingVenuelist[key].userName,
-            venueName:pendingVenuelist[key].venueName,
-        }),{ 
+      let response = await axios.put(`https://venue-booking-system2.herokuapp.com/admin-/update/${pendingVenuelist[key].id}`,
+            {
+              "status": 0
+            }    
+        ,{ 
           headers:{
-          Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
+          Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token')) 
         }
       }
     );
     console.log(response)
+    setAccept(true)
     }catch(err){  
       console.log(err)
+      setAccept(false)
       }
   }
-
-
+  async function handleCancel(key){
+    try{
+      let response = await axios.put(`https://venue-booking-system2.herokuapp.com/admin-/update/${pendingVenuelist[key].id}`,
+            {
+              "status": 1
+            }    
+        ,{ 
+          headers:{
+          Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token')) 
+        }
+      }
+    );
+    console.log(response)
+    setCancel(true)
+    }catch(err){  
+      console.log(err)
+      setCancel(false)
+      }
+  }
   const logout = (e)=> {
     e.preventDefault();
     sessionStorage.removeItem('token');
@@ -243,8 +265,8 @@ export function Venueaccept(){
           <td>{item.venueName}</td>
           <td>{item.address}</td>
           <td>{item.contactNumber}</td>
-          <td><button className='button_accept' onClick={()=>handleAccept(index)}>Accept</button></td>
-          <td><button className='button_cancel' >Cancel</button></td>
+          <td><button className='button_accept' onClick={()=>{handleAccept(index)}}>Accept</button></td>
+          <td><button className='button_cancel' onClick={()=>handleCancel(index)} >Cancel</button></td>
         </tr>
         ))}
       </tbody>

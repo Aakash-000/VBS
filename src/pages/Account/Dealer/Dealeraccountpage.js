@@ -1,17 +1,34 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { IconContext } from "react-icons";
-import { Link } from "react-router-dom";
+import { Link,useParams, useNavigate } from "react-router-dom";
 import { SidebarDataforDealer } from "./SidebarData";
 import "./dealeraccountpage.css";
 import Logo from '../../../assets/images/navbar_logo_bgr.png'
 import Avatar from '@mui/material/Avatar';
+import axios from 'axios'
 
 export default function Dealeraccount() {
   const [sidebar, setSidebar] = useState(false);    
-
+  const {dealeremail} = useParams();
   const showSidebar = () => setSidebar(!sidebar);                                                               
+  const navigate = useNavigate();
+
+  const config = {  
+    headers:{
+      Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
+    }
+    }
+
+  const logout = (e)=> {
+    sessionStorage.removeItem('token');
+    sessionStorage.clear();
+    navigate('/dealerlogin');
+    window.location.reload();
+  }
+    
+
 
   return (
     <>
@@ -24,8 +41,8 @@ export default function Dealeraccount() {
           </div>
           </Link>
           <div className='right-group-de'>
-          <Avatar sx={{ bgcolor: '#ffd43b', color:'#23013f'}}>AD</Avatar>
-          <button>Logout</button>
+          <p>{dealeremail}</p>
+          <button onClick={logout}>Logout</button>
           </div>
         </div>
         <nav className={sidebar ? "sided-menu active" : "sided-menu"}>
@@ -38,7 +55,7 @@ export default function Dealeraccount() {
             {SidebarDataforDealer.map((item, index) => {
               return (
                 <li key={index} className={item.fordealer.cName}>
-                  <Link to={item.fordealer.path} className='sidebard-pa'>
+                  <Link to={`${item.fordealer.path}`+`/${dealeremail}`} className='sidebard-pa'>
                     <p>{item.fordealer.icon}{item.fordealer.title}</p>
                   </Link>
                 </li>

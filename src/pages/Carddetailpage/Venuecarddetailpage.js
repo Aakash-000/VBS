@@ -9,7 +9,7 @@ export default function Venuecarddetailpage() {
   const {id} = useParams();
 
     useEffect(()=>{
-    axios.get(`https://venue-booking-system2.herokuapp.com/venue/${id}`)
+    axios.get(`https://venue-booking-system2.herokuapp.com/${id}`)
     .then(response=>(setgetregvenue(response.data.data)));
     }
     ,[])

@@ -22,11 +22,11 @@ export function VenuecarddetailCustomer(){
   
 
     useEffect(()=>{
-    axios.get(`https://venue-booking-system2.herokuapp.com/venue/${id}`)
+    axios.get(`https://venue-booking-system2.herokuapp.com/client-/${id}`)
     .then(response=>(setgetregvenue(response.data.data)));
-    }
-    ,[])
     console.log(getregvenue);
+    },[])
+    
     // const filterImg = getregvenue.find((item)=> item.id == id) 
     return (
       <>
@@ -63,12 +63,10 @@ export default function Customeraccount() {
   const showSidebar = () => setSidebar(!sidebar);
 
     const config = {  
-      headers:{
+      headers:{                                                                                                 
         Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
       }
     }
-
-
 
     useEffect(async()=>{
       function getUser(){
@@ -85,8 +83,8 @@ export default function Customeraccount() {
     useEffect(async()=>{
       function getVenue(){
         axios.get('https://venue-booking-system2.herokuapp.com/client-',config)
-        .then(response => {console.log(response)})
-        .catch(err=> {console.log(err)});
+        .then(response => {console.log(response)})                                                            
+        .catch(err => {console.log(err)});                                                                     
       }
       getVenue();
     },[])

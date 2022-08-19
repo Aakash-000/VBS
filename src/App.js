@@ -37,15 +37,15 @@ export default function App() {
         {/* <Route path='/uploadfile/:email' element={<Uploadfile/>}/> */}
         <Route path="/customerregistration" element={<Customerregistrationpage/>}/>
         <Route path="/explorevenue/venue/:id" element={ <Venuecarddetailpage/>}/>
-        <Route path="/dealeraccount"  element={<Dealeraccountpage/>}/>
-        <Route path='/vabookingreq' element={<Bookingreq/>}/>
-        <Route path="/customeraccount/:email/venue/:id" element={<VenuecarddetailCustomer/>}/>
+        <Route path="/dealeraccount/:dealeremail"  element={<Dealeraccountpage/>}/>
+        <Route path="/vabookingreq/:dealeremail" element={<Bookingreq/>}/>
+        <Route path="/venue/:clientemail/:id" element={<VenuecarddetailCustomer/>}/>
         <Route path="/customeraccount/:email" element={<Customeraccount/>}/>
         <Route path="/adminaccount/:adminemail" element={<Adminaccount/>}/>
         <Route path="/cadata/:email" element={<EditCustomeraccount/>}/>
         <Route path='/acceptvenue/:adminemail' element={<Venueaccept/>}/>
-        {/* <Route path="/vadata/:email" element={<EditDealeraccount/>}/>
-        <Route path="/aadata/:email" element={<Editadminaccount/>}/> */}
+         <Route path="/vadata/:dealeremail" element={<EditDealeraccount/>}/>
+      { /* <Route path="/aadata/:email" element={<Editadminaccount/>}/> */}
         </Routes>
         </Router>
       </div>

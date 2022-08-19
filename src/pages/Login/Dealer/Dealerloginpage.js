@@ -12,23 +12,43 @@ export default function Dealerloginpage() {
   {id:'3',forConfirmPassword:"*Password should match!"},
   {id:'4',forConNum:"*Should be ten digit long"},{id:'5',forEmail:"*Please write valid email"}]   
 
-  const[dealerDetail,setDealerDetail] = useState({email:"",password:""});
+  const[dealerDetail,setDealerDetail] = useState({username:"",password:""});
   const[focused,setFocused] = useState(false);
   const[filterD,setfilterD] = useState([]);
   const[filterAccount,setfilterAccount] = useState([]);
     
     
-    const submitHandler = async (e) => {
-    e.preventDefault();
-    // checkData();
-    // console.log(dealerDetail); 
-    // console.log(filterD); 
-    // setDealerDetail(()=>({...dealerDetail, email:"",password:""}));
+    async function login(){
+      try{
+        let response = await axios.post('https://venue-booking-system2.herokuapp.com/login',JSON.stringify(dealerDetail),
+        {headers:{'Content-Type':'application/json'}});
+        console.log(response)
+        if(response.data.data.email === dealerDetail.username){
+          navigate(`/dealeraccount/${response.data.data.email}`);
+          sessionStorage.setItem('token',JSON.stringify(response.data.data.token));
+          setDealerDetail(()=>({...dealerDetail,username:'',password:''}));
+          window.location.reload();
+        }
+        }catch(response){
+          if(response.response.request.status != 200){
+            console.log(response);
+            setDealerDetail(()=>({...dealerDetail,username:'',password:''}));
+          }else if(response.response.request.status == 500){
+            alert('Internal Server Error');
+          }
+        }
     }
     
     function handleFocus(e){
     setFocused(true);
     }
+     
+
+    const submitHandler =(e)=>{
+      e.preventDefault()
+      login()
+    }
+
 
     return (
       <div> 
@@ -39,7 +59,7 @@ export default function Dealerloginpage() {
     <h1 className='heading_dlog'><Reacticoneight/>Dealer Login</h1>
     <div className='form_field_dealer'>
       <label htmlFor='email'>Email:</label>
-      <input autoComplete="off" type="text" name='email' pattern='^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,email:e.target.value})} value={dealerDetail.email}/>
+      <input autoComplete="off" type="text" name='email' pattern='^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,username:e.target.value})} value={dealerDetail.username}/>
       <span>{errorMsg.map((item)=>(item.forEmail))}</span>
       </div>
     <div className='form_field_dealer'>
@@ -59,5 +79,3 @@ export default function Dealerloginpage() {
       </div>  
   )
 }
-
-

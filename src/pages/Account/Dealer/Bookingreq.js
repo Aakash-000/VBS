@@ -3,24 +3,51 @@ import {Reacticonsixteen,Reacticonseventeen} from '../../../assets/icons/Reactic
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import './bookingreq.css'
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { IconContext } from "react-icons";
-import { Link } from "react-router-dom";
+import { Link,useParams,useNavigate } from "react-router-dom";
 import { SidebarDataforDealer } from "./SidebarData";
 import "./dealeraccountpage.css";
 import Logo from '../../../assets/images/navbar_logo_bgr.png'
 import Avatar from '@mui/material/Avatar';
-
+import axios from 'axios'
 
 
 export default function Bookingreq() {
   const [sidebar, setSidebar] = useState(false);    
+  const {dealeremail} = useParams();
+  const showSidebar = () => setSidebar(!sidebar);
+  const[reqVen,setreqVen]=useState([]);   
 
-  const showSidebar = () => setSidebar(!sidebar);                                                               
-        
-    return (
+  const navigate = useNavigate();
+  
+  const logout = (e)=> {
+    sessionStorage.removeItem('token');
+    sessionStorage.clear();
+    navigate('/dealerlogin');
+    window.location.reload();
+  }
+
+  const config = {  
+    headers:{
+      Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
+    }
+    }
+
+    useEffect(async() => {
+      try{
+      let response =await axios.get(`https://venue-booking-system2.herokuapp.com/venue-/requests/${dealeremail}`,config)
+      console.log(response)
+      setreqVen(response.data.data)
+      }catch(err){
+        console.log(err)
+      }
+      }, [])
+
+
+       return (
         <div>
            <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebard">
@@ -31,8 +58,8 @@ export default function Bookingreq() {
           </div>
           </Link>
           <div className='right-group-de'>
-          <Avatar sx={{ bgcolor: '#ffd43b', color:'#23013f'}}>AD</Avatar>
-          <button>Logout</button>
+          <p>{dealeremail}</p>
+          <button onClick={logout}>Logout</button>
           </div>
         </div>
         <nav className={sidebar ? "sided-menu active" : "sided-menu"}>
@@ -45,7 +72,7 @@ export default function Bookingreq() {
             {SidebarDataforDealer.map((item, index) => {
               return (
                 <li key={index} className={item.fordealer.cName}>
-                  <Link to={item.fordealer.path} className='sidebard-pa'>
+                  <Link to={`${item.fordealer.path}`+`/${dealeremail}`} className='sidebard-pa'>
                     <p>{item.fordealer.icon}{item.fordealer.title}</p>
                   </Link>
                 </li>
@@ -60,42 +87,25 @@ export default function Bookingreq() {
         <thead>
         <tr>
       <th>SN</th>
-      <th>Name</th>
+      <th>Function Type</th>
       <th>Required Capacity</th>
       <th>Date Selected</th>
-      <th>Offered Payment</th>
+      <th>Calculated Payment</th>
       <th><Reacticonsixteen/></th>
       <th><Reacticonseventeen/></th>
         </tr>
         </thead>
         <tbody>
-    <tr>
-      <th>1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Rs 50000</td>
+    {reqVen.map((item,index)=>(
+      <tr>
+      <th>{index}</th>
+      <td>{item.functionType}</td>
+    <td>{item.requiredCapacity}</td>
+    <td>{item.bookingDate}</td>
+    <td>{item.calculatedPayment}</td>
       <td><button className='button_accept'>Accept</button></td>
       <td><button className='button_cancel'>Cancel</button></td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>Rs 70000</td>
-      <td><button className='button_accept'>Accept</button></td>
-      <td><button className='button_cancel'>Cancel</button></td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Larry</td>
-      <td>the bird</td>
-      <td>@twitter</td>
-      <td>Rs 80000</td>
-      <td><button className='button_accept'>Accept</button></td>
-      <td><button className='button_cancel'>Cancel</button></td>
-    </tr>
+    </tr>))}
         </tbody>
         </table>
         </div>

@@ -61,7 +61,7 @@ export default function Customerregistrationpage() {
   </div>
   <div class="creg_field col-md-6">
   <label for="username" class="form-label">User Name</label>
-  <input autoComplete="off" type="text" name='name' id='username' required={true} pattern='^[a-zA-Z ]{3,16}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,name:e.target.value})} value={customerDetail.name}/>
+  <input autoComplete="off" type="text" name='name' id='username' required={true} pattern='^[a-zA-Z ]{3,50}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,name:e.target.value})} value={customerDetail.name}/>
     <span>{errorMsg.map((item)=>(item.forUserName))}</span>
     </div>
 

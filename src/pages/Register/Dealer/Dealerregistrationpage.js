@@ -15,12 +15,12 @@ export default function Dealerregistrationpage() {
   {id:'4',forComment:"*Please include description more than 50 letters with no special characters"},
   {id:'6',forConNum:"*Should be ten digit long"},
   {id:'7',forPassword:"*At least seven char long and Please include three letter one number one specialcharacter"}]
-    
+
     const navigate = useNavigate();
     const[focused,setFocused] = useState(false);
     const[dealerDetail,setDealerDetail] = useState({email:'',venueName:'',userName:'',address:'',contactNumber:'',password:'',description:''});
 
-
+                                                                                                          
       async function nextPageRedirect(){
         try{
        let response = await axios.post('https://venue-booking-system2.herokuapp.com/register/venue',
@@ -60,7 +60,7 @@ export default function Dealerregistrationpage() {
   </div>
   <div class="dreg_field col-md-6">
   <label for="username" class="form-label">User Name</label>
-  <input autoComplete="off" type="text" name='userName' id='username' required={true} pattern='^[a-zA-Z ]{3,16}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,userName:e.target.value})} value={dealerDetail.userName}/>
+  <input autoComplete="off" type="text" name='userName' id='username' required={true} pattern='^[a-zA-Z ]{3,40}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,userName:e.target.value})} value={dealerDetail.userName}/>
     <span>{errorMsg.map((item)=>(item.forUserName))}</span>
     </div>
 
@@ -87,7 +87,6 @@ export default function Dealerregistrationpage() {
     <input type="text" name='contactNumber' id='number' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setDealerDetail({...dealerDetail,contactNumber:e.target.value})} value={dealerDetail.contactNumber}/>
     <span>{errorMsg.map((item)=>(item.forConNum))}</span>
   </div>
-  
   {/* <div class="dreg_field col-md-12">
     <label for="file" class="form-label">Choose Image</label>
     <input type="file" name="imageFile" id="file" required={true} accept=".jpg, .jpeg, .png, .svg, .gif" onBlur={handleFocus} focused={focused.toString()} onChange={e=>{setimageFile(e.target.files[0])}} />

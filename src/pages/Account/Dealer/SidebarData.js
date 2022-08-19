@@ -10,7 +10,7 @@ export const SidebarDataforDealer = [
     }},
     {fordealer:{
         title:'Edit Profile',
-        path:'/vadata/:email',
+        path:'/vadata',
          icon:<Reacticonthirteen/>
          ,cName: 'sided-text'
     }},
