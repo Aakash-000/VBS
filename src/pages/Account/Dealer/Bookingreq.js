@@ -11,7 +11,6 @@ import { Link,useParams,useNavigate } from "react-router-dom";
 import { SidebarDataforDealer } from "./SidebarData";
 import "./dealeraccountpage.css";
 import Logo from '../../../assets/images/navbar_logo_bgr.png'
-import Avatar from '@mui/material/Avatar';
 import axios from 'axios'
 
 
@@ -19,10 +18,32 @@ export default function Bookingreq() {
   const [sidebar, setSidebar] = useState(false);    
   const {dealeremail} = useParams();
   const showSidebar = () => setSidebar(!sidebar);
-  const[reqVen,setreqVen]=useState([]);   
+  const[reqVen,setreqVen]=useState([]);  
+  const[noToken,setnoToken] = useState(false);
+  const[dealerName,setdealerName] = useState('');
+
+  useEffect(() => {
+    if(sessionStorage.length != 0){
+      setnoToken(false)
+    }else {
+      setnoToken(true)
+    }
+  }, [noToken])
 
   const navigate = useNavigate();
-  
+
+      useEffect(()=>{
+        async function getVenue(){
+          let response = await axios.get('https://venue-booking-system2.herokuapp.com/client-',config);
+          console.log(response)
+          const editDealer = response.data.data.filter((value,index)=>{
+            return value.email === dealeremail;
+          })
+          setdealerName(editDealer[0].userName)
+        }
+        getVenue()
+        },[])
+
   const logout = (e)=> {
     sessionStorage.removeItem('token');
     sessionStorage.clear();
@@ -46,8 +67,16 @@ export default function Bookingreq() {
       }
       }, [])
 
+      async function handleAccept(index){
+
+      }
+      async function handleCancel(index){
+
+      }
 
        return (
+         <>
+         {!noToken ?(
         <div>
            <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebard">
@@ -58,7 +87,7 @@ export default function Bookingreq() {
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealeremail}</p>
+          <p>{dealerName}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -87,6 +116,9 @@ export default function Bookingreq() {
         <thead>
         <tr>
       <th>SN</th>
+      <th>UserName</th>
+      <th>Contact Number</th>
+      <th>Email</th>
       <th>Function Type</th>
       <th>Required Capacity</th>
       <th>Date Selected</th>
@@ -98,17 +130,21 @@ export default function Bookingreq() {
         <tbody>
     {reqVen.map((item,index)=>(
       <tr>
-      <th>{index}</th>
+      <th key={index}>{index}</th>
+      <td>{item.client.name}</td>
+      <td>{item.client.mobile_no}</td>
+      <td>{item.client.email}</td>
       <td>{item.functionType}</td>
     <td>{item.requiredCapacity}</td>
     <td>{item.bookingDate}</td>
     <td>{item.calculatedPayment}</td>
-      <td><button className='button_accept'>Accept</button></td>
-      <td><button className='button_cancel'>Cancel</button></td>
+      <td><button className='button_accept' onClick={()=>handleAccept(index)}>Accept</button></td>
+      <td><button className='button_cancel' onClick={()=>handleCancel(index)}>Cancel</button></td>
     </tr>))}
         </tbody>
         </table>
         </div>
-        </div>
+        </div>):(<div>You are logged out of page.Please login and try again.</div>)}
+        </>
     )
 }

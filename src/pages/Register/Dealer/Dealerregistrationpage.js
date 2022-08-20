@@ -18,19 +18,28 @@ export default function Dealerregistrationpage() {
 
     const navigate = useNavigate();
     const[focused,setFocused] = useState(false);
-    const[dealerDetail,setDealerDetail] = useState({email:'',venueName:'',userName:'',address:'',contactNumber:'',password:'',description:''});
-
+    const[dealerDetail,setDealerDetail] = useState({email:"",venueName:"",userName:"",address:"",contactNumber:"",password:"",description:""});
+    const[venueFile,setimageFile]=useState(null);
                                                                                                           
       async function nextPageRedirect(){
         try{
+          let formData = new FormData();
+          formData.append('email',dealerDetail.email)
+          formData.append('venueName', dealerDetail.venueName)
+          formData.append('userName', dealerDetail.userName)
+          formData.append('address', dealerDetail.address)
+          formData.append('contactNumber', dealerDetail.contactNumber)
+          formData.append('password',dealerDetail.password)
+          formData.append('description',dealerDetail.description)
+          formData.append('venueFile',venueFile)
        let response = await axios.post('https://venue-booking-system2.herokuapp.com/register/venue',
-        JSON.stringify(dealerDetail),
+            formData,
         {headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'multipart/form-data'
         }
       });
           navigate('/dealerlogin');
-          setDealerDetail(()=>({...dealerDetail,email:'',venueName:'',userName:'',address:'',contactNumber:'',password:'',description:''}));
+          setDealerDetail(()=>({...dealerDetail,email:"",venueName:"",userName:"",address:"",contactNumber:"",password:"",description:""}));
       console.log(response);
     }catch(err){
       console.log(err);
@@ -51,11 +60,11 @@ export default function Dealerregistrationpage() {
       <Navbar/>
     <div className='dealer_reg_page container-fluid'>
        
-      <form class="dreg_form row g-3" onSubmit={nextHandler}>
+      <form class="dreg_form row g-3" onSubmit={nextHandler} encType="multipart/form-data">
         <h1 className='heading_dreg'><Reacticonfour className='reg_icon'/>Dealer Registration</h1>
     <div class="dreg_field col-md-6">
     <label for="email" class="form-label">Email</label>
-    <input autoComplete="off" type="text" name='email' pattern='^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,email:e.target.value})} value={dealerDetail.email}/>
+    <input autoComplete="off" type="text" name='email' pattern='^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,email:e.target.value})} value={dealerDetail.email}/>
     <span>*Please write valid email</span>
   </div>
   <div class="dreg_field col-md-6">
@@ -77,7 +86,7 @@ export default function Dealerregistrationpage() {
     </div>
     
    
-  <div class="dreg_field col-md-6">
+    <div class="dreg_field col-md-6">
     <label for="address" class="form-label">Address</label>
     <input autoComplete="off" type="text" name='address'  required={true} id='address' pattern='^[a-zA-Z ]{5,200}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,address:e.target.value})} value={dealerDetail.address}/>
     <span>{errorMsg.map((item)=>(item.forLocation))}</span>
@@ -86,20 +95,20 @@ export default function Dealerregistrationpage() {
     <label for="contactnumber" class="form-label">Contact Number</label>
     <input type="text" name='contactNumber' id='number' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setDealerDetail({...dealerDetail,contactNumber:e.target.value})} value={dealerDetail.contactNumber}/>
     <span>{errorMsg.map((item)=>(item.forConNum))}</span>
-  </div>
-  {/* <div class="dreg_field col-md-12">
+    </div>
+    <div class="dreg_field col-md-12">
     <label for="file" class="form-label">Choose Image</label>
     <input type="file" name="imageFile" id="file" required={true} accept=".jpg, .jpeg, .png, .svg, .gif" onBlur={handleFocus} focused={focused.toString()} onChange={e=>{setimageFile(e.target.files[0])}} />
     <span>{errorMsg.map((item)=>(item.forImage))}</span>
-    </div> */}
-  <div class="dreg_field col-md-12">
+    </div>
+    <div class="dreg_field col-md-12">
     <label for="desc" class="form-label">Description</label>
     <textarea name='description' pattern='^[a-zA-Z ]{50,200}$' onBlur={handleFocus} focused={focused.toString()} required={true} id='desc' onChange={e=>setDealerDetail({...dealerDetail,description:e.target.value})} value={dealerDetail.description}/>
     <span>{errorMsg.map((item)=>(item.forComment))}</span>
-  </div>
-  <div class="dreg_field col-12">
+    </div>
+    <div class="dreg_field col-12">
      <button type="submit">Add Venue</button>
-  </div>
+    </div>
     </form>
     </div>
     </div>
@@ -114,7 +123,7 @@ export default function Dealerregistrationpage() {
 //   async function uploadFile(){
 //     try{
 //           let formData = new FormData();
-//           formData.append('venueFile', venueFile);
+//           ;formData.append('venueFile', venueFile)
 //           let response = await axios.post('https://venue-booking-system2.herokuapp.com/register/venue',
 //           {headers: {
 //             'Content-Type': 'multipart/form-data',

@@ -5,11 +5,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Sliderbar from '../../components/SliderBar/Sliderbar';
 import Icongridelement from './Icongridelement.js'
 import Navbar from '../../components/Navbar/Navbar.js'
-
+import Accordionelement from './Accordionelement.js';
+import Footer from '../../components/Footer/Footer';
 
 export default function Body() {
 
   return (
+           <>
             <div className='landing_page'>
               <Navbar/>
             <div className='upper container-fluid'>
@@ -43,41 +45,49 @@ export default function Body() {
                 </div>))}
                 </div>
                 </div>
-              <div className='accordion container'>
-                <pre>Trust our Service</pre>
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-       <div class="accordion-item">
-          <h2 class="container-fluid" id="flush-headingOne">
-          <h3 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-          Accordion Item #1
-          </h3>
-          </h2>
-          <div id="flush-collapseOne" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-          </div>
-          </div>
-          <div class="accordion-item">
-          <h2 class="container-fluid" id="flush-headingTwo">
-          <h3 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-          Accordion Item #2
-          </h3>
-          </h2>
-          <div id="flush-collapseTwo" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-          </div>
-          </div>
-          <div class="accordion-item">
-          <h2 class="container-fluid" id="flush-headingThree">
-          <h3 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-          Accordion Item #3
-          </h3>
-          </h2>
-          <div id="flush-collapseThree" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-          </div>
-          </div>
-          </div>
+              <div className='accordion_def container'>
+                <pre>About us</pre>
+                <div class="accordion" id="accordionExample">
+              <div class="accordion_sub_one accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne">
+                <abbr class="accordion-header" id="headingOne">
+                  <abbr  type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  How can we believe that the registered Venue is legal and safe to book?
+                 </abbr>
+                </abbr>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                  <div class="accordion-body">
+                    <strong>We ensure the safety and legal status by implementing our field officer and security to the Venue location and note down the status of Venue.If venue approved we being out venue to you.</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion_sub_two accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-controls="collapseTwo">
+                <abbr class="accordion-header" id="headingTwo">
+                 <abbr type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                 How long have you been giving this service?
+                 </abbr>
+                </abbr>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                 <div class="accordion-body">
+                    <strong>We have recently registered as an organization and been helping Venue owner and customer since last 3 months.</strong>
+                  </div>
+                </div>
+              </div>
+              <div class=" accordion_sub_three accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-controls="collapseThree">
+                <abbr class="accordion-header" id="headingThree">
+                 <abbr type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                 How can we contact you?
+                 </abbr>
+                </abbr>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                  <div class="accordion-body">
+                   <strong>You can contact us via our Hotline service or email us at our official email.</strong>
+                  </div>
+               </div>
+              </div>
+            </div>
                 </div>  
               </div> 
+              <Footer/>
+              </>
   )
 }

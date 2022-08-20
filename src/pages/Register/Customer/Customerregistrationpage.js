@@ -56,7 +56,7 @@ export default function Customerregistrationpage() {
       
     <div class="creg_field col-md-6">
     <label for="email" class="form-label">Email</label>
-    <input autoComplete="off" type="text" name='email' pattern='^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,email:e.target.value})} value={customerDetail.email}/>
+    <input autoComplete="off" type="text" name='email' pattern='^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,email:e.target.value})} value={customerDetail.email}/>
     <span>*Please write valid email</span>
   </div>
   <div class="creg_field col-md-6">

@@ -7,11 +7,18 @@ import axios from 'axios'
 export default function Bookingform() {
 
     const {clientemail,id} = useParams();
-    const[bookingDetail,setbookingDetail] = useState({bookingDate:"",calculatedPayment:"",requiredCapacity:"",functionType:""})
+    const[bookingDetail,setbookingDetail] = useState({bookingDate:"",calculatedPayment:"",requiredCapacity:"",functionType:"Marriage"})
     const prevBooked = [];
     const[booked,setBooked] = useState([]);
     const[isAvailable,setisAvailable] = useState(true);
-                                             
+    const[noToken,setnoToken] = useState(false);
+    useEffect(() => {
+      if(sessionStorage.length != 0){
+        setnoToken(false)
+      }else {
+        setnoToken(true)
+      }
+    }, [noToken])                                        
 
     const config = {      
       headers:{                                                                                                 
@@ -31,12 +38,12 @@ export default function Bookingform() {
           config
           );
           console.log(response);
-          // setBooked(response.data.data)   
-          // if(booked.includes(bookingDetail.date)){
-          //   setisAvailable(false)
-          // }else{
-          //   prevBooked.push(bookingDetail.date);
-          // }
+          setBooked(response.data.data)   
+          if(booked.includes(bookingDetail.date)){
+            setisAvailable(false)
+          }else{
+            prevBooked.push(bookingDetail.date);
+          }
       }catch(err){
         console.log(err)
         setbookingDetail(()=>({...bookingDetail,bookingDate:"",calculatedPayment:"",requiredCapacity:"",functionType:""}))
@@ -50,6 +57,8 @@ export default function Bookingform() {
        }
 
     return (
+      <>
+      {noToken?(
         <div className='booking_form_customer'>
         <div className='book_button'>
         <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -72,11 +81,11 @@ export default function Bookingform() {
       <div className='booking_form'>
       <label htmlFor='date'>FunctionType:</label>
       <select value={bookingDetail.functionType} onChange={e=>setbookingDetail({...bookingDetail,functionType:e.target.value})}>
-      <option value="Marriage">Marriage</option>
-      <option value="Family Party">Family Party</option>
-      <option value="Conclave">Conclave</option>
-      <option value="Education Functions">College Functions</option>
-      <option value="Convention">Convention</option>
+      <option >Marriage</option>
+      <option >Family Party</option>
+      <option >Conclave</option>
+      <option >College Functions</option>
+      <option >Convention</option>
      </select>
       </div>
       <div className='booking_form'>
@@ -95,6 +104,7 @@ export default function Bookingform() {
       </div>
         </div>
         </div>
-        </div>
+        </div>):(<div>You are logged out of page.Please login and try again.</div>)}
+        </>
     )
 }

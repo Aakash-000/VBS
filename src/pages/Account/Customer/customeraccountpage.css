@@ -28,7 +28,7 @@
     justify-content: center;
     position: fixed;
     left: -100%;
-    transition: 500ms;
+    transition: 0.7s;
   }
   .sidebarc .sidec-logo img{
     height:60px;
@@ -51,7 +51,7 @@
     } 
 .sidec-menu.active {
     left: 0;
-    transition: 500ms;
+    transition: 0.7s;
   }
   
 .sidec-text {

@@ -18,9 +18,15 @@ export default function EditDealeraccount() {
   const {dealeremail} = useParams();
   const[dealerDetail,setdealerDetail] = useState({venueName:'',userName:'',password:'',contactNumber:'',address:''});
   const[focused,setFocused] = useState(false);
-  const[getdealer,setDealer] = useState([]);
   const[venueFile,setimageFile]=useState(null);
-  
+  const[noToken,setnoToken] = useState(false);
+  useEffect(() => {
+    if(sessionStorage.length != 0){
+      setnoToken(false)
+    }else {
+      setnoToken(true)
+    }
+  }, [noToken])
 
   const configforImg = {  
     headers:{
@@ -35,11 +41,18 @@ export default function EditDealeraccount() {
       }
       }
     useEffect(()=>{
-      function getVenue(){
-        axios.get('https://venue-booking-system2.herokuapp.com/client-',config)
-        .then(response => {console.log(response)
-        setDealer(response.data.data)})
-        .catch(err=> {console.log(err)});
+      async function getVenue(){
+        let response = await axios.get('https://venue-booking-system2.herokuapp.com/client-',config);
+        console.log(response)
+        const editDealer = response.data.data.filter((value,index)=>{
+          return value.email === dealeremail;
+        })
+        setdealerDetail({...dealerDetail,venueName:editDealer[0].venueName,
+          userName:editDealer[0].userName,
+          password:editDealer[0].password,
+          contactNumber:editDealer[0].contactNumber,
+          address:editDealer[0].address
+        })
       }
       getVenue()
     },[])
@@ -70,8 +83,10 @@ export default function EditDealeraccount() {
  }
     return (
       <>
+      {!noToken ? (
+        <>
       <div class='container-fluid'>
-    <div class="container_row row">
+    {/* <div class="container_row row">
     <div class="col-sm-6">
      <div class="upload_image_card card">
       <div class="upload_image_card_body card-body">
@@ -88,7 +103,7 @@ export default function EditDealeraccount() {
       </div>
       </div>
       </div>
-      </div>
+      </div> */}
       </div> 
         <div className='edit_dealer container-fluid'>
         <div className='dealer_edit_page'>
@@ -125,6 +140,7 @@ export default function EditDealeraccount() {
        </form>
       </div>
         </div>
+        </>):(<div>You are logged out of page.Please login to continue.</div>)}
         </>
     )
 }

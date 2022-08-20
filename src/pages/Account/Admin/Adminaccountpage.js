@@ -63,7 +63,7 @@ export default function Adminaccount() {
           </div>
           </Link>
           <div className='right-group-ad'>
-          <Avatar sx={{ bgcolor: '#ffd43b', color:'#23013f'}}>AD</Avatar>
+          <p>{adminemail}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -220,14 +220,14 @@ export function Venueaccept(){
           </div>
           </Link>
           <div className='right-group-ad'>
-          <Avatar sx={{ bgcolor: '#ffd43b', color:'#23013f'}}>AD</Avatar>
+          <p>{adminemail}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
         <nav className={sidebar ? "sidea-menu active" : "sidea-menu"}>
           <ul className="sidea-menu-items" onClick={showSidebar}>
             <li className="sidea-toggle">
-              <Link to="#" className="sidemenud-bars">
+              <Link to="#" className="sidemenua-bars">
                 <AiIcons.AiOutlineClose/>
               </Link>
             </li>

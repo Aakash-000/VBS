@@ -5,6 +5,7 @@ import { IconContext } from "react-icons";
 import { Link,useParams, useNavigate } from "react-router-dom";
 import { SidebarDataforDealer } from "./SidebarData";
 import "./dealeraccountpage.css";
+import Dealerloginpage from '../../Login/Dealer/Dealerloginpage.js'
 import Logo from '../../../assets/images/navbar_logo_bgr.png'
 import Avatar from '@mui/material/Avatar';
 import axios from 'axios'
@@ -14,12 +15,45 @@ export default function Dealeraccount() {
   const {dealeremail} = useParams();
   const showSidebar = () => setSidebar(!sidebar);                                                               
   const navigate = useNavigate();
+  const[reqVen,setreqVen]=useState([]);
+  const[noToken,setnoToken] = useState(false);
+  const[dealerName,setdealerName] = useState('');
+  useEffect(() => {
+    if(sessionStorage.length != 0){
+      setnoToken(false)
+    }else {
+      setnoToken(true)
+    }
+  }, [noToken])
 
   const config = {  
     headers:{
       Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
     }
     }
+
+    useEffect(async() => {
+      try{
+      let response =await axios.get(`https://venue-booking-system2.herokuapp.com/venue-/requests/${dealeremail}`,config)
+      console.log(response)
+      if(response.data.data)
+      setreqVen(response.data.data)
+      }catch(err){
+        console.log(err)
+      }
+      }, [])
+
+      useEffect(()=>{
+        async function getVenue(){
+          let response = await axios.get('https://venue-booking-system2.herokuapp.com/client-',config);
+          console.log(response)
+          const editDealer = response.data.data.filter((value,index)=>{
+            return value.email === dealeremail;
+          })
+          setdealerName(editDealer[0].userName)
+        }
+        getVenue()
+      },[])
 
   const logout = (e)=> {
     sessionStorage.removeItem('token');
@@ -32,6 +66,7 @@ export default function Dealeraccount() {
 
   return (
     <>
+    {!noToken ? (
       <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebard">
           <Link to="#" className="sidemenud-bars">
@@ -41,7 +76,7 @@ export default function Dealeraccount() {
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealeremail}</p>
+          <p>{dealerName}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -63,17 +98,16 @@ export default function Dealeraccount() {
             })}
           </ul>
         </nav>
-        </IconContext.Provider>
-        {/* <div className='body_content container-fluid'>
-        <div class="card col-lg-12">
-        <img src="..." class="card-img-top" alt="..."/>
+        </IconContext.Provider>):(<div>You are logged out of page.Please login and try again to continue.</div>)}
+        {/* <div className='body_content container'>
+        <div class="card col-lg-4">
          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <h5 class="card-title">{reqVen.length}</h5>
+            <p class="card-text">Number of Venue Booking Request</p>
         </div>
         </div>
-        <div className="body_content_sub container-fluid">
+        </div> */}
+        {/*<div className="body_content_sub container-fluid">
         <div class="row">
         <div class="col-sm-8 col-lg-6">
             <div class="card">

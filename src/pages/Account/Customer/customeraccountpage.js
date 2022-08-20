@@ -19,7 +19,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 export function VenuecarddetailCustomer(){  
   const[getregvenue,setgetregvenue] = useState([]);
   const {id} = useParams();
-  
+  const[noToken,setnoToken] = useState(false);
+  useEffect(() => {
+    if(sessionStorage.length != 0){
+      setnoToken(false)
+    }else {
+      setnoToken(true)
+    }
+  }, [noToken]) 
 
     useEffect(()=>{
     axios.get(`https://venue-booking-system2.herokuapp.com/client-/${id}`)
@@ -30,6 +37,7 @@ export function VenuecarddetailCustomer(){
     // const filterImg = getregvenue.find((item)=> item.id == id) 
     return (
       <>
+      {!noToken?(
       <div className='card_detail_customer container-fluid'>
       <div class="card_customer mb-3" style={{width:'800px',height:'500px'}}>
   <div class="row g-0">
@@ -46,9 +54,9 @@ export function VenuecarddetailCustomer(){
         <Bookingform/>
       </div>
     </div>
-  </div>
     </div>
-  </div>
+    </div>
+  </div>):(<div>You are logged out of page.Please login to continue.</div>)}
       </>
     )
 }
@@ -61,6 +69,14 @@ export default function Customeraccount() {
   const [sidebar, setSidebar] = useState(true);
   const[customerdetail,setcustomerDetail] = useState([]);
   const showSidebar = () => setSidebar(!sidebar);
+  const[noToken,setnoToken] = useState(false);
+  useEffect(() => {
+    if(sessionStorage.length != 0){
+      setnoToken(false)
+    }else {
+      setnoToken(true)
+    }
+  }, [noToken]) 
 
     const config = {  
       headers:{                                                                                                 
@@ -99,6 +115,7 @@ export default function Customeraccount() {
 
   return (
     <>
+     {!noToken?(
    <div>
         <IconContext.Provider value={{ color: "#011627" }}>
           <div className="sidebarc sticky-top">
@@ -183,8 +200,7 @@ export default function Customeraccount() {
           </div>
           </div>)}
         </div>
-        </div>
-    )}
+        </div>):(<div>You are logged out of page.Please login to continue.</div>)}
     </>
   );
   
