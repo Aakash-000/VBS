@@ -19,7 +19,6 @@ export default function Dealercardlist({filterSearch}) {
             async function getVenue(){
               let response = await axios.get('https://venue-booking-system2.herokuapp.com/client-',config)
               setregVenue(response.data.data)
-              .catch(err=> {console.log(err)});
             }
             getVenue();
           },[])

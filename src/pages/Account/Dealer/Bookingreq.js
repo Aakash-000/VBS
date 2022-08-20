@@ -21,7 +21,8 @@ export default function Bookingreq() {
   const[reqVen,setreqVen]=useState([]);  
   const[noToken,setnoToken] = useState(false);
   const[dealerName,setdealerName] = useState('');
-
+  const[accept,setAccept]=useState(false);
+  const[cancel,setCancel ] =useState(false);
   useEffect(() => {
     if(sessionStorage.length != 0){
       setnoToken(false)
@@ -65,13 +66,37 @@ export default function Bookingreq() {
       }catch(err){
         console.log(err)
       }
-      }, [])
+      },[accept,cancel])
 
-      async function handleAccept(index){
-
+      async function handleAccept(key){
+        try{
+          let response = await axios.put(`https://venue-booking-system2.herokuapp.com/venue-/response/${reqVen[key].id}`,
+                {
+                  "status": 1
+                }    
+            ,config
+        );
+        console.log(response)
+        setAccept(true)
+        }catch(err){  
+          console.log(err)
+          setAccept(false)
+          }
       }
-      async function handleCancel(index){
-
+      async function handleCancel(key){
+        try{
+          let response = await axios.put(`https://venue-booking-system2.herokuapp.com/venue-/response/${reqVen[key].id}`,
+                {
+                  "status": 2
+                }    
+            ,config
+        );
+        console.log(response)
+        setCancel(true)
+        }catch(err){  
+          console.log(err)
+          setCancel(false)
+          }
       }
 
        return (
@@ -129,8 +154,8 @@ export default function Bookingreq() {
         </thead>
         <tbody>
     {reqVen.map((item,index)=>(
-      <tr>
-      <th key={index}>{index}</th>
+      <tr key={index}>
+      <th>{index+1}</th>
       <td>{item.client.name}</td>
       <td>{item.client.mobile_no}</td>
       <td>{item.client.email}</td>

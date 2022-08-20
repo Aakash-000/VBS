@@ -28,8 +28,16 @@ export default function Bookingform() {
     }
 
       useEffect(()=>{
-          
-      })
+       async function getData(){
+        try{
+          let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/bookedDate/${id}`,config);
+          console.log(response)
+        }catch(err){
+          console.log(err)
+        }
+      }
+        getData()
+    },[])
 
       async function bookNow(){
         try{
@@ -38,12 +46,12 @@ export default function Bookingform() {
           config
           );
           console.log(response);
-          setBooked(response.data.data)   
-          if(booked.includes(bookingDetail.date)){
-            setisAvailable(false)
-          }else{
-            prevBooked.push(bookingDetail.date);
-          }
+          // setBooked(response.data.data)   
+          // if(booked.includes(bookingDetail.date)){
+          //   setisAvailable(false)
+          // }else{
+          //   prevBooked.push(bookingDetail.date);
+          // }
       }catch(err){
         console.log(err)
         setbookingDetail(()=>({...bookingDetail,bookingDate:"",calculatedPayment:"",requiredCapacity:"",functionType:""}))
@@ -58,7 +66,7 @@ export default function Bookingform() {
 
     return (
       <>
-      {noToken?(
+      {!noToken?(
         <div className='booking_form_customer'>
         <div className='book_button'>
         <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">

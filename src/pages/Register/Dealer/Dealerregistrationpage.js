@@ -31,7 +31,7 @@ export default function Dealerregistrationpage() {
           formData.append('contactNumber', dealerDetail.contactNumber)
           formData.append('password',dealerDetail.password)
           formData.append('description',dealerDetail.description)
-          formData.append('venueFile',venueFile)
+          formData.append('venueFile',venueFile,venueFile.Folderpath)
        let response = await axios.post('https://venue-booking-system2.herokuapp.com/register/venue',
             formData,
         {headers: {
