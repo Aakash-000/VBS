@@ -1,5 +1,5 @@
 import React from 'react'
-import {Reacticontwelve,Reacticonthree,Reacticonsix,Reacticonthirteen,Reacticonone,Reacticonfourteen} from '../../../assets/icons/Reacticon.js'
+import {Reacticontwelve,Reacticonthree,Reacticonsix,Reacticonthirteen,Reacticonone,Reacticonfourteen,Reacticoneighteen} from '../../../assets/icons/Reacticon.js'
 export const SidebarDataforDealer = [
     
     {fordealer:{
@@ -32,6 +32,11 @@ export const SidebarDataforDealer = [
                 title:'Edit Profile',
                 path:'/cadata',
                  icon:<Reacticonthirteen/>
+            }},
+            {forcustomer:{
+                title:'My Booking Data',
+                path:'/cabookingdata',
+                 icon:<Reacticoneighteen/>
             }}
 
 ]

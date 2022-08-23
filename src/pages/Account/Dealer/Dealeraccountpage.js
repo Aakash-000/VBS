@@ -12,12 +12,12 @@ import axios from 'axios'
 
 export default function Dealeraccount() {
   const [sidebar, setSidebar] = useState(false);    
-  const {dealeremail} = useParams();
+  const {dealeremail,dealername} = useParams();
   const showSidebar = () => setSidebar(!sidebar);                                                               
   const navigate = useNavigate();
   const[reqVen,setreqVen]=useState([]);
   const[noToken,setnoToken] = useState(false);
-  const[dealerName,setdealerName] = useState('');
+  
   useEffect(() => {
     if(sessionStorage.length != 0){
       setnoToken(false)
@@ -43,17 +43,6 @@ export default function Dealeraccount() {
       }
       }, [])
 
-      useEffect(()=>{
-        async function getVenue(){
-          let response = await axios.get('https://venue-booking-system2.herokuapp.com/client-',config);
-          console.log(response)
-          const editDealer = response.data.data.filter((value,index)=>{
-            return value.email === dealeremail;
-          })
-          setdealerName(editDealer[0].userName)
-        }
-        getVenue()
-      },[])
 
   const logout = (e)=> {
     sessionStorage.removeItem('token');
@@ -76,7 +65,7 @@ export default function Dealeraccount() {
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealerName}</p>
+          <p>{dealername}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -90,7 +79,7 @@ export default function Dealeraccount() {
             {SidebarDataforDealer.map((item, index) => {
               return (
                 <li key={index} className={item.fordealer.cName}>
-                  <Link to={`${item.fordealer.path}`+`/${dealeremail}`} className='sidebard-pa'>
+                  <Link to={`${item.fordealer.path}`+`/${dealeremail}`+`/${dealername}`} className='sidebard-pa'>
                     <p>{item.fordealer.icon}{item.fordealer.title}</p>
                   </Link>
                 </li>

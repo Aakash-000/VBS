@@ -16,17 +16,18 @@ export default function Customerloginpage() {
   const[CustomerDetail,setCustomerDetail] = useState({username:'',password:''});
   const[focused,setFocused] = useState(false);
   const[invalid,setInvalid] = useState(false);
-  
+  const[isvalid,setisvalid] = useState(true);
  
 
     async function login(){
       try{
-          let response = await axios.post('https://venue-booking-system2.herokuapp.com/login',JSON.stringify(CustomerDetail),
+          let response = await axios.post('https://venue-booking-system2.herokuapp.com/login',
+          JSON.stringify(CustomerDetail),
           {headers:{'Content-Type':'application/json'}});
             
           if(response.data.data.email === CustomerDetail.username){
             console.log(response);
-            navigate(`/customeraccount/${response.data.data.email}`);
+            navigate(`/customeraccount/${response.data.data.email}/${response.data.data.uname}`);
             sessionStorage.setItem('token',JSON.stringify(response.data.data.token));
             setCustomerDetail(()=>({...CustomerDetail,username:'',password:''}));
             window.location.reload();
@@ -38,6 +39,14 @@ export default function Customerloginpage() {
               setCustomerDetail(()=>({...CustomerDetail,username:'',password:''}));
             }else if(response.response.request.status == 500){
               alert('Internal Server Error');
+            }
+            setisvalid(false)
+            const timeId = setTimeout(() => {
+          setisvalid(true)
+           }, 5000)
+          
+         return () => {
+          clearTimeout(timeId)
             }
           }
         }
@@ -56,16 +65,17 @@ export default function Customerloginpage() {
       
         <Navbar/>
     <div className='customer_page container'>
-    {invalid ? 
-    <div className='invalid'>
-      <pre className='invalid_status'>Username or Password is invalid!
-    </pre></div>:
-      (<div></div>)}
+    {isvalid ? <div></div> : <div className='invalid_req_book'>
+        <pre className='invalid_status_req_book'>
+          Login Unsuccessfull!
+        </pre>
+        </div>
+        }
         <form className='customer_form' onSubmit={submitHandler}>
         <h1 className='heading_clog'><Reacticoneight/>Customer Login</h1>
         <div className='form_field_customer'>
       <label htmlFor='email'>Email:</label>
-      <input autoComplete="off" type="email" name='email' pattern='^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setCustomerDetail({...CustomerDetail,username:e.target.value})} value={CustomerDetail.username}/>
+      <input autoComplete="off" type="email" name='email' pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setCustomerDetail({...CustomerDetail,username:e.target.value})} value={CustomerDetail.username}/>
       <span>{errorMsg.map((item)=>(item.forEmail))}</span>
       </div>
         <div className='form_field_customer'>

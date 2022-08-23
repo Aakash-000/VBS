@@ -20,7 +20,9 @@ export default function Dealerregistrationpage() {
     const[focused,setFocused] = useState(false);
     const[dealerDetail,setDealerDetail] = useState({email:"",venueName:"",userName:"",address:"",contactNumber:"",password:"",description:""});
     const[venueFile,setimageFile]=useState(null);
-                                                                                                          
+    const[isvalid,setisvalid] = useState(true);
+    const[isvalidS,setisvalidS] = useState(true);
+
       async function nextPageRedirect(){
         try{
           let formData = new FormData();
@@ -31,18 +33,36 @@ export default function Dealerregistrationpage() {
           formData.append('contactNumber', dealerDetail.contactNumber)
           formData.append('password',dealerDetail.password)
           formData.append('description',dealerDetail.description)
-          formData.append('venueFile',venueFile,venueFile.Folderpath)
+          formData.append('venueFile',venueFile)
        let response = await axios.post('https://venue-booking-system2.herokuapp.com/register/venue',
             formData,
         {headers: {
           'Content-Type': 'multipart/form-data'
         }
-      });
-          navigate('/dealerlogin');
+      }); 
+          setTimeout(()=>{
+            navigate('/dealerlogin')
+          },5000)
           setDealerDetail(()=>({...dealerDetail,email:"",venueName:"",userName:"",address:"",contactNumber:"",password:"",description:""}));
       console.log(response);
+      setisvalidS(false)
+      const timeId = setTimeout(() => {
+        setisvalidS(true)
+      }, 5000)
+
+    return () => {
+    clearTimeout(timeId)
+    }
     }catch(err){
       console.log(err);
+      setDealerDetail(()=>({...dealerDetail,email:"",venueName:"",userName:"",address:"",contactNumber:"",password:"",description:""}));
+      setisvalid(false)
+        const timeId = setTimeout(() => {
+          setisvalid(true)
+        }, 5000)
+      return () => {
+      clearTimeout(timeId)
+      }
     }
   }
 
@@ -59,12 +79,23 @@ export default function Dealerregistrationpage() {
     <div > 
       <Navbar/>
     <div className='dealer_reg_page container-fluid'>
-       
+      {isvalid ? <div></div> : <div className='invalid_req_book'>
+        <pre className='invalid_status_req_book'>
+           Registration Unsuccessfull!
+        </pre>
+        </div>
+        }
+        {isvalidS ? <div></div> : <div className='valid_req_book'>
+        <pre className='valid_status_req_book'>
+          Registered Successfully.Please wait for response email for Login!
+        </pre>
+        </div>
+        }
       <form class="dreg_form row g-3" onSubmit={nextHandler} encType="multipart/form-data">
         <h1 className='heading_dreg'><Reacticonfour className='reg_icon'/>Dealer Registration</h1>
     <div class="dreg_field col-md-6">
     <label for="email" class="form-label">Email</label>
-    <input autoComplete="off" type="text" name='email' pattern='^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,email:e.target.value})} value={dealerDetail.email}/>
+    <input autoComplete="off" type="text" name='email' pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,email:e.target.value})} value={dealerDetail.email}/>
     <span>*Please write valid email</span>
   </div>
   <div class="dreg_field col-md-6">
@@ -73,7 +104,6 @@ export default function Dealerregistrationpage() {
     <span>{errorMsg.map((item)=>(item.forUserName))}</span>
     </div>
 
-   
   <div class="dreg_field col-md-6">
     <label for="password" class="form-label">Password</label>
     <input type="password" name='password' id='password' onBlur={handleFocus} focused={focused.toString()} pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} onChange={e=>setDealerDetail({...dealerDetail,password:e.target.value})} value={dealerDetail.password}/>
@@ -84,8 +114,7 @@ export default function Dealerregistrationpage() {
   <input autoComplete="off" type="text" name='venueName' id='name' required={true} pattern='^[a-zA-Z ]{10,200}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,venueName:e.target.value})} value={dealerDetail.venueName}/>
   <span>{errorMsg.map((item)=>(item.forName))}</span>
     </div>
-    
-   
+
     <div class="dreg_field col-md-6">
     <label for="address" class="form-label">Address</label>
     <input autoComplete="off" type="text" name='address'  required={true} id='address' pattern='^[a-zA-Z ]{5,200}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,address:e.target.value})} value={dealerDetail.address}/>
@@ -93,7 +122,7 @@ export default function Dealerregistrationpage() {
     </div>
     <div class="dreg_field col-md-6">
     <label for="contactnumber" class="form-label">Contact Number</label>
-    <input type="text" name='contactNumber' id='number' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setDealerDetail({...dealerDetail,contactNumber:e.target.value})} value={dealerDetail.contactNumber}/>
+    <input type="text" name='contactNumber' id='number' required={true}  maxLength='10' onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setDealerDetail({...dealerDetail,contactNumber:e.target.value})} value={dealerDetail.contactNumber}/>
     <span>{errorMsg.map((item)=>(item.forConNum))}</span>
     </div>
     <div class="dreg_field col-md-12">

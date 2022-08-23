@@ -24,16 +24,24 @@
     gap: 40px;
     margin-right: 60px;
 }
+.buttonicon{
+    margin-bottom: 4px;
+}
 
-.rightmediaicon{
-    margin-right:0.5vw;
-}
-.rightmediaicon:hover{
-    color: #E63946;
-}
 .navbar_sub .about_but{
     display: flex;
     flex-direction: row;
+}
+.about_but:active{
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    font-weight:450;
+    padding: 8px 18px;
+    background-color:#1D3557;
+    border:none;
+    border-radius:2vw;
+    color:white;
 }
 .navbar_sub button{
     cursor: pointer;
@@ -67,7 +75,96 @@
 .mobile-menu-icon{
     display:none;
 }
-
+ /* .navbar_sub .about_button_active{
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    font-weight:450;
+    padding: 8px 18px;
+    background-color:#1D3557;
+    border:none;
+    border-radius:2vw;
+    color: white;
+} 
+.navbar_sub .about_button_inactive{
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    font-weight:450;
+    padding: 8px 18px;
+    background-color:white;
+    border:none;
+    border-radius:2vw;
+    color: rgb(11, 13, 32);
+} */
+/*  
+.navbar_sub .admin_button_active{
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    font-weight:450;
+    padding: 8px 18px;
+    background-color:#1D3557;
+    border:none;
+    border-radius:2vw;
+    color: white;
+}
+.navbar_sub .customer_button_active{
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    font-weight:450;
+    padding: 8px 18px;
+    background-color:#1D3557;
+    border:none;
+    border-radius:2vw;
+    color: white;
+}
+.navbar_sub .dealer_button_active{
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    font-weight:450;
+    padding: 8px 18px;
+    background-color:#1D3557;
+    border:none;
+    border-radius:2vw;
+    color: white;
+}
+.navbar_sub .dealer_button_inactive{
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    font-weight:450;
+    padding: 8px 18px;
+    background-color:white;
+    border:none;
+    border-radius:2vw;
+    color: rgb(11, 13, 32);
+}
+.navbar_sub .customer_button_inactive{
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    font-weight:450;
+    padding: 8px 18px;
+    background-color:white;
+    border:none;
+    border-radius:2vw;
+    color: rgb(11, 13, 32);
+}
+.navbar_sub .admin_button_inactive{
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    font-weight:450;
+    padding: 8px 18px;
+    background-color:white;
+    border:none;
+    border-radius:2vw;
+    color: rgb(11, 13, 32);
+}
+ */
 @media screen and (max-width:780px){
     .navbar_sub{
         display: none;

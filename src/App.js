@@ -9,10 +9,10 @@ import Customerloginpage from './pages/Login/Customer/Customerloginpage.js'
 import Dealerloginpage from './pages/Login/Dealer/Dealerloginpage.js'
 import Dealeraccountpage from './pages/Account/Dealer/Dealeraccountpage.js'
 import Venuecarddetailpage from './pages/Carddetailpage/Venuecarddetailpage.js'
-import {VenuecarddetailCustomer} from './pages/Account/Customer/customeraccountpage.js'
+import {VenuecarddetailCustomer, MybookedVenue} from './pages/Account/Customer/customeraccountpage.js'
 import Dealerregistrationpage from './pages/Register/Dealer/Dealerregistrationpage.js'
 import Customerregistrationpage from './pages/Register/Customer/Customerregistrationpage.js'
-import Explorevenue from './component4/Explorevenue.js'
+import Explorevenue, { Explorevenuenormal } from './component4/Explorevenue.js'
 import Customeraccount from './pages/Account/Customer/customeraccountpage.js'
 import Adminaccount, { Venueaccept } from './pages/Account/Admin/Adminaccountpage.js'
 import EditCustomeraccount from './pages/Account/Customer/EditCustomeraccount.js'
@@ -29,23 +29,23 @@ export default function App() {
         <Routes>
         <Route path="/" element={<Body/>}/>
         <Route path="/explorevenue" element={<Explorevenue/>}/>
+        <Route path="/explorevenue/normal" element={<Explorevenuenormal/>}/>
         <Route path="/adminlogin" element={<Adminloginpage/>}/>
         <Route path='/adminregistration' element={<Adminregisterpage/>}/>
         <Route path="/customerlogin" element={<Customerloginpage/>}/>
         <Route path="/dealerregistration" element={<Dealerregistrationpage/>}/>
         <Route path="/dealerlogin" element={<Dealerloginpage/>}/>
-        {/* <Route path='/uploadfile/:email' element={<Uploadfile/>}/> */}
         <Route path="/customerregistration" element={<Customerregistrationpage/>}/>
         <Route path="/explorevenue/venue/:id" element={ <Venuecarddetailpage/>}/>
-        <Route path="/dealeraccount/:dealeremail"  element={<Dealeraccountpage/>}/>
-        <Route path="/vabookingreq/:dealeremail" element={<Bookingreq/>}/>
-        <Route path="/venue/:clientemail/:id" element={<VenuecarddetailCustomer/>}/>
-        <Route path="/customeraccount/:email" element={<Customeraccount/>}/>
+        <Route path="/dealeraccount/:dealeremail/:dealername"  element={<Dealeraccountpage/>}/>
+        <Route path="/vabookingreq/:dealeremail/:dealername" element={<Bookingreq/>}/>
+        <Route path="/venue/:email/:id" element={<VenuecarddetailCustomer/>}/>
+        <Route path="/customeraccount/:email/:customername" element={<Customeraccount/>}/>
+        <Route path="/cabookingdata/:email/:customername" element={<MybookedVenue/>}/>
         <Route path="/adminaccount/:adminemail" element={<Adminaccount/>}/>
-        <Route path="/cadata/:email" element={<EditCustomeraccount/>}/>
+        <Route path="/cadata/:email/:customername" element={<EditCustomeraccount/>}/>
         <Route path='/acceptvenue/:adminemail' element={<Venueaccept/>}/>
-         <Route path="/vadata/:dealeremail" element={<EditDealeraccount/>}/>
-      { /* <Route path="/aadata/:email" element={<Editadminaccount/>}/> */}
+         <Route path="/vadata/:dealeremail/:dealername" element={<EditDealeraccount/>}/>
         </Routes>
         </Router>
       </div>

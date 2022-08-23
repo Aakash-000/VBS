@@ -15,6 +15,7 @@ export default function Adminloginpage() {
   const[AdminDetail,setAdminDetail] = useState({username:'',password:''});
   const[focused,setFocused] = useState(false);
   const navigate = useNavigate();
+  const[isvalid,setisvalid] = useState(true);
   
     async function login(){
       try{
@@ -23,7 +24,7 @@ export default function Adminloginpage() {
     }});
       if(response.data.data.email == AdminDetail.username){
         console.log(response);
-        navigate(`/adminaccount/${response.data.data.email}`);
+        navigate(`/adminaccount/${response.data.data.email}/`);
         sessionStorage.setItem('token',JSON.stringify(response.data.data.token));
         setAdminDetail(()=>({...AdminDetail,username:'',password:''}));
         window.location.reload();
@@ -35,6 +36,14 @@ export default function Adminloginpage() {
         }else if(response.response.request.status == 500){
           alert('Internal Server Error');
         }
+        setisvalid(false)
+            const timeId = setTimeout(() => {
+          setisvalid(true)
+           }, 5000)
+          
+         return () => {
+          clearTimeout(timeId)
+            }
       }
     }
 
@@ -50,12 +59,17 @@ export default function Adminloginpage() {
     <div>
        <Navbar/>
      <div className='admin_page container'>
-        
+     {isvalid ? <div></div> : <div className='invalid_req_book'>
+        <pre className='invalid_status_req_book'>
+          Login Unsuccessfull!
+        </pre>
+        </div>
+        }
         <form className='admin_control_form' onSubmit={submitHandler}>
         <h1 className='heading_alog'><Reacticoneight/>Admin Login</h1>
         <div className='form_field_admin'>
         <label htmlFor='username'>Email :</label>
-        <input autocomplete="off" type="text" required={true} pattern='^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' name='username' id="username" onBlur={handleFocus} focused={focused.toString()} onChange={e=>setAdminDetail({...AdminDetail,username:e.target.value})} value={AdminDetail.username}/>
+        <input autocomplete="off" type="text" required={true} pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' name='username' id="username" onBlur={handleFocus} focused={focused.toString()} onChange={e=>setAdminDetail({...AdminDetail,username:e.target.value})} value={AdminDetail.username}/>
         <span>{errorMsg.map((item)=>(item.forName))}</span>
         </div>
         <div className='form_field_admin'>

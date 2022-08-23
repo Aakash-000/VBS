@@ -8,12 +8,11 @@ import axios from 'axios'
 import {useParams,useNavigate} from 'react-router-dom'
 import "./customeraccountpage.css";
 import Logo from '../../../assets/images/navbar_logo_bgr.png'
-import Avatar from '@mui/material/Avatar';
-import {Reacticonfifteen} from '../../../assets/icons/Reacticon.js'
 import Explorevenue from '../../../component4/Explorevenue.js'
 import Bookingform from './Bookingform.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { CgArrowsExpandDownRight } from "react-icons/cg";
 
 
 export function VenuecarddetailCustomer(){  
@@ -27,12 +26,6 @@ export function VenuecarddetailCustomer(){
       setnoToken(true)
     }
   }, [noToken]) 
-
-    useEffect(()=>{
-    axios.get(`https://venue-booking-system2.herokuapp.com/client-/${id}`)
-    .then(response=>(setgetregvenue(response.data.data)));
-    console.log(getregvenue);
-    },[])
     
     // const filterImg = getregvenue.find((item)=> item.id == id) 
     return (
@@ -65,9 +58,8 @@ export function VenuecarddetailCustomer(){
 export default function Customeraccount() {
   
   const navigate = useNavigate();
-  const {email} = useParams();
+  const {email,customername} = useParams();
   const [sidebar, setSidebar] = useState(true);
-  const[customerdetail,setcustomerDetail] = useState([]);
   const showSidebar = () => setSidebar(!sidebar);
   const[noToken,setnoToken] = useState(false);
   useEffect(() => {
@@ -85,18 +77,6 @@ export default function Customeraccount() {
     }
 
     useEffect(async()=>{
-      function getUser(){
-        axios.get(`https://venue-booking-system2.herokuapp.com/client-/${email}`,config)
-        .then(response => {
-          console.log(response.data.data) 
-          setcustomerDetail(response.data.data)
-        })
-        .catch(err=> {console.log(err)});
-      }
-       getUser();
-    },[])
-
-    useEffect(async()=>{
       function getVenue(){
         axios.get('https://venue-booking-system2.herokuapp.com/client-',config)
         .then(response => {console.log(response)})                                                            
@@ -110,7 +90,7 @@ export default function Customeraccount() {
       sessionStorage.clear();
       navigate('/customerlogin');
       window.location.reload();
-  }
+    }
     
 
   return (
@@ -126,7 +106,7 @@ export default function Customeraccount() {
             </div>
             </Link>
             <div className='right-group-cus'>
-            <p>{customerdetail.name}</p>
+            <p>{customername}</p>
             <button onClick={logout}>Logout</button>
             </div>
           </div>
@@ -141,7 +121,7 @@ export default function Customeraccount() {
               SidebarDataforcustomer.map((item, index) => {
                 return (
                   <li key={index} className='sidec-text' onClick={showSidebar}>
-                    <Link to={`${item.forcustomer.path}`+`/${email}`} className='sidebarc-pa'>
+                    <Link to={`${item.forcustomer.path}`+`/${email}`+`/${customername}`} className='sidebarc-pa'>
                       <p>{item.forcustomer.icon}{item.forcustomer.title}</p>
                     </Link>
                   </li>
@@ -205,3 +185,171 @@ export default function Customeraccount() {
   );
   
 }
+
+export function MybookedVenue(){
+  const[noToken,setnoToken] = useState(false);
+  const [sidebar, setSidebar] = useState(true);
+  const showSidebar = () => setSidebar(!sidebar);
+  const[mybookedVenverify,setmybookedVenverify] = useState([]);
+  const[mybookedVenpen,setmybookedVenpen] = useState([]);
+
+  const {email,customername} = useParams();
+  const navigate = useNavigate();
+                                                  
+  useEffect(() => {
+    if(sessionStorage.length != 0){
+      setnoToken(false)
+    }else {
+      setnoToken(true)
+    }
+  }, [noToken]) 
+  const config = {  
+    headers:{                                                                                                 
+      Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
+    }
+  }
+  useEffect(async()=>{
+    try{
+    let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/booking/${email}`,config);
+    console.log(response)
+    const verifiedData = response.data.data.filter((item)=>{
+      return item.venueStatus === "VERIFY";
+    })
+    setmybookedVenverify(verifiedData)
+    }catch(err){
+      console.log(err)
+    }
+  },[])
+
+  useEffect(async()=>{
+    try{
+    let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/booking/${email}`,config);
+    console.log(response)
+    const pendingData = response.data.data.filter((item)=>{
+      return item.venueStatus === "PENDING";
+    })
+    setmybookedVenpen(pendingData)
+    }catch(err){
+      console.log(err)
+    }
+  },[])
+
+  const logout = (e)=> {
+    sessionStorage.removeItem('token');
+    sessionStorage.clear();
+    navigate('/customerlogin');
+    window.location.reload();
+}
+  
+  
+  return(
+    <>
+     {!noToken?(
+       <div>
+        <IconContext.Provider value={{ color: "#011627" }}>
+          <div className="sidebarc sticky-top">
+            <Link to="#" className="sidemenuc-bars">
+              <FaIcons.FaBars onClick={showSidebar} />
+              <div className='sidec-logo'>
+                <img src={Logo} alt='logo'/>
+            </div>
+            </Link>
+            <div className='right-group-cus'>
+            <p>{customername}</p>
+            <button onClick={logout}>Logout</button>
+            </div>
+          </div>
+          <nav className={sidebar ? "sidec-menu active" : "sidec-menu"}>
+            <ul className="sidec-menu-items" onClick={showSidebar}>
+              <li className="sidec-toggle">
+                <Link to="#" className="sidemenuc-bars">
+                  <AiIcons.AiOutlineClose/>
+                </Link>
+              </li>
+              {
+              SidebarDataforcustomer.map((item, index) => {
+                return (
+                  <li key={index} className='sidec-text' onClick={showSidebar}>
+                    <Link to={`${item.forcustomer.path}`+`/${email}`+`/${customername}`} className='sidebarc-pa'>
+                      <p>{item.forcustomer.icon}{item.forcustomer.title}</p>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+          </IconContext.Provider>
+            <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
+            <p className='table_container_title'>Successfully Booked Venue</p>
+            <table class="table_container_body table  table-bordered">
+            <thead>
+            <tr>
+          <th>SN</th>
+          <th>Function Type</th>
+          <th>Required Capacity</th>
+          <th>Date Selected</th>
+          <th>Calculated Payment</th>
+          <th>Booking Status</th>
+          <th>Venue Detail</th>
+            </tr>
+            </thead>
+            <tbody>
+              {mybookedVenverify.map((val,index)=>(              
+              <tr key={index+1}>
+            <th>{index+1}</th>
+          <td>{val.functionType}</td>
+          <td>{val.requiredCapacity}</td>
+          <td>{val.bookingDate}</td>
+          <td>{val.calculatedPayment}</td>
+          <td>{val.bookingStatus}</td>
+          <div class="modal-body">
+          <pre>FullName:{val.venue.userName}</pre>
+          <pre>VenueName:{val.venue.venueName}</pre>
+          <pre>Email:{val.venue.email}</pre>
+          <pre>ContactNumber:{val.venue.contactNumber}</pre>
+          </div>
+            </tr>
+              ))}
+            </tbody>
+            </table>
+            </div>
+            <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
+            <p className='table_container_title'>Pending Venue for Booking</p>
+            <table class="table_container_body table  table-bordered">
+            <thead>
+            <tr>
+          <th>SN</th>
+          <th>Function Type</th>
+          <th>Required Capacity</th>
+          <th>Date Selected</th>
+          <th>Calculated Payment</th>
+          <th>Booking Status</th>
+          <th>Venue Detail</th>
+            </tr>
+            </thead>
+            <tbody>
+              {mybookedVenpen.map((val,index)=>(              
+              <tr key={index+1}>
+            <th>{index+1}</th>
+          <td>{val.functionType}</td>
+          <td>{val.requiredCapacity}</td>
+          <td>{val.bookingDate}</td>
+          <td>{val.calculatedPayment}</td>
+          <td>{val.bookingStatus}</td>
+          <div class="modal-body">
+          <pre>FullName:{val.venue.userName}</pre>
+          <pre>VenueName:{val.venue.venueName}</pre>
+          <pre>Email:{val.venue.email}</pre>
+          <pre>ContactNumber:{val.venue.contactNumber}</pre>
+          </div>
+            </tr>
+              ))}
+            </tbody>
+            </table>
+            </div>
+            </div>
+          ):(<div>You are logged out of page please login and try again.</div>)}
+          </>
+  )
+}
+

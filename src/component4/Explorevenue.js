@@ -12,3 +12,11 @@ export default function Explorevenue() {
     </div>
     )
 }
+
+export function Explorevenuenormal(){
+    return(
+        <div>
+            <Searchbar/>
+        </div>
+    )
+}

@@ -16,6 +16,8 @@ export default function EditCustomeraccount() {
   const navigate = useNavigate();
   const {email} = useParams();
   const[noToken,setnoToken] = useState(false);
+  const[editData,seteditData] = useState({username:'',password:'',mobile_no:''});
+
   useEffect(() => {
     if(sessionStorage.length != 0){
       setnoToken(false)
@@ -29,16 +31,15 @@ export default function EditCustomeraccount() {
       axios.get(`https://venue-booking-system2.herokuapp.com/client-/${email}`,config)
       .then(response => {
         console.log(response.data.data)
-        seteditData({...editData,userName:response.data.data.name,
+        seteditData({...editData,username:response.data.data.name,
           password:response.data.data.password,
-          contactNumber:response.data.data.mobile_no})
+          mobile_no:response.data.data.mobile_no})
       })
       .catch(err=> {console.log(err)});
     }
      getUser();
   },[])
   
-  const[editData,seteditData] = useState({userName:'',password:'',contactNumber:''});
   const[focused,setFocused] = useState(false);
   function handleFocus(e){
     setFocused(true);
@@ -47,12 +48,22 @@ export default function EditCustomeraccount() {
  const config = {  
   headers:{                                                                                                 
     Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
+    ,'Content-Type':'application/json'
   }
 }
 
+  async function editCustomer(){
+    try{
+      let response = await axios.put(`https://venue-booking-system2.herokuapp.com/client-/update/${email}`,JSON.stringify(editData),config)
+      console.log(response)
+    }catch(err){
+      console.log(err)
+    }
+  }
  function submitHandler(e){
-    e.preventDefault();
-    // navigate(`/customeraccount/${email}`);
+    e.preventDefault()
+    editCustomer()
+    navigate(`/customeraccount/${email}/${editData.username}`)
     console.log(editData)
  }
     return (
@@ -64,7 +75,7 @@ export default function EditCustomeraccount() {
         <h1 className='heading_edit_clog'>Edit Account</h1>
         <div class="form_edit_field_customer">
         <label htmlFor="username" >User Name:</label>
-        <input autoComplete="off" type="text" name='username' id='username' required={true} pattern='^[a-zA-Z ]{3,16}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>seteditData({...editData,userName:e.target.value})} value={editData.userName}/>
+        <input autoComplete="off" type="text" name='username' id='username' required={true} pattern='^[a-zA-Z ]{3,16}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>seteditData({...editData,username:e.target.value})} value={editData.username}/>
         <span>{errorMsg.map((item)=>(item.forName))}</span>
         </div>
         <div className='form_edit_field_customer'>
@@ -74,7 +85,7 @@ export default function EditCustomeraccount() {
         </div>
         <div className='form_edit_field_customer'>
         <label for="contactnumber" class="form-label">Contact Number:</label>
-    <input type="text" name='contactNumber' id='number' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>seteditData({...editData,contactNumber:e.target.value})} value={editData.contactNumber}/>
+    <input type="text" name='contactNumber' id='number'  maxLength='10' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>seteditData({...editData,mobile_no:e.target.value})} value={editData.mobile_no}/>
     <span>{errorMsg.map((item)=>(item.forConNum))}</span>
         </div>
         <div className="form_edit_field_customer">

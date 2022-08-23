@@ -18,18 +18,40 @@ export default function Customerregistrationpage() {
     
     const navigate = useNavigate();
     const[focused,setFocused] = useState(false);
-    const[customerDetail,setCustomerDetail] = useState({email:"",name:"",city_name:"",mobile_no:"",password:""});
-
-
+    const[customerDetail,setCustomerDetail] = useState({email:"",username:"",city_name:"",mobile_no:"",password:""});
+    const[isvalid,setisvalid] = useState(true);
+    const[isvalidS,setisvalidS] = useState(true);
+    
       async function register(){
+        try{
         let response = await axios.post('https://venue-booking-system2.herokuapp.com/register/client',JSON.stringify(customerDetail),
         {headers:{'Content-Type':'application/json'
         }});
 
         console.log(response);
-        setCustomerDetail(()=>({...customerDetail,email:" ",name:" ",city_name:" ",mobile_no:" ",password:" "}));
+        setCustomerDetail(()=>({...customerDetail,email:" ",username:" ",city_name:" ",mobile_no:" ",password:" "}));
         navigate('/customerlogin');
+        setisvalidS(false)
+        const timeId = setTimeout(() => {
+          setisvalidS(true)
+        }, 5000)
+
+      return () => {
+      clearTimeout(timeId)
       }
+      }catch(err){
+        console.log(err)
+        setCustomerDetail(()=>({...customerDetail,email:" ",username:" ",city_name:" ",mobile_no:" ",password:" "}));
+        setisvalid(false)
+        const timeId = setTimeout(() => {
+          setisvalid(true)
+        }, 5000)
+
+      return () => {
+      clearTimeout(timeId)
+      }
+      }
+    }
 
        function submitHandler(e){
       e.preventDefault();
@@ -50,18 +72,30 @@ export default function Customerregistrationpage() {
     <div> 
       <Navbar/>
     <div className='customer_reg_page container-fluid'>
-      
+
+    {isvalid ? <div></div> : <div className='invalid_req_book'>
+        <pre className='invalid_status_req_book'>
+          Registration Unsuccessfull!
+        </pre>
+        </div>
+        }
+        {isvalidS ? <div></div> : <div className='valid_req_book'>
+        <pre className='valid_status_req_book'>
+          Registration Successful!
+        </pre>
+        </div>
+        }
       <form class="creg_form row g-3" onSubmit={submitHandler}>
         <h1 className='heading_creg'><Reacticonfour className='reg_icon'/>Customer Registration</h1>
       
     <div class="creg_field col-md-6">
     <label for="email" class="form-label">Email</label>
-    <input autoComplete="off" type="text" name='email' pattern='^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,email:e.target.value})} value={customerDetail.email}/>
+    <input autoComplete="off" type="text" name='email' pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,email:e.target.value})} value={customerDetail.email}/>
     <span>*Please write valid email</span>
   </div>
   <div class="creg_field col-md-6">
   <label for="username" class="form-label">User Name</label>
-  <input autoComplete="off" type="text" name='name' id='username' required={true} pattern='^[a-zA-Z ]{3,50}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,name:e.target.value})} value={customerDetail.name}/>
+  <input autoComplete="off" type="text" name='name' id='username' required={true} pattern='^[a-zA-Z ]{3,50}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,username:e.target.value})} value={customerDetail.username}/>
     <span>{errorMsg.map((item)=>(item.forUserName))}</span>
     </div>
 
@@ -79,7 +113,7 @@ export default function Customerregistrationpage() {
     </div>
     <div class="creg_field col-md-6">
     <label for="contactnumber" class="form-label">Contact Number</label>
-    <input type="text" name='mobile_number' id='number' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setCustomerDetail({...customerDetail,mobile_no:e.target.value})} value={customerDetail.mobile_no}/>
+    <input type="text" name='mobile_number' id='number' required={true} maxLength='10' onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setCustomerDetail({...customerDetail,mobile_no:e.target.value})} value={customerDetail.mobile_no}/>
     <span>{errorMsg.map((item)=>(item.forConNum))}</span>
   </div>
 

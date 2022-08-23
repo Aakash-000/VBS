@@ -18,8 +18,8 @@ export default function EditDealeraccount() {
   const {dealeremail} = useParams();
   const[dealerDetail,setdealerDetail] = useState({venueName:'',userName:'',password:'',contactNumber:'',address:''});
   const[focused,setFocused] = useState(false);
-  const[venueFile,setimageFile]=useState(null);
   const[noToken,setnoToken] = useState(false);
+  
   useEffect(() => {
     if(sessionStorage.length != 0){
       setnoToken(false)
@@ -28,12 +28,7 @@ export default function EditDealeraccount() {
     }
   }, [noToken])
 
-  const configforImg = {  
-    headers:{
-      Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token')),
-      'Content-Type': 'multipart/form-data'
-    }
-    }
+
     const config = {  
       headers:{
         Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token')),
@@ -42,43 +37,31 @@ export default function EditDealeraccount() {
       }
     useEffect(()=>{
       async function getVenue(){
-        let response = await axios.get('https://venue-booking-system2.herokuapp.com/client-',config);
+        let response = await axios.get(`https://venue-booking-system2.herokuapp.com/venue-/${dealeremail}`,config);
         console.log(response)
-        const editDealer = response.data.data.filter((value,index)=>{
-          return value.email === dealeremail;
-        })
-        setdealerDetail({...dealerDetail,venueName:editDealer[0].venueName,
-          userName:editDealer[0].userName,
-          password:editDealer[0].password,
-          contactNumber:editDealer[0].contactNumber,
-          address:editDealer[0].address
-        })
+        setdealerDetail(response.data.data)
       }
       getVenue()
     },[])
 
-  async function uploadFile(){
-    try{
-          let formData = new FormData();
-          formData.append('venueFile', venueFile);
-          let response = await axios.put(`https://venue-booking-system2.herokuapp.com/register/uploadImage/${dealeremail}`,
-          formData,configforImg);
-          console.log(response)
-        }catch(err){
-          console.log(err);
-        }
-  }
-  const uploadHandle =(e)=>{
-    e.preventDefault();
-    uploadFile();
-  }
+    async function editAccount(){
+      try{
+      let response = await axios.put(`https://venue-booking-system2.herokuapp.com/venue-/update/${dealeremail}`,
+      JSON.stringify(dealerDetail),config);
+      console.log(response)
+      }catch(err){
+        console.log(err)
+      }
+    }
+
   function handleFocus(e){
     setFocused(true);
  }
 
  function submitHandler(e){
     e.preventDefault();
-    // navigate(`/dealeraccount/${dealeremail}`);
+    editAccount();
+    navigate(`/dealeraccount/${dealeremail}/${dealerDetail.userName}`);
     console.log(dealeremail)
  }
     return (
@@ -86,24 +69,6 @@ export default function EditDealeraccount() {
       {!noToken ? (
         <>
       <div class='container-fluid'>
-    {/* <div class="container_row row">
-    <div class="col-sm-6">
-     <div class="upload_image_card card">
-      <div class="upload_image_card_body card-body">
-      <form onSubmit={uploadHandle} encType="multipart/form-data" >
-      <div class="dreg_field col-md-12">
-      <label for="file" class="form-label">Choose Image:</label>
-      <input type="file" name="imageFile" id="file" required={true} accept=".jpg, .jpeg, .png, .svg, .gif" onBlur={handleFocus} focused={focused.toString()} onChange={e=>{setimageFile(e.target.files[0])}} />
-      <span>*Please choose an Image!</span>
-      </div>
-      <div class="file_img_button">
-      <button type="submit">Upload</button>
-      </div>
-      </form>
-      </div>
-      </div>
-      </div>
-      </div> */}
       </div> 
         <div className='edit_dealer container-fluid'>
         <div className='dealer_edit_page'>
@@ -126,7 +91,7 @@ export default function EditDealeraccount() {
         </div>
         <div className='form_edit_field_dealer col-md-6'>
         <label for="contactnumber" class="form-label">Contact Number :</label>
-        <input type="text" name='contacNnumber' id='number' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setdealerDetail({...dealerDetail,contactNumber:e.target.value})} value={dealerDetail.contactNumber}/>
+        <input type="text" name='contacNnumber' id='number'  maxLength='10' required={true} onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setdealerDetail({...dealerDetail,contactNumber:e.target.value})} value={dealerDetail.contactNumber}/>
         <span>{errorMsg.map((item)=>(item.forConNum))}</span>
         </div>
         <div className='form_edit_field_dealer col-md-6'>

@@ -9,12 +9,14 @@ import './searchbar.css'
 export const Searchbar = () =>{
     const[searchTerm,setSearchTerm]=useState("");
     return (
+        <>
     <div>
     <div className='search_bar'>
     <input type="text" name="search" autoComplete="off" id="search"  value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} placeholder='Search For Location'/><Reacticonseven/>
     </div>
-    <Dealercardlist filterSearch={searchTerm}/>
     </div>
+    <Dealercardlist filterSearch={searchTerm}/>
+    </>
     )
 }
 

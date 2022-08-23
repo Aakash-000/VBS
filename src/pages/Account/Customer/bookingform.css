@@ -59,7 +59,9 @@
 }
 .book_model_footer{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin:20px 0px;
 }
 .book_model_footer button{
@@ -70,3 +72,34 @@
     color: rgb(234, 255, 226);
     font-size: 20px;
 }
+.book_model_footer abbr{
+    color: #E63946;
+}
+.invalid_req_book{
+    margin: 5px;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    z-index: 999;
+}
+.invalid_req_book .invalid_status_req_book{
+ font-size: 20px;
+ color:#f1eff3;
+ background-color:  #E63946;
+ padding:5px;
+ border-radius: 15px;
+}
+.valid_req_book{
+    margin: 5px;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    z-index: 999;
+}
+.valid_req_book .valid_status_req_book{
+    font-size: 20px;
+    color:#150029;
+    background-color:  rgb(91, 138, 135);
+    padding:5px;
+    border-radius: 15px;
+   }

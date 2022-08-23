@@ -1,5 +1,5 @@
 import {MdOutlineAddTask,MdExplore,MdCancel} from 'react-icons/md'
-import {BsBookmarkCheckFill,BsPersonCheckFill} from 'react-icons/bs'
+import {BsBookmarkCheckFill,BsPersonCheckFill,BsClipboardData} from 'react-icons/bs'
 import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiOutlineInfoCircle} from 'react-icons/ai'
 import {FaGlobe,FaGem,FaFingerprint,FaDotCircle,FaAlignLeft,FaRegTimesCircle,FaHome,FaUserEdit} from 'react-icons/fa'
@@ -123,6 +123,13 @@ export  const Reacticonseventeen =()=>{
     return (
         <div>
            <MdCancel size={30}/>
+        </div>
+    )
+}
+export  const Reacticoneighteen =()=>{
+    return (
+        <div>
+           <BsClipboardData />
         </div>
     )
 }

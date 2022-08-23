@@ -39,11 +39,11 @@ export default function () {
 
      
     <section class="">
-      <div class="container text-center text-md-start mt-5">
+      <div class="container text-center text-md-start mt-3">
         
-        <div class="row mt-3">
+        <div class="row mt-1">
           
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-2">
             <h6 class="text-uppercase fw-bold">Team Members</h6>
             <hr
                 class="mb-4 mt-0 d-inline-block mx-auto"
@@ -57,24 +57,30 @@ export default function () {
             </p>
           </div>
              
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-2">
              
-            <h6 class="text-uppercase fw-bold">Products</h6>
+            <h6 class="text-uppercase fw-bold">For You</h6>
             <hr
                 class="mb-4 mt-0 d-inline-block mx-auto"
                 style={{width: '60px', backgroundColor: '#7c4dff', height: '2px'}}
                 />
-            <p>
-              <a href="/" class="text-dark">Verified Venue</a>
+            <p class="text-dark">
+              Verified Owner
             </p>
-            <p>
-              <a href="/" class="text-dark">Status</a>
+            <p class="text-dark">
+              Standard Venue
+            </p>
+            <p class="text-dark">
+              Safe Booking
+            </p>
+            <p class="text-dark">
+            Verified Customer
             </p>
           </div>
            
            
            
-          <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-md-0 mb-4">
+          <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-md-0 mb-2">
              
             <h6 class="text-uppercase fw-bold">Contact</h6>
             <hr
@@ -92,13 +98,9 @@ export default function () {
       </div>
     </section>
      
-    <div
-         class="text-center p-3"
-         >
-      © 2022 Copyright:
-      <a class="text-dark" href="/"
-         >www.eventtree.com</a
-        >
+    <div class="text-center p-3">
+      ©2022 
+      <a class="text-dark" href="/" style={{margin:'10px'}}>www.eventtree.com</a>
     </div>
     
   </footer>

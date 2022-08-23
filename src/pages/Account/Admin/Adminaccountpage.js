@@ -253,6 +253,7 @@ export function Venueaccept(){
     <th>VenueName</th>
     <th>Location</th>
     <th>ContactNumber</th>
+    <th>Email</th>
     <th><Reacticonsixteen/></th>
     <th><Reacticonseventeen/></th>
       </tr>
@@ -265,6 +266,7 @@ export function Venueaccept(){
           <td>{item.venueName}</td>
           <td>{item.address}</td>
           <td>{item.contactNumber}</td>
+          <td>{item.email}</td>
           <td><button className='button_accept' onClick={()=>{handleAccept(index)}}>Accept</button></td>
           <td><button className='button_cancel' onClick={()=>handleCancel(index)} >Cancel</button></td>
         </tr>

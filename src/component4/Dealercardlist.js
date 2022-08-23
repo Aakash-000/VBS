@@ -41,7 +41,7 @@ export default function Dealercardlist({filterSearch}) {
     //     </div>
     <div className='grid_layout'>
     <div className="grid_layout_row row row-cols-1 row-cols-md-3 row-cols-lg-4">
-    {getregVenue.filter((item)=>{if(item.address.toLowerCase().includes(filterSearch.toLowerCase())){
+    {getregVenue.filter((item)=>{if(item.address.toLowerCase().substring(0,2).includes(filterSearch.toLowerCase())){
         return item;
     }}).map((item)=>
          (
