@@ -12,7 +12,7 @@ export const Searchbar = () =>{
         <>
     <div>
     <div className='search_bar'>
-    <input type="text" name="search" autoComplete="off" id="search"  value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} placeholder='Search For Location'/><Reacticonseven/>
+    <input type="text" name="search" autoComplete="off" id="search"  value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} placeholder='Searchfor Venue Location'/><Reacticonseven/>
     </div>
     </div>
     <Dealercardlist filterSearch={searchTerm}/>

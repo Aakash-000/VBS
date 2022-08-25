@@ -41,16 +41,16 @@ export default function Dealercardlist({filterSearch}) {
     //     </div>
     <div className='grid_layout'>
     <div className="grid_layout_row row row-cols-1 row-cols-md-3 row-cols-lg-4">
-    {getregVenue.filter((item)=>{if(item.address.toLowerCase().substring(0,2).includes(filterSearch.toLowerCase())){
+    {getregVenue.filter((item)=>{if(item.address.toLowerCase().substring(0,4).includes(filterSearch.toLowerCase().substring(0,4))){
         return item;
     }}).map((item)=>
          (
         <Link className='grid_layout_link' to={`/venue/${email}/${item.id}`} key={item.id}>
         <div class="grid_layout_col col">
-        <div class="card">
+        <div class="card_list card">
         <img src={item.image} class="card-img-top" alt="..."/>
-        <div class="card-body"> 
-        <h5 class="card-title">{item.venueName}</h5>
+        <div class="card_list_sub card-body"> 
+        <h5 class="card_list_title card-title">{item.venueName.toUpperCase()}</h5>
         </div>
         </div>
         </div>

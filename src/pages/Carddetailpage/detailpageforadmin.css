@@ -1,0 +1,107 @@
+.sidebara {
+    background-color:rgb(250, 251, 253);
+    display: flex;
+    padding:0.5vw 0 ;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(220, 226, 228);
+  }
+
+.sidemenua-bars {
+    margin-left: 5vw;
+    font-size: 20px;
+    background: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:1vw;
+  }
+.sidea-toggle .sidemenua-bars{
+    margin-right:1vw;
+}
+.sidea-menu {
+    /* rgb(240, 244, 245); */
+    background-color:  rgb(240, 244, 245);
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: -100%;
+    transition: 400ms;
+  }
+  .sidebara .sidea-logo img{
+    height:60px;
+    width:60px;
+  }
+  .sidebara .right-group-ad{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap:10px;
+  }
+  
+  .sidebara button{
+    font-size:20px;
+    padding:0.5vw 1.5vw;
+    background-color: #1D3557;
+    color:#F1FAEE;
+    border-radius: 2vw;
+    border:none;
+    margin-right:3vw;
+    }
+    
+.sidea-menu.active {
+    left: 0;
+    transition: 350ms;
+  }
+  
+.sidea-text {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    list-style: none;
+    height:0px;
+    margin-top: 60px;
+  }
+.sidebara-pa p{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 16px;
+    color:#383a44;
+    gap:0.5vw;
+}
+.sidea-text a {
+    text-decoration: none;
+    font-size: 18px;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    border-radius: 20px;
+  }
+
+.sidebara-pa p:hover{
+    color:#00A896;
+}
+.sidea-menu-items {
+    width: 100%;
+    padding: 0;
+  }
+  
+.sidea-toggle {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+  }
+
+.view_detail_admin{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

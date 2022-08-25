@@ -9,3 +9,11 @@
 .grid_layout .grid_layout_row .grid_layout_link{
     width:325px;
 } 
+.card_list{
+    box-shadow: rgba(230, 225, 219, 0.979) 0px 2px 10px;
+    background-color: #FDFFFC;
+}
+.card_list_sub .card_list_title{
+    color:rgb(30, 3, 43);
+    text-align: center;
+}

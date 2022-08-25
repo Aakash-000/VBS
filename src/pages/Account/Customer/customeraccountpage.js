@@ -12,7 +12,7 @@ import Explorevenue from '../../../component4/Explorevenue.js'
 import Bookingform from './Bookingform.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { CgArrowsExpandDownRight } from "react-icons/cg";
+import {Reacticonnineteen,Reacticontwenty,Reacticontwentyone} from '../../../assets/icons/Reacticon.js'
 
 
 export function VenuecarddetailCustomer(){  
@@ -62,6 +62,10 @@ export default function Customeraccount() {
   const [sidebar, setSidebar] = useState(true);
   const showSidebar = () => setSidebar(!sidebar);
   const[noToken,setnoToken] = useState(false);
+  const[mybookedVenverify,setmybookedVenverify] = useState([]);
+  const[mybookedVenpen,setmybookedVenpen] = useState([]);
+  const[mybookedVenunsucc,setmybookedVenunsucc] = useState([]);
+
   useEffect(() => {
     if(sessionStorage.length != 0){
       setnoToken(false)
@@ -84,7 +88,28 @@ export default function Customeraccount() {
       }
       getVenue();
     },[])
-    
+    useEffect(async()=>{
+      try{
+      let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/booking/${email}`,config);
+      console.log(response)
+      const verifiedData = response.data.data.filter((item)=>{
+        return item.bookingStatus === "ACCEPTED";
+      })
+      const unsuccessfuldata = response.data.data.filter((item)=>{
+        return item.bookingStatus === "CANCELED";
+      })
+      const pendingData = response.data.data.filter((item)=>{
+        return item.bookingStatus === "PENDING";
+      })
+      setmybookedVenpen(pendingData)
+      setmybookedVenverify(verifiedData)
+      setmybookedVenunsucc(unsuccessfuldata)
+      }catch(err){
+        console.log(err)
+      }
+    },[])
+
+
     const logout = (e)=> {
       sessionStorage.removeItem('token');
       sessionStorage.clear();
@@ -106,7 +131,7 @@ export default function Customeraccount() {
             </div>
             </Link>
             <div className='right-group-cus'>
-            <p>{customername}</p>
+            <p>{customername.toUpperCase()}</p>
             <button onClick={logout}>Logout</button>
             </div>
           </div>
@@ -135,47 +160,77 @@ export default function Customeraccount() {
             <Explorevenue/>
         </div>): (<div className='stretchexplore'>
           <Explorevenue/></div>)}
-        {sidebar ? (<div className="body_content_sub_push ">
-        <div class   ="row">
-        <div class="col-sm-8 col-lg-6 col-xl-6">
-            <div class="card">
-             <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        {sidebar ? (<div className="body_content_sub_push container-fluid ">
+        <div class="row">
+        <div class="col-sm-8 col-lg-4 col-xl-4">
+            <div class="card_c card">
+             <div class="card_body card-body">
+               <div className='card_body_sub_push'>
+               <Reacticontwenty/>
+        <p class="card_title_push card-title">{mybookedVenverify.length}</p>
+        </div>
+        <p class="card_text_push card-text">Number of Booked Venue Accepted</p>
       </div>
     </div>
      </div>
-        <div class="col-sm-8 col-lg-6 col-xl-6">
-        <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="col-sm-8 col-lg-4 col-xl-4">
+        <div class="card_c card">
+      <div class="card_body card-body">
+      <div className='card_body_sub_push'>
+        <Reacticonnineteen/>
+        <p class="card_title_push card-title">{mybookedVenpen.length}</p>
+        </div>
+        <p class="card_text_push card-text">Number of Booked Venue Pending</p>
       </div>
         </div>
         </div>
+        <div class="col-sm-8 col-lg-4 col-xl-4">
+            <div class="card_c card">
+             <div class="card_body card-body">
+               <div className='card_body_sub_push'>
+               <Reacticontwentyone/>
+        <p class="card_title_push card-title">{mybookedVenunsucc.length}</p>
+        </div>
+        <p class="card_text_push card-text">Number of Booked Venue Cancelled</p>
+      </div>
+      </div>
+      </div>
         </div>
         </div>):(
-          <div className="body_content_sub_extend col-xl-8">
+          <div className="body_content_sub_extend container-fluid">
           <div class="row">
-          <div class="col-sm-8 col-lg-6 col-xl-6">
-              <div class="card">
-               <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div class="col-sm-8 col-lg-6 col-xl-4">
+              <div class="card_c card">
+              <div class="card_body card-body">
+              <div className='card_body_sub_extend'>
+        <Reacticontwenty/>
+        <p class="card_title_extend card-title">{mybookedVenverify.length}</p>
         </div>
+        <p class="card_text_extend card-text">Number of Booked Venue Accepted</p>
+      </div>
       </div>
        </div>
-          <div class="col-sm-8 col-lg-6 col-xl-6">
-          <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div class="col-sm-8 col-lg-6 col-xl-4">
+          <div class="card_c card">
+          <div class="card_body card-body">
+          <div className='card_body_sub_extend'>
+        <Reacticonnineteen/>
+        <p class="card_title_extend card-title">{mybookedVenpen.length}</p>
         </div>
+        <p class="card_text_extend card-text">Number of Booked Venue Pending</p>
+      </div>
           </div>
+          </div>
+          <div class="col-sm-8 col-lg-6 col-xl-4">
+              <div class="card_c card">
+              <div class=" card_body card-body">
+              <div className='card_body_sub_extend'>
+        <Reacticontwentyone/>
+        <p class="card_title_extend card-title">{mybookedVenunsucc.length}</p>
+        </div>
+        <p class="card_text_extend card-text">Number of Booked Venue Cancelled</p>
+      </div>
+      </div>
           </div>
           </div>
           </div>)}
@@ -192,7 +247,7 @@ export function MybookedVenue(){
   const showSidebar = () => setSidebar(!sidebar);
   const[mybookedVenverify,setmybookedVenverify] = useState([]);
   const[mybookedVenpen,setmybookedVenpen] = useState([]);
-
+  const[mybookedVenunsucc,setmybookedVenunsucc] = useState([]);
   const {email,customername} = useParams();
   const navigate = useNavigate();
                                                   
@@ -213,22 +268,17 @@ export function MybookedVenue(){
     let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/booking/${email}`,config);
     console.log(response)
     const verifiedData = response.data.data.filter((item)=>{
-      return item.venueStatus === "VERIFY";
+      return item.bookingStatus === "ACCEPTED";
+    })
+    const unsuccessfuldata = response.data.data.filter((item)=>{
+      return item.bookingStatus === "CANCELED";
+    })
+    const pendingdata = response.data.data.filter((item)=>{
+      return item.bookingStatus === "PENDING"
     })
     setmybookedVenverify(verifiedData)
-    }catch(err){
-      console.log(err)
-    }
-  },[])
-
-  useEffect(async()=>{
-    try{
-    let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/booking/${email}`,config);
-    console.log(response)
-    const pendingData = response.data.data.filter((item)=>{
-      return item.venueStatus === "PENDING";
-    })
-    setmybookedVenpen(pendingData)
+    setmybookedVenunsucc(unsuccessfuldata)
+    setmybookedVenpen(pendingdata)
     }catch(err){
       console.log(err)
     }
@@ -255,7 +305,7 @@ export function MybookedVenue(){
             </div>
             </Link>
             <div className='right-group-cus'>
-            <p>{customername}</p>
+            <p>{customername.toUpperCase()}</p>
             <button onClick={logout}>Logout</button>
             </div>
           </div>
@@ -279,8 +329,42 @@ export function MybookedVenue(){
             </ul>
           </nav>
           </IconContext.Provider>
+          <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
+            <p className='table_container_title'>Pending Venue of My Booking List</p>
+            <table class="table_container_body table  table-bordered">
+            <thead>
+            <tr>
+          <th>SN</th>
+          <th>Function Type</th>
+          <th>Required Capacity</th>
+          <th>Date Selected</th>
+          <th>Calculated Payment</th>
+          <th>Booking Status</th>
+          <th>Venue Detail</th>
+            </tr>
+            </thead>
+            <tbody>
+              {mybookedVenpen.map((val,index)=>(              
+              <tr key={index+1}>
+            <th>{index+1}</th>
+          <td>{val.functionType}</td>
+          <td>{val.requiredCapacity}</td>
+          <td>{val.bookingDate}</td>
+          <td>{val.calculatedPayment}</td>
+          <td>{val.bookingStatus}</td>
+          <div class="modal-body">
+          <pre>FullName:{val.venue.userName}</pre>
+          <pre>VenueName:{val.venue.venueName}</pre>
+          <pre>Email:{val.venue.email}</pre>
+          <pre>ContactNumber:{val.venue.contactNumber}</pre>
+          </div>
+            </tr>
+              ))}
+            </tbody>
+            </table>
+            </div>
             <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
-            <p className='table_container_title'>Successfully Booked Venue</p>
+            <p className='table_container_title'>Successfully and Unsucessfully Booked Venue</p>
             <table class="table_container_body table  table-bordered">
             <thead>
             <tr>
@@ -310,27 +394,9 @@ export function MybookedVenue(){
           </div>
             </tr>
               ))}
-            </tbody>
-            </table>
-            </div>
-            <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
-            <p className='table_container_title'>Pending Venue for Booking</p>
-            <table class="table_container_body table  table-bordered">
-            <thead>
-            <tr>
-          <th>SN</th>
-          <th>Function Type</th>
-          <th>Required Capacity</th>
-          <th>Date Selected</th>
-          <th>Calculated Payment</th>
-          <th>Booking Status</th>
-          <th>Venue Detail</th>
-            </tr>
-            </thead>
-            <tbody>
-              {mybookedVenpen.map((val,index)=>(              
-              <tr key={index+1}>
-            <th>{index+1}</th>
+              {mybookedVenunsucc.map((val,index)=>(              
+              <tr key={index}>
+            <th>{index+100}</th>
           <td>{val.functionType}</td>
           <td>{val.requiredCapacity}</td>
           <td>{val.bookingDate}</td>

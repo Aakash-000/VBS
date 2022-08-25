@@ -24,7 +24,7 @@ export default function Adminloginpage() {
     }});
       if(response.data.data.email == AdminDetail.username){
         console.log(response);
-        navigate(`/adminaccount/${response.data.data.email}/`);
+        navigate(`/adminaccount/${response.data.data.email}`);
         sessionStorage.setItem('token',JSON.stringify(response.data.data.token));
         setAdminDetail(()=>({...AdminDetail,username:'',password:''}));
         window.location.reload();
@@ -69,12 +69,12 @@ export default function Adminloginpage() {
         <h1 className='heading_alog'><Reacticoneight/>Admin Login</h1>
         <div className='form_field_admin'>
         <label htmlFor='username'>Email :</label>
-        <input autocomplete="off" type="text" required={true} pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' name='username' id="username" onBlur={handleFocus} focused={focused.toString()} onChange={e=>setAdminDetail({...AdminDetail,username:e.target.value})} value={AdminDetail.username}/>
+        <input autocomplete="off" type="text" required={true} pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' name='username' id="username" onBlur={handleFocus} focused={focused.toString()} onChange={e=>setAdminDetail({...AdminDetail,username:e.target.value})} value={AdminDetail.username} aria-expanded="false"/>
         <span>{errorMsg.map((item)=>(item.forName))}</span>
         </div>
         <div className='form_field_admin'>
         <label htmlFor='password'>Password :</label>
-        <input  type="password" name='password' onBlur={handleFocus} focused={focused.toString()}  pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} id="password" onChange={e=>setAdminDetail({...AdminDetail,password:e.target.value})} value={AdminDetail.password}/>
+        <input  type="password" name='password' onBlur={handleFocus} focused={focused.toString()}  pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} id="password" onChange={e=>setAdminDetail({...AdminDetail,password:e.target.value})} value={AdminDetail.password} aria-expanded="false"/>
         <span>{errorMsg.map((item)=>(item.forPassword))}</span>
         </div>
         {/* <div className='form_field'>

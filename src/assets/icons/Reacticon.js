@@ -1,10 +1,11 @@
 import {MdOutlineAddTask,MdExplore,MdCancel} from 'react-icons/md'
-import {BsBookmarkCheckFill,BsPersonCheckFill,BsClipboardData} from 'react-icons/bs'
+import {BsBookmarkCheckFill,BsPersonCheckFill,BsClipboardData,BsBookmarkXFill} from 'react-icons/bs'
 import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiOutlineInfoCircle} from 'react-icons/ai'
-import {FaGlobe,FaGem,FaFingerprint,FaDotCircle,FaAlignLeft,FaRegTimesCircle,FaHome,FaUserEdit} from 'react-icons/fa'
+import {FaGlobe,FaTags,FaGem,FaFingerprint,FaHourglass,FaDotCircle,FaAlignLeft,FaRegTimesCircle,FaHome,FaUserEdit} from 'react-icons/fa'
 import {CgUserList} from 'react-icons/cg'
 import {FiAlertCircle} from 'react-icons/fi'
+import {GrStatusPlaceholder} from 'react-icons/gr'
 import React from 'react'
 
 export  const Reacticonone =()=>{
@@ -130,6 +131,35 @@ export  const Reacticoneighteen =()=>{
     return (
         <div>
            <BsClipboardData />
+        </div>
+    )
+}
+export  const Reacticonnineteen =()=>{
+    return (
+        <div>
+          <FaTags size={30}/>
+        </div>
+    )
+}
+export  const Reacticontwenty =()=>{
+    return (
+        <div>
+          <FaHourglass size={30}/>
+        </div>
+    )
+}
+export  const Reacticontwentyone =()=>{
+    return (
+        <div>
+          <BsBookmarkXFill size={30}/>
+        </div>
+    )
+}
+
+export  const Reacticontwentytwo =()=>{
+    return (
+        <div>
+          <GrStatusPlaceholder />
         </div>
     )
 }

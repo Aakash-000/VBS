@@ -152,7 +152,7 @@ export default function Bookingform() {
       </div>
       <div className="book_model_footer ">
         <button type="submit" disabled={isdatevalid ? false : true}>Submit</button>
-        {isdatevalid ?<div> </div>: <abbr>Date is already Booked</abbr>}
+        {isdatevalid ?<div> </div>: <abbr>*Date is already Booked</abbr>}
       </div>
       </form>
       </div>

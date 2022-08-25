@@ -2,12 +2,11 @@ import React, { useState,useEffect} from 'react';
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar/Navbar.js'
 import Body from './pages/Landing/Body.js'
 import Adminloginpage, { Adminregisterpage } from './pages/Login/Admin/Adminloginpage.js'
 import Customerloginpage from './pages/Login/Customer/Customerloginpage.js'
 import Dealerloginpage from './pages/Login/Dealer/Dealerloginpage.js'
-import Dealeraccountpage from './pages/Account/Dealer/Dealeraccountpage.js'
+import Dealeraccountpage,{Seteventdetail} from './pages/Account/Dealer/Dealeraccountpage.js'
 import Venuecarddetailpage from './pages/Carddetailpage/Venuecarddetailpage.js'
 import {VenuecarddetailCustomer, MybookedVenue} from './pages/Account/Customer/customeraccountpage.js'
 import Dealerregistrationpage from './pages/Register/Dealer/Dealerregistrationpage.js'
@@ -17,8 +16,8 @@ import Customeraccount from './pages/Account/Customer/customeraccountpage.js'
 import Adminaccount, { Venueaccept } from './pages/Account/Admin/Adminaccountpage.js'
 import EditCustomeraccount from './pages/Account/Customer/EditCustomeraccount.js'
 import EditDealeraccount from './pages/Account/Dealer/Editdealeraccount.js';
-import Editadminaccount from './pages/Account/Admin/Editadminaccount.js'
-import Bookingreq from './pages/Account/Dealer/Bookingreq';
+import Bookingreq,{Bookingreqstatus} from './pages/Account/Dealer/Bookingreq';
+import Detailpageforadmin from './pages/Carddetailpage/Detailpageforadmin.js'
 
 
 export default function App() {
@@ -42,10 +41,13 @@ export default function App() {
         <Route path="/venue/:email/:id" element={<VenuecarddetailCustomer/>}/>
         <Route path="/customeraccount/:email/:customername" element={<Customeraccount/>}/>
         <Route path="/cabookingdata/:email/:customername" element={<MybookedVenue/>}/>
+        <Route path="/vabookingreqstatus/:dealeremail/:dealername" element={<Bookingreqstatus/>}/>
         <Route path="/adminaccount/:adminemail" element={<Adminaccount/>}/>
         <Route path="/cadata/:email/:customername" element={<EditCustomeraccount/>}/>
         <Route path='/acceptvenue/:adminemail' element={<Venueaccept/>}/>
          <Route path="/vadata/:dealeremail/:dealername" element={<EditDealeraccount/>}/>
+         <Route path="/viewdetail/:adminemail/:demail/:id" element={<Detailpageforadmin/>}/>
+         <Route path="/vaeventdetail/:dealeremail/:dealername" element={<Seteventdetail/>}/>
         </Routes>
         </Router>
       </div>

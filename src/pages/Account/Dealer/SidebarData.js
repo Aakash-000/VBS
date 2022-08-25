@@ -1,5 +1,5 @@
 import React from 'react'
-import {Reacticontwelve,Reacticonthree,Reacticonsix,Reacticonthirteen,Reacticonone,Reacticonfourteen,Reacticoneighteen} from '../../../assets/icons/Reacticon.js'
+import {Reacticontwelve,Reacticonthree,Reacticontwentytwo,Reacticonsix,Reacticonthirteen,Reacticonone,Reacticonfourteen,Reacticoneighteen} from '../../../assets/icons/Reacticon.js'
 export const SidebarDataforDealer = [
     
     {fordealer:{
@@ -18,6 +18,18 @@ export const SidebarDataforDealer = [
         title:'Booking Request',
         path:'/vabookingreq',
         icon:<Reacticonthree/>
+        ,cName: 'sided-text'
+    }},
+    {  fordealer:{
+        title:'Booking Request Status',
+        path:'/vabookingreqstatus',
+        icon:<Reacticontwentytwo/>
+        ,cName: 'sided-text'
+    }},
+    {  fordealer:{
+        title:'Set Event Detail',
+        path:'/vaeventdetail',
+        icon:<Reacticontwentytwo/>
         ,cName: 'sided-text'
     }}
    ]

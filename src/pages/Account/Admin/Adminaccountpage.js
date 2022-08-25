@@ -11,7 +11,7 @@ import {Reacticonsixteen,Reacticonseventeen} from '../../../assets/icons/Reactic
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import axios from 'axios'
-import { type } from "@testing-library/user-event/dist/type/index.js";
+
 
 export default function Adminaccount() {
   const[noToken,setnoToken] = useState(false);
@@ -19,7 +19,24 @@ export default function Adminaccount() {
   const showSidebar = () => setSidebar(!sidebar);
   const navigate = useNavigate();
   const {adminemail} = useParams();
+  const[getFilepath,setFilepath] = useState([]);
+  
+  const config = {  
+    headers:{
+      Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
+    }
+  }
 
+  useEffect(async()=>{
+    try{
+      let response = await axios.get('https://venue-booking-system2.herokuapp.com/admin-/registerRequests',config)
+        setFilepath(response.data.data.filePath)
+    }catch(err){
+      console.log(err)
+    }
+    },[])
+
+  
   useEffect(() => {
     if(sessionStorage.length != 0){
       setnoToken(false)
@@ -28,22 +45,6 @@ export default function Adminaccount() {
     }
   }, [noToken])
 
-  const config = {  
-    headers:{
-      Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
-    }
-  }
-
-  useEffect(()=>{
-    function getPendingVenue(){
-      axios.get('https://venue-booking-system2.herokuapp.com/admin-/registerRequests',config)
-      .then(response => {
-        console.log(response) 
-      })
-      .catch(err=> {console.log(err)});
-    }
-     getPendingVenue();
-  },[])
 
   const logout = (e)=> {
     e.preventDefault();
@@ -54,6 +55,7 @@ export default function Adminaccount() {
   }
   return (
     <>{!noToken ? (
+      <>
       <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebara">
           <Link to="#" className="sidemenua-bars">
@@ -85,7 +87,12 @@ export default function Adminaccount() {
             })}
           </ul>
         </nav>
-        </IconContext.Provider>):
+        </IconContext.Provider>
+        <div>
+        {/* <img src={blobUrl} alt="Image"/> */}
+        </div>
+        </>
+        ):
         (<div>You are logged out of the page.Please try again after login!</div>)
         }
         {/* <div className='body_content container-fluid'>
@@ -198,6 +205,11 @@ export function Venueaccept(){
       setCancel(false)
       }
   }
+
+  const handleDetail = (demail,key,index)=>{
+      localStorage.setItem('imagePath',JSON.stringify(pendingVenuelist[index].filePath))
+      navigate(`/viewdetail/${adminemail}/${demail}/${key}`)
+  }
   const logout = (e)=> {
     e.preventDefault();
     sessionStorage.removeItem('token');
@@ -248,12 +260,8 @@ export function Venueaccept(){
       <table class="table_container_accept_body table  table-bordered">
       <thead>
       <tr>
-    <th>ID</th>
-    <th>UserName</th>
+    <th>SN</th>
     <th>VenueName</th>
-    <th>Location</th>
-    <th>ContactNumber</th>
-    <th>Email</th>
     <th><Reacticonsixteen/></th>
     <th><Reacticonseventeen/></th>
       </tr>
@@ -262,12 +270,8 @@ export function Venueaccept(){
         {pendingVenuelist.map((item,index)=>(
           <tr key={index}>
           <th>{index+1}</th>
-          <td>{item.userName}</td>
-          <td>{item.venueName}</td>
-          <td>{item.address}</td>
-          <td>{item.contactNumber}</td>
-          <td>{item.email}</td>
-          <td><button className='button_accept' onClick={()=>{handleAccept(index)}}>Accept</button></td>
+          <div><td>{item.venueName}<button onClick={()=>handleDetail(item.email,item.id,index)}>View Detail</button></td></div>
+          <td><button className='button_accept' onClick={()=>handleAccept(index)}>Accept</button></td>
           <td><button className='button_cancel' onClick={()=>handleCancel(index)} >Cancel</button></td>
         </tr>
         ))}

@@ -62,7 +62,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin:20px 0px;
 }
 .book_model_footer button{
     border:none;
@@ -71,9 +70,13 @@
     background-color: #23013f;
     color: rgb(234, 255, 226);
     font-size: 20px;
+    margin-top: 10px;
 }
 .book_model_footer abbr{
     color: #E63946;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 10px;
 }
 .invalid_req_book{
     margin: 5px;
@@ -99,7 +102,7 @@
 .valid_req_book .valid_status_req_book{
     font-size: 20px;
     color:#150029;
-    background-color:  rgb(91, 138, 135);
+    background-color: #ffd43b;
     padding:5px;
     border-radius: 15px;
    }

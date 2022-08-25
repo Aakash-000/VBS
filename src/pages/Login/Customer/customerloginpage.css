@@ -87,8 +87,8 @@
    }
    .invalid .invalid_status{
     font-size: 20px;
-    color:#f1eff3;
-    background-color:  #E63946;
+    color:#E63946;
+    /* background-color:   */
     padding:5px;
     border-radius: 15px;
    }

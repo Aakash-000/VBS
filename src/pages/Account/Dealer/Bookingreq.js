@@ -16,7 +16,7 @@ import axios from 'axios'
 
 export default function Bookingreq() {
   const [sidebar, setSidebar] = useState(false);    
-  const {dealeremail} = useParams();
+  const {dealeremail,dealername} = useParams();
   const showSidebar = () => setSidebar(!sidebar);
   const[reqVen,setreqVen]=useState([]);  
   const[noToken,setnoToken] = useState(false);
@@ -111,7 +111,7 @@ export default function Bookingreq() {
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealerdetail.userName}</p>
+          <p>{dealername.toUpperCase()}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -172,4 +172,189 @@ export default function Bookingreq() {
         </div>):(<div>You are logged out of page.Please login and try again.</div>)}
         </>
     )
+}
+export function Bookingreqstatus(){
+  const navigate = useNavigate();
+  const [sidebar, setSidebar] = useState(false);    
+  const {dealeremail,dealername} = useParams();
+  const showSidebar = () => setSidebar(!sidebar);
+  const[reqVenverify,setreqVenverify] = useState([]);  
+  const[reqVenpen,setreqVenpen] = useState([]);
+  const[reqVenunsucc,setreqVenunsucc] = useState([]);
+  const[noToken,setnoToken] = useState(false);
+  const[dealerdetail,setdealerdetail ] = useState([]);
+
+  useEffect(() => {
+    if(sessionStorage.length != 0){
+      setnoToken(false)
+    }else {
+      setnoToken(true)
+    }
+  }, [noToken])
+
+  
+  useEffect(()=>{
+    async function getVenue(){
+      let response = await axios.get(`https://venue-booking-system2.herokuapp.com/venue-/${dealeremail}`,config);
+      console.log(response)
+      setdealerdetail(response.data.data)
+    }
+    getVenue()
+  },[])
+
+  const logout = (e)=> {
+    sessionStorage.removeItem('token');
+    sessionStorage.clear();
+    navigate('/dealerlogin');
+    window.location.reload();
+  }
+
+  const config = {  
+    headers:{
+      Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
+    }
+    }
+
+    useEffect(async() => {
+      try{
+      let response =await axios.get(`https://venue-booking-system2.herokuapp.com/venue-/booking/${dealeremail}`,config)
+      console.log(response)
+      const pendingdata = response.data.data.filter((item)=>{
+        return item.bookingStatus === "PENDING"
+      })
+      const unsuccessfuldata = response.data.data.filter((item)=>{
+        return item.bookingStatus === "CANCELED";
+      })
+      const verifieddata = response.data.data.filter((item)=>{
+        return item.bookingStatus === "ACCEPTED"
+      })
+      setreqVenpen(pendingdata)
+      setreqVenverify(verifieddata)
+      setreqVenunsucc(unsuccessfuldata)
+      }catch(err){
+        console.log(err)
+      }
+      },[])
+
+
+       return (
+         <>
+         {!noToken ?(
+        <div>
+           <IconContext.Provider value={{ color: "#011627" }}>
+        <div className="sidebard sticky-top">
+          <Link to="#" className="sidemenud-bars">
+            <FaIcons.FaBars onClick={showSidebar} />
+            <div className='sided-logo'>
+              <img src={Logo} alt='logo'/>
+          </div>
+          </Link>
+          <div className='right-group-de'>
+          <p>{dealername.toUpperCase()}</p>
+          <button onClick={logout}>Logout</button>
+          </div>
+        </div>
+        <nav className={sidebar ? "sided-menu active" : "sided-menu"}>
+          <ul className="sided-menu-items" onClick={showSidebar}>
+            <li className="sided-toggle">
+              <Link to="#" className="sidemenud-bars">
+                <AiIcons.AiOutlineClose/>
+              </Link>
+            </li>
+            {SidebarDataforDealer.map((item, index) => {
+              return (
+                <li key={index} className={item.fordealer.cName}>
+                  <Link to={`${item.fordealer.path}`+`/${dealeremail}`+`/${dealerdetail.userName}`} className='sidebard-pa'>
+                    <p>{item.fordealer.icon}{item.fordealer.title}</p>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+        </IconContext.Provider>
+        <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
+        <p className='table_container_req_title'>Pending Booking Request of Customers</p>
+        <table class="table_container_req_body table  table-bordered">
+        <thead>
+        <tr>
+      <th>SN</th>
+      <th>Customer Detail</th>
+      <th>Function Type</th>
+      <th>Required Capacity</th>
+      <th>Date Selected</th>
+      <th>Calculated Payment</th>
+      <th>Request Status</th>
+        </tr>
+        </thead>
+        <tbody>
+    {reqVenpen.map((item,index)=>(
+      <tr key={index}>
+      <th>{index+1}</th>
+          <div class="modal-body">
+          <pre>FullName:{item.client.name}</pre>
+          <pre>Mobileno:{item.client.mobile_no}</pre>
+          <pre>Email:{item.client.email}</pre>
+          </div>
+      <td>{item.functionType}</td>
+    <td>{item.requiredCapacity}</td>
+    <td>{item.bookingDate}</td>
+    <td>{item.calculatedPayment}</td>
+    <td>{item.bookingStatus}</td>
+    </tr>
+    ))}
+        </tbody>
+        </table>
+        </div>
+        <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
+        <p className='table_container_req_title'>Verified and Cancelled Booking Request of Customers</p>
+        <table class="table_container_req_body table  table-bordered">
+        <thead>
+        <tr>
+      <th>SN</th>
+      <th>Customer Detail</th>
+      <th>Function Type</th>
+      <th>Required Capacity</th>
+      <th>Date Selected</th>
+      <th>Calculated Payment</th>
+      <th>Request Status</th>
+        </tr>
+        </thead>
+        <tbody>
+    {reqVenverify.map((item,index)=>(
+      <tr key={index}>
+      <th>{index+1}</th>
+          <div class="modal-body">
+          <pre>FullName:{item.client.name}</pre>
+          <pre>Mobileno:{item.client.mobile_no}</pre>
+          <pre>Email:{item.client.email}</pre>
+          </div>
+      <td>{item.functionType}</td>
+    <td>{item.requiredCapacity}</td>
+    <td>{item.bookingDate}</td>
+    <td>{item.calculatedPayment}</td>
+    <td>{item.bookingStatus}</td>
+    </tr>
+    ))}
+    {reqVenunsucc.map((item,index)=>(
+      <tr key={index}>
+      <th>{index+100}</th>
+          <div class="modal-body">
+          <pre>FullName:{item.client.name}</pre>
+          <pre>Mobileno:{item.client.mobile_no}</pre>
+          <pre>Email:{item.client.email}</pre>
+          </div>
+      <td>{item.functionType}</td>
+      <td>{item.requiredCapacity}</td>
+      <td>{item.bookingDate}</td>
+      <td>{item.calculatedPayment}</td>
+      <td>{item.bookingStatus}</td>
+      </tr>
+    ))}
+        </tbody>
+        </table>
+        </div>
+        </div>):(<div>You are logged out of page.Please login and try again.</div>)}
+        </>
+       )
 }
