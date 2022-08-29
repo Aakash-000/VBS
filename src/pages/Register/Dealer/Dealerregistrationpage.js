@@ -132,7 +132,7 @@ export default function Dealerregistrationpage() {
     </div>
     <div class="dreg_field col-md-12">
     <label for="desc" class="form-label">Description</label>
-    <textarea name='description' pattern='^[a-zA-Z ]{50,200}$' onBlur={handleFocus} focused={focused.toString()} required={true} id='desc' onChange={e=>setDealerDetail({...dealerDetail,description:e.target.value})} value={dealerDetail.description}/>
+    <textarea name='description' pattern='^[a-zA-Z ]{10,200}$' onBlur={handleFocus} focused={focused.toString()} required={true} id='desc' onChange={e=>setDealerDetail({...dealerDetail,description:e.target.value})} value={dealerDetail.description}/>
     <span>{errorMsg.map((item)=>(item.forComment))}</span>
     </div>
     <div class="dreg_field col-12">

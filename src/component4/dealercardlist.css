@@ -1,7 +1,6 @@
 
 .grid_layout .grid_layout_row{
-    gap:1vw;
-    padding:0vw 1vw;
+    gap:20px;
 }
 .grid_layout .grid_layout_row .grid_layout_col{
     width:311px;
@@ -16,4 +15,7 @@
 .card_list_sub .card_list_title{
     color:rgb(30, 3, 43);
     text-align: center;
+}
+.grid_layout .grid_layout_col{
+    cursor: pointer;
 }

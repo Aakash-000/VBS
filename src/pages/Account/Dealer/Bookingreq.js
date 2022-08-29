@@ -102,6 +102,7 @@ export default function Bookingreq() {
          <>
          {!noToken ?(
         <div>
+          <div>
            <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebard">
           <Link to="#" className="sidemenud-bars">
@@ -111,7 +112,7 @@ export default function Bookingreq() {
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealername.toUpperCase()}</p>
+          <p>{dealername}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -125,7 +126,7 @@ export default function Bookingreq() {
             {SidebarDataforDealer.map((item, index) => {
               return (
                 <li key={index} className={item.fordealer.cName}>
-                  <Link to={`${item.fordealer.path}`+`/${dealeremail}`+`/${dealerdetail.userName}`} className='sidebard-pa'>
+                  <Link to={`${item.fordealer.path}`+`/${dealeremail}`+`/${dealername}`} className='sidebard-pa'>
                     <p>{item.fordealer.icon}{item.fordealer.title}</p>
                   </Link>
                 </li>
@@ -134,6 +135,8 @@ export default function Bookingreq() {
           </ul>
         </nav>
         </IconContext.Provider>
+        </div>
+        <div className="table_t">
         <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
         <p className='table_container_req_title'>Booking Request of Customers</p>
         <table class="table_container_req_body table  table-bordered">
@@ -168,6 +171,7 @@ export default function Bookingreq() {
     ))}
         </tbody>
         </table>
+        </div>
         </div>
         </div>):(<div>You are logged out of page.Please login and try again.</div>)}
         </>
@@ -241,6 +245,7 @@ export function Bookingreqstatus(){
          <>
          {!noToken ?(
         <div>
+          <div>
            <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebard sticky-top">
           <Link to="#" className="sidemenud-bars">
@@ -250,7 +255,7 @@ export function Bookingreqstatus(){
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealername.toUpperCase()}</p>
+          <p>{dealername}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -273,6 +278,8 @@ export function Bookingreqstatus(){
           </ul>
         </nav>
         </IconContext.Provider>
+        </div>
+        <div className="table_t">
         <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
         <p className='table_container_req_title'>Pending Booking Request of Customers</p>
         <table class="table_container_req_body table  table-bordered">
@@ -353,6 +360,7 @@ export function Bookingreqstatus(){
     ))}
         </tbody>
         </table>
+        </div>
         </div>
         </div>):(<div>You are logged out of page.Please login and try again.</div>)}
         </>

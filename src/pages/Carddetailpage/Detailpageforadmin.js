@@ -23,7 +23,7 @@ export default function Detailpageforadmin() {
           Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
         }
       }
-      
+
       useEffect(() => {
         if(sessionStorage.length != 0){
           setnoToken(false)
@@ -62,14 +62,14 @@ export default function Detailpageforadmin() {
       }
   
       const byteArray = new Uint8Array(byteNumbers);
-  
+
       byteArrays.push(byteArray);
     }
   
     const blob = new Blob(byteArrays, { type: contentType });
     return blob;
   };
-  
+
         const contentType = "image/jpeg";
         const blob = b64toBlob(imagePath, contentType)
 
@@ -90,9 +90,10 @@ export default function Detailpageforadmin() {
           }
 
     return (
-        <div>
+        <div className="relative_path">
         {!noToken ? (
         <>
+        <div>
         <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebara">
           <Link to="#" className="sidemenua-bars">
@@ -125,17 +126,27 @@ export default function Detailpageforadmin() {
           </ul>
         </nav>
         </IconContext.Provider>
-        <button onClick={handleClick}>Click</button>
-        <div className='view_detail_admin'>
-        <div class="card mb-3" style={{maxHeight:'700px',maxWidth:'700px'}}>
-        <img src={blobUrl} class="card-img-top" alt="..."/>
-        <div class="card-body">
-          <h5 class="card-title">{viewDetail.email}</h5>
-          <p class="card-text">{viewDetail.address}</p>
-          <p class="card-text">{viewDetail.contactNumber}</p>
-          <p class="card-text"><small class="text-muted">{viewDetail.description}</small></p>
-       </div>
-      </div>
+        </div>
+        <div className='view_detail_cus'>
+          <div class="card mb-3" style={{maxWidth:'1000px'}}>
+            <div class="row g-0">
+            <div class="col-md-4">
+            <img src={blobUrl} class="img-fluid rounded-start" alt="..."/>
+            </div>
+           <div class="col-md-8">
+            <div class="card-body">
+              <div className="card_body_clickout">
+              <h5 class="regven card-title">{viewDetail.venueName}</h5>
+              <button onClick={handleClick}>Go Back</button>
+              </div>
+              <p class="card-text">{viewDetail.userName}</p>
+              <p class="card-text">{viewDetail.address}</p>
+              <p class="card-text">{viewDetail.contactNumber}</p>
+              <p class="card-text">{viewDetail.description}</p>
+            </div>
+          </div>
+        </div>
+        </div>
         </div>
         </>
         ):

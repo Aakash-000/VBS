@@ -7,7 +7,7 @@ import axios from 'axios'
 
 export default function Bookingform() {
 
-    const {email,id} = useParams();
+    const {email,demail} = useParams();
     const[bookingDetail,setbookingDetail] = useState({bookingDate:"",calculatedPayment:"",requiredCapacity:"",functionType:"Marriage"})
     const[isdatevalid,setisdatevalid] = useState(true);
     const[booked,setBooked] = useState([]);
@@ -37,7 +37,7 @@ export default function Bookingform() {
       useEffect(()=>{
        async function getBookedDate(){
         try{
-          let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/bookedDate/${id}`,config);
+          let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/bookedDate/${demail}`,config);
           setBooked(response.data.data)
         
           const getDate = booked.filter((item,index)=>{
@@ -59,7 +59,7 @@ export default function Bookingform() {
 
       async function bookNow(){
         try{
-          let response = await axios.post(`https://venue-booking-system2.herokuapp.com/client-/book-venue/${id}/${email}`
+          let response = await axios.post(`https://venue-booking-system2.herokuapp.com/client-/book-venue/${demail}/${email}`
           ,JSON.stringify(bookingDetail),
           config
           );
@@ -103,7 +103,7 @@ export default function Bookingform() {
       {!noToken?(
         <div className='booking_form_customer'>
         <div className='book_button'>
-        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button className="book_button_sub"type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Book Now
         </button>
         </div>
@@ -151,7 +151,7 @@ export default function Bookingform() {
       <input autoComplete="off" type="text" name='requiredCapacity'  required={true}  onChange={e=>setbookingDetail({...bookingDetail,requiredCapacity:e.target.value})} value={bookingDetail.requiredCapacity}/>
       </div>
       <div className="book_model_footer ">
-        <button type="submit" disabled={isdatevalid ? false : true}>Submit</button>
+        <button type="submit" className="book_model_footer_sub" disabled={isdatevalid ? false : true}>Submit</button>
         {isdatevalid ?<div> </div>: <abbr>*Date is already Booked</abbr>}
       </div>
       </form>

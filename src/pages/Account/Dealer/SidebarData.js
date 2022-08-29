@@ -59,18 +59,13 @@ export const SidebarDataforadmin =[
                 icon:<Reacticontwelve/>
         }},
         {foradmin:{
-            title:'Edit Profile',
-                path:'/aadata',
-                 icon:<Reacticonthirteen/>
-        }},
-        {foradmin:{
             title:'Explore Venue',
                 path:'/explorevenue',
                 icon:<Reacticonsix/>
         }},
         {foradmin:{
-            title:'Booking Request Status',
-        path:'/aabookingreq',
+            title:'Venue List',
+        path:'/aavenuelist',
         icon:<Reacticonthree/>
         }},
         {foradmin:{

@@ -49,11 +49,12 @@ export default function () {
                 class="mb-4 mt-0 d-inline-block mx-auto"
                 style={{width: '60px', backgroundColor: '#7c4dff', height: '2px'}}
                 />
+
             <p>
-              Aakash Dhakal
+              Shiva Parajuli 
             </p>
             <p>
-              Shiva Parajuli
+            Aakash Dhakal
             </p>
           </div>
              

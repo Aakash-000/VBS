@@ -168,3 +168,6 @@ tr pre{
 .right-group-de button:hover{
     background-color: rgb(19, 53, 75);
 }
+.table_t{
+  padding-top:50px;
+}

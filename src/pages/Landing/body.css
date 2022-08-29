@@ -72,7 +72,7 @@
     transition: 0.25s ease-in;
 }
 .box_card:hover{
-    background-color:#00A896;
+    background-color: turquoise;
     color: rgb(6, 15, 24);
     cursor: pointer;
 }

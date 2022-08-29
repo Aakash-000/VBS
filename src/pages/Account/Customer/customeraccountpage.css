@@ -1,10 +1,12 @@
 .sidebarc {
     background-color:rgb(250, 251, 253);
     display: flex;
+    position: fixed;
     padding:0.5vw 0 ;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgb(220, 226, 228);
+    width:100vw;
   }
 
 .sidemenuc-bars {
@@ -25,6 +27,8 @@
     width: 250px;
     height: 100vh;
     display: flex;
+    position: fixed;
+    top:75px;
     justify-content: center;
     position: fixed;
     left: -100%;
@@ -42,13 +46,13 @@
     border-radius: 2vw;
     border:none;
     margin-right:3vw;
-    }
-    .sidebarc .right-group-cus{
+}
+.sidebarc .right-group-cus{
       display: flex;
       flex-direction: row;
       align-items: center;
       gap:10px;
-    } 
+  } 
 .sidec-menu.active {
     left: 0;
     transition: 400ms;
@@ -96,22 +100,16 @@
   .body_content .stretchexplore{
     transition: 350ms;
     width:100%;
+    padding-top: 80px;
+    padding-left: 20px;
   }
   .body_content .pushexplore{
     transition: 400ms;
-    padding-left:260px;  
-  }
-  .card_detail_customer{
-    height:100vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color:rgb(220, 226, 228);
+    padding-left:273px; 
+    padding-top: 80px;
   }
   .card_customer{
     border-radius: 20px;
-    background-color:  rgb(240, 244, 245);
   }
   .card_body_cus{
     display: flex;
@@ -237,4 +235,47 @@ tr th,tr td{
   background-color: #FDFFFC;
   transition: 0.25s ease-in;
 }
+.table_t{
+  padding-top:50px;
+}
+.view_detail_cus{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 300px;
+    padding-left:300px;
+}
+.card_body_clickout{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+}
+
+.card_body_clickout .card_body_clickout_sub{
+      border-radius: 20px;
+      border: none;
+      background-color: rgb(160, 163, 157);
+      padding: 6px 10px;
+}
+.booking_button{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Courier New', Courier, monospace;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 

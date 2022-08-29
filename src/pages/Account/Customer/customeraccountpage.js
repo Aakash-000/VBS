@@ -9,16 +9,22 @@ import {useParams,useNavigate} from 'react-router-dom'
 import "./customeraccountpage.css";
 import Logo from '../../../assets/images/navbar_logo_bgr.png'
 import Explorevenue from '../../../component4/Explorevenue.js'
-import Bookingform from './Bookingform.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {Reacticonnineteen,Reacticontwenty,Reacticontwentyone} from '../../../assets/icons/Reacticon.js'
+import Bookingform from "./Bookingform.js";
 
 
 export function VenuecarddetailCustomer(){  
   const[getregvenue,setgetregvenue] = useState([]);
-  const {id} = useParams();
+  const {vemail} = useParams();
   const[noToken,setnoToken] = useState(false);
+  const navigate = useNavigate();
+  const {email} = useParams();
+  const [sidebar, setSidebar] = useState(true);
+  const showSidebar = () => setSidebar(!sidebar);
+  const[currUser,setcurrUser] = useState([]);
+
   useEffect(() => {
     if(sessionStorage.length != 0){
       setnoToken(false)
@@ -27,36 +33,144 @@ export function VenuecarddetailCustomer(){
     }
   }, [noToken]) 
     
-    // const filterImg = getregvenue.find((item)=> item.id == id) 
+  const logout = (e)=> {
+    sessionStorage.removeItem('token');
+    sessionStorage.clear();
+    navigate('/customerlogin');
+    window.location.reload();
+  }
+
+  const handleOut =()=>{
+    localStorage.removeItem('imageitemarr')
+    localStorage.clear()
+    navigate(`/customeraccount/${email}/${currUser.name}`)
+  }
+
+     const config = {  
+      headers:{                                                                                                 
+        Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
+      }
+    }
+
+      const imagePath = JSON.parse(localStorage.getItem('imageitemarr'))
+
+     const b64toBlob = (b64Data , contentType , sliceSize = 512) => {
+            const byteCharacters = atob(b64Data);
+            const byteArrays = [];
+
+            for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+              const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+              const byteNumbers = new Array(slice.length);
+              for (let i = 0; i < slice.length; i++){
+                byteNumbers[i] = slice.charCodeAt(i);
+              }
+          
+              const byteArray = new Uint8Array(byteNumbers);
+
+              byteArrays.push(byteArray);
+            }
+          
+            const blob = new Blob(byteArrays, { type: contentType });
+            return blob;
+          };
+
+
+            const contentType = "image/jpeg";
+          const blob = b64toBlob(imagePath, contentType);
+          // const blobUrl = URL.createObjectURL(blob);
+
+
+    useEffect(async()=>{
+      try{
+        let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/${email}`,config)
+        setcurrUser(response.data.data)
+        console.log(response)
+      }catch(err){
+        console.log(err)
+      }
+    },[])
+
+    useEffect(async()=>{
+        try{
+          let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/venue/${vemail}`,config)
+          setgetregvenue(response.data.data)
+          console.log(response)
+        }catch(err){
+          console.log(err)
+        }
+    },[])  
+  
     return (
       <>
       {!noToken?(
-      <div className='card_detail_customer container-fluid'>
-      <div class="card_customer mb-3" style={{width:'800px',height:'500px'}}>
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="..." class="img-fluid rounded-start" alt="..."/>
-    </div>
-    <div class="col-md-8">
-      <div class="card_body_cus">
-        <h5 class="card-title">{getregvenue.venueName}</h5>
-        <h3>Location:{getregvenue.address}</h3>
-        <p class="card-text">Email:{getregvenue.email}</p>
-        <p class="card-text">OwnerName:{getregvenue.userName}</p>
-        <p class="card-text">ContactNumber:{getregvenue.contactNumber}</p>
-        <Bookingform/>
-      </div>
-    </div>
-    </div>
-    </div>
-  </div>):(<div>You are logged out of page.Please login to continue.</div>)}
-      </>
+        <div>
+      <div>
+        <IconContext.Provider value={{ color: "#011627" }}>
+          <div className="sidebarc sticky-top">
+            <Link to="#" className="sidemenuc-bars">
+              <FaIcons.FaBars onClick={showSidebar} />
+              <div className='sidec-logo'>
+                <img src={Logo} alt='logo'/>
+            </div>
+            </Link>
+            <div className='right-group-cus'>
+            <p>{currUser.name}</p>
+            <button onClick={logout}>Logout</button>
+            </div>
+          </div>
+          <nav className={sidebar ? "sidec-menu active" : "sidec-menu"}>
+            <ul className="sidec-menu-items" onClick={showSidebar}>
+              <li className="sidec-toggle">
+                <Link to="#" className="sidemenuc-bars">
+                  <AiIcons.AiOutlineClose/>
+                </Link>
+              </li>
+              {
+              SidebarDataforcustomer.map((item, index) => {
+                return (
+                  <li key={index} className='sidec-text' onClick={showSidebar}>
+                    <Link to={`${item.forcustomer.path}`+`/${email}`+`/${currUser.name}`} className='sidebarc-pa'>
+                      <p>{item.forcustomer.icon}{item.forcustomer.title}</p>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+          </IconContext.Provider>
+          </div>
+          <div className='view_detail_cus'>
+          <div class="card mb-3" style={{maxWidth:'1000px'}}>
+            <div class="row g-0">
+            <div class="col-md-4">
+            <img src={URL.createObjectURL(blob)} class="img-fluid rounded-start" alt="..."/>
+            </div>
+           <div class="col-md-8">
+            <div class="card-body">
+              <div className="card_body_clickout">
+              <h5 class="regven card-title">{getregvenue.venueName}</h5>
+              <Bookingform/>
+              <button className="card_body_clickout_sub" onClick={handleOut}>Go Back</button>
+              </div>
+              <p class="card-text">{getregvenue.userName}</p>
+              <p class="card-text">{getregvenue.address}</p>
+              <p class="card-text">{getregvenue.contactNumber}</p>
+              <p class="card-text">{getregvenue.description}</p>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        ):(<div>You are logged out of page.Please login to continue.</div>)}
+        </>
     )
 }
 
-  
+
 export default function Customeraccount() {
-  
+
   const navigate = useNavigate();
   const {email,customername} = useParams();
   const [sidebar, setSidebar] = useState(true);
@@ -88,6 +202,7 @@ export default function Customeraccount() {
       }
       getVenue();
     },[])
+
     useEffect(async()=>{
       try{
       let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/booking/${email}`,config);
@@ -131,7 +246,7 @@ export default function Customeraccount() {
             </div>
             </Link>
             <div className='right-group-cus'>
-            <p>{customername.toUpperCase()}</p>
+            <p>{customername}</p>
             <button onClick={logout}>Logout</button>
             </div>
           </div>
@@ -166,10 +281,10 @@ export default function Customeraccount() {
             <div class="card_c card">
              <div class="card_body card-body">
                <div className='card_body_sub_push'>
-               <Reacticontwenty/>
+               <Reacticonnineteen/>
         <p class="card_title_push card-title">{mybookedVenverify.length}</p>
         </div>
-        <p class="card_text_push card-text">Number of Booked Venue Accepted</p>
+        <p class="card_text_push card-text">Accepted Request</p>
       </div>
     </div>
      </div>
@@ -177,10 +292,10 @@ export default function Customeraccount() {
         <div class="card_c card">
       <div class="card_body card-body">
       <div className='card_body_sub_push'>
-        <Reacticonnineteen/>
+        <Reacticontwenty/>
         <p class="card_title_push card-title">{mybookedVenpen.length}</p>
         </div>
-        <p class="card_text_push card-text">Number of Booked Venue Pending</p>
+        <p class="card_text_push card-text">Pending  Request</p>
       </div>
         </div>
         </div>
@@ -191,7 +306,7 @@ export default function Customeraccount() {
                <Reacticontwentyone/>
         <p class="card_title_push card-title">{mybookedVenunsucc.length}</p>
         </div>
-        <p class="card_text_push card-text">Number of Booked Venue Cancelled</p>
+        <p class="card_text_push card-text">Cancelled Request</p>
       </div>
       </div>
       </div>
@@ -203,10 +318,10 @@ export default function Customeraccount() {
               <div class="card_c card">
               <div class="card_body card-body">
               <div className='card_body_sub_extend'>
-        <Reacticontwenty/>
+        <Reacticonnineteen/>
         <p class="card_title_extend card-title">{mybookedVenverify.length}</p>
         </div>
-        <p class="card_text_extend card-text">Number of Booked Venue Accepted</p>
+        <p class="card_text_extend card-text">Accepted Request</p>
       </div>
       </div>
        </div>
@@ -214,10 +329,10 @@ export default function Customeraccount() {
           <div class="card_c card">
           <div class="card_body card-body">
           <div className='card_body_sub_extend'>
-        <Reacticonnineteen/>
+        <Reacticontwenty/>
         <p class="card_title_extend card-title">{mybookedVenpen.length}</p>
         </div>
-        <p class="card_text_extend card-text">Number of Booked Venue Pending</p>
+        <p class="card_text_extend card-text">Pending Request</p>
       </div>
           </div>
           </div>
@@ -228,7 +343,7 @@ export default function Customeraccount() {
         <Reacticontwentyone/>
         <p class="card_title_extend card-title">{mybookedVenunsucc.length}</p>
         </div>
-        <p class="card_text_extend card-text">Number of Booked Venue Cancelled</p>
+        <p class="card_text_extend card-text">Cancelled Request</p>
       </div>
       </div>
           </div>
@@ -296,6 +411,7 @@ export function MybookedVenue(){
     <>
      {!noToken?(
        <div>
+         <div>
         <IconContext.Provider value={{ color: "#011627" }}>
           <div className="sidebarc sticky-top">
             <Link to="#" className="sidemenuc-bars">
@@ -305,7 +421,7 @@ export function MybookedVenue(){
             </div>
             </Link>
             <div className='right-group-cus'>
-            <p>{customername.toUpperCase()}</p>
+            <p>{customername}</p>
             <button onClick={logout}>Logout</button>
             </div>
           </div>
@@ -329,6 +445,8 @@ export function MybookedVenue(){
             </ul>
           </nav>
           </IconContext.Provider>
+          </div>
+          <div className="table_t">
           <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
             <p className='table_container_title'>Pending Venue of My Booking List</p>
             <table class="table_container_body table  table-bordered">
@@ -412,6 +530,7 @@ export function MybookedVenue(){
               ))}
             </tbody>
             </table>
+            </div>
             </div>
             </div>
           ):(<div>You are logged out of page please login and try again.</div>)}

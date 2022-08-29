@@ -13,7 +13,7 @@ import Dealerregistrationpage from './pages/Register/Dealer/Dealerregistrationpa
 import Customerregistrationpage from './pages/Register/Customer/Customerregistrationpage.js'
 import Explorevenue, { Explorevenuenormal } from './component4/Explorevenue.js'
 import Customeraccount from './pages/Account/Customer/customeraccountpage.js'
-import Adminaccount, { Venueaccept } from './pages/Account/Admin/Adminaccountpage.js'
+import Adminaccount, { Venueaccept, Customerlist, Venuelist } from './pages/Account/Admin/Adminaccountpage.js'
 import EditCustomeraccount from './pages/Account/Customer/EditCustomeraccount.js'
 import EditDealeraccount from './pages/Account/Dealer/Editdealeraccount.js';
 import Bookingreq,{Bookingreqstatus} from './pages/Account/Dealer/Bookingreq';
@@ -38,7 +38,7 @@ export default function App() {
         <Route path="/explorevenue/venue/:id" element={ <Venuecarddetailpage/>}/>
         <Route path="/dealeraccount/:dealeremail/:dealername"  element={<Dealeraccountpage/>}/>
         <Route path="/vabookingreq/:dealeremail/:dealername" element={<Bookingreq/>}/>
-        <Route path="/venue/:email/:id" element={<VenuecarddetailCustomer/>}/>
+        <Route path="/venue/:email/:vemail" element={<VenuecarddetailCustomer/>}/>
         <Route path="/customeraccount/:email/:customername" element={<Customeraccount/>}/>
         <Route path="/cabookingdata/:email/:customername" element={<MybookedVenue/>}/>
         <Route path="/vabookingreqstatus/:dealeremail/:dealername" element={<Bookingreqstatus/>}/>
@@ -48,6 +48,8 @@ export default function App() {
          <Route path="/vadata/:dealeremail/:dealername" element={<EditDealeraccount/>}/>
          <Route path="/viewdetail/:adminemail/:demail/:id" element={<Detailpageforadmin/>}/>
          <Route path="/vaeventdetail/:dealeremail/:dealername" element={<Seteventdetail/>}/>
+          <Route path="/customerlist/:adminemail" element={<Customerlist/>}/> 
+          <Route path="/aavenuelist/:adminemail" element={<Venuelist/>}/>
         </Routes>
         </Router>
       </div>

@@ -5,7 +5,6 @@ import { IconContext } from "react-icons";
 import { Link,useParams, useNavigate } from "react-router-dom";
 import { SidebarDataforDealer } from "./SidebarData";
 import "./dealeraccountpage.css";
-import Dealerloginpage from '../../Login/Dealer/Dealerloginpage.js'
 import Logo from '../../../assets/images/navbar_logo_bgr.png'
 import Avatar from '@mui/material/Avatar';
 import axios from 'axios'
@@ -69,6 +68,7 @@ export default function Dealeraccount() {
     <>
     {!noToken ? (
       <div>
+        <div>
       <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebard">
           <Link to="#" className="sidemenud-bars">
@@ -78,7 +78,7 @@ export default function Dealeraccount() {
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealername.toUpperCase()}</p>
+          <p>{dealername}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -101,7 +101,8 @@ export default function Dealeraccount() {
           </ul>
         </nav>
         </IconContext.Provider>
-        <div>
+        </div>
+        <div className="body_b">
         {sidebar ? (<div className="body_content_sub_push container-fluid ">
         <div class="row">
         <div class="col-sm-8 col-lg-4 col-xl-4">
@@ -212,19 +213,41 @@ export function Seteventdetail(){
     }
     }
 
-    const handleChange = (e)=>{
-      seteventDetail(()=>({
-        ...eventDetail ,
-        [e.target.name]:e.target.value
-      }))
+    const handleChangeMarriage =(e) => {
+      seteventDetail({marriage:{...eventDetail.marriage,[e.target.name]:e.target.value}})
     }
-  
+    const handleChangeConclave =(e) => {
+      seteventDetail({conclave:{...eventDetail.conclave,[e.target.name]:e.target.value}})
+    }
+    const handleChangeFamilyParty =(e) => {
+      seteventDetail({familyparty:{...eventDetail.familyparty,[e.target.name]:e.target.value}})
+    }
+    const handleChangeAnnualMeet =(e) => {
+      seteventDetail({annualmeet:{...eventDetail.annualmeet,[e.target.name]:e.target.value}})
+    }
+    const handleChangeCollegeFunction =(e) => {
+      seteventDetail({collegefunction:{...eventDetail.collegefunction,[e.target.name]:e.target.value}})
+    }
+
     function handleFocus(e){
       setFocused(true);
    }
     const handleSubmit = (e)=>{
-      e.preventDefault()
-      console.log(eventDetail)
+        e.preventDefault()
+        // let formData = new FormData();
+        // formData.append('marriagebasePayment',{...eventDetail,marriagebasePayment})
+        // formData.append('marriageRate',{...eventDetail,marriageRate})
+        // formData.append('conclavebasePayment',{...eventDetail,conclavebasePayment})
+        // formData.append('conclaveRate',{...eventDetail,conclaveRate})
+        // formData.append('collegefunctionbasePayment',{...eventDetail,collegefunctionbasePayment})
+        // formData.append('collegefunctionRate',{...eventDetail,collegefunctionRate})
+        // formData.append('annualMeetbasePayment',{...eventDetail,annualMeetbasePayment})
+        // formData.append('annualMeetRate',{...eventDetail,annualMeetRate})
+        // formData.append('familyPartybasePayment',{...eventDetail,familypartybasePayment})
+        // formData.append('familyPartyRate',{...eventDetail,familyPartyRate})
+
+        const arrK = Object.values(eventDetail)
+        console.log(arrK)
     }
     const logout = (e)=> {
       sessionStorage.removeItem('token');
@@ -236,6 +259,7 @@ export function Seteventdetail(){
         <>
     {!noToken ? (
       <div>
+        <div>
       <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebard">
           <Link to="#" className="sidemenud-bars">
@@ -245,7 +269,7 @@ export function Seteventdetail(){
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealername.toUpperCase()}</p>
+          <p>{dealername}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -268,56 +292,62 @@ export function Seteventdetail(){
           </ul>
         </nav>
         </IconContext.Provider>
+        </div>
         <div>
-          </div>
-          <div class='container-fluid'>
-      </div> 
-        <div className='edit_dealer container-fluid'>
-        <div className='dealer_edit_page'>
-        <form className='dealer_edit_form row g-3' onSubmit={handleSubmit}>
-        <h1 className='heading_edit_dlog'>Set Event Detail</h1>
-        <div class="form_edit_field_dealer col-lg-6">
+          <div class='container-fluid'> 
+        <div className='event_dealer container-fluid'>
+        <div className='dealer_event_page'>
+        <form className='dealer_event_form row g-3' onSubmit={handleSubmit}>
+        <h1 className='heading_event_dlog'>Set Event Detail</h1>
+         
         <label htmlFor="marriage" >Marriage:</label>
         <input autoComplete="off" type="text" name='marriagebasePayment' required={true} 
-        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Marriage" onChange={(e)=>{(seteventDetail({...eventDetail,[e.target.marriage.marriagebasePayment]:e.target.value}))}} value={eventDetail.marriage.marriagebasePayment}/>
+        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Marriage" onChange={handleChangeMarriage} />
+        
         <input autoComplete="off" type="text" name='marriageRate' required={true} 
-        focused={focused.toString()} placeholder="Write rate to Increase after 100 guest in Marriage" onChange={handleChange} value={eventDetail.marriage.marriageRate}/>
-        </div>
-        <div class="form_edit_field_dealer col-lg-6">
+        focused={focused.toString()} placeholder="Write rate to Increase after 100 guest in Marriage" onChange={handleChangeMarriage}/>
+      
+      
         <label htmlFor="conclave" >Conclave:</label>
         <input autoComplete="off" type="text" name='conclavebasePayment' required={true} 
-        focused={focused.toString()}  placeholder="Write Basecost for 100 guest in Conclave" onChange={handleChange} value={eventDetail.conclave.conclavebasePayment}/>
+        focused={focused.toString()}  placeholder="Write Basecost for 100 guest in Conclave" onChange={handleChangeConclave} />
+       
         <input autoComplete="off" type="text" name='conclaveRate' required={true} 
-        focused={focused.toString()}  placeholder="Write rate to Increase after 100 guest in Conclave" onChange={handleChange} value={eventDetail.conclave.conclaveRate}/>
-        </div>
-        <div className='form_edit_field_dealer col-md-6'>
+        focused={focused.toString()}  placeholder="Write rate to Increase after 100 guest in Conclave" onChange={handleChangeConclave}/>   
+      
+      
         <label htmlFor="familyparty" >Family Party:</label>
         <input autoComplete="off" type="text" name='familyPartybasePayment' required={true} 
-        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Family Party" onChange={handleChange} value={eventDetail.familyparty.familyPartybasePayment}/>
+        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Family Party" onChange={handleChangeFamilyParty}/>
+       
         <input autoComplete="off" type="text" name='familyPartyrate' required={true} 
-        focused={focused.toString()}  placeholder="Write rate to Increase after 100 guest in Family Party" onChange={handleChange} value={eventDetail.familyparty.familyPartyrate}/>
-        </div>
-        <div className='form_edit_field_dealer col-md-6'>
+        focused={focused.toString()}  placeholder="Write rate to Increase after 100 guest in Family Party" onChange={handleChangeFamilyParty}/>
+       
+      
         <label htmlFor="annualmeet" >Annual Meet:</label>
         <input autoComplete="off" type="text" name='annualMeetbasePayment' required={true} 
-        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Annual Meet" onChange={handleChange} value={eventDetail.annualmeet.annualMeetbasePayment}/>
+        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Annual Meet" onChange={handleChangeAnnualMeet}/>
+       
         <input autoComplete="off" type="text" name='annualMeetRate' required={true} 
-        focused={focused.toString()} placeholder="Write rate for 100 guest in Annual Meet" onChange={handleChange} value={eventDetail.annualmeet.annualMeetRate}/>
-        </div>
-        <div className='form_edit_field_dealer col-md-6'>
+        focused={focused.toString()} placeholder="Write rate for 100 guest in Annual Meet" onChange={handleChangeAnnualMeet} />
+       
+       
         <label htmlFor="collegefunction" >College Functions:</label>
         <input autoComplete="off" type="text" name='collegefunctionbasePayment' required={true} 
-        focused={focused.toString()}  placeholder="Write Basecost for 100 guest in College Function" onChange={handleChange} value={eventDetail.collegefunction.collegefunctionbasePayment}/>
+        focused={focused.toString()}  placeholder="Write Basecost for 100 guest in College Function" onChange={handleChangeCollegeFunction}/>
+       
         <input autoComplete="off" type="text" name='collegefunctionRate' required={true} 
-        focused={focused.toString()}  placeholder="Write rate for 100 guest in College Function" onChange={handleChange} value={eventDetail.collegefunction.collegefunctionRate}/>
-        </div>
-        <div className="form_edit_field_dealer col-12">
-        <button type="submit">Submit</button>
+        focused={focused.toString()}  placeholder="Write rate for 100 guest in College Function" onChange={handleChangeCollegeFunction}/>
+       
+        <div className="form_event_field_dealer col-12">
+            <button type="submit">Submit</button>
          </div>
        </form>
-      </div>
-      </div>
-        </div>
+       </div>
+       </div>
+       </div>
+       </div>
+       </div>
         ):(<div>You are logged out of page.Please login and try again to continue.</div>)}
     </>
       )
