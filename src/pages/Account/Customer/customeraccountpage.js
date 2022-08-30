@@ -17,6 +17,7 @@ import Bookingform from "./Bookingform.js";
 
 export function VenuecarddetailCustomer(){  
   const[getregvenue,setgetregvenue] = useState([]);
+  const[imagePath,setimagePath] = useState([]);
   const {vemail} = useParams();
   const[noToken,setnoToken] = useState(false);
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ export function VenuecarddetailCustomer(){
   const logout = (e)=> {
     sessionStorage.removeItem('token');
     sessionStorage.clear();
+    localStorage.clear();
     navigate('/customerlogin');
     window.location.reload();
   }
@@ -52,35 +54,7 @@ export function VenuecarddetailCustomer(){
       }
     }
 
-      const imagePath = JSON.parse(localStorage.getItem('imageitemarr'))
-
-     const b64toBlob = (b64Data , contentType , sliceSize = 512) => {
-            const byteCharacters = atob(b64Data);
-            const byteArrays = [];
-
-            for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-              const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-              const byteNumbers = new Array(slice.length);
-              for (let i = 0; i < slice.length; i++){
-                byteNumbers[i] = slice.charCodeAt(i);
-              }
-          
-              const byteArray = new Uint8Array(byteNumbers);
-
-              byteArrays.push(byteArray);
-            }
-          
-            const blob = new Blob(byteArrays, { type: contentType });
-            return blob;
-          };
-
-
-            const contentType = "image/jpeg";
-          const blob = b64toBlob(imagePath, contentType);
-          // const blobUrl = URL.createObjectURL(blob);
-
-
+     
     useEffect(async()=>{
       try{
         let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/${email}`,config)
@@ -144,7 +118,7 @@ export function VenuecarddetailCustomer(){
           <div class="card mb-3" style={{maxWidth:'1000px'}}>
             <div class="row g-0">
             <div class="col-md-4">
-            <img src={URL.createObjectURL(blob)} class="img-fluid rounded-start" alt="..."/>
+            <img src={`data:image/jpeg;base64,${getregvenue.filePath}`} class="img-fluid rounded-start" alt="..."/>
             </div>
            <div class="col-md-8">
             <div class="card-body">
@@ -402,6 +376,7 @@ export function MybookedVenue(){
   const logout = (e)=> {
     sessionStorage.removeItem('token');
     sessionStorage.clear();
+    localStorage.clear();
     navigate('/customerlogin');
     window.location.reload();
 }

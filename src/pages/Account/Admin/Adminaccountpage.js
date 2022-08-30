@@ -6,7 +6,7 @@ import { Link , useNavigate,useParams} from "react-router-dom";
 import { SidebarDataforadmin } from "../Dealer/SidebarData.js";
 import "./adminaccountpage.css";
 import Logo from '../../../assets/images/navbar_logo_bgr.png'
-import {Reacticonsixteen,Reacticonseventeen} from '../../../assets/icons/Reacticon.js'
+import {Reacticonsixteen,Reacticonseventeen, Reacticontwentythree} from '../../../assets/icons/Reacticon.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import axios from 'axios'
@@ -49,6 +49,7 @@ export default function Adminaccount() {
     e.preventDefault();
     sessionStorage.removeItem('token');
     sessionStorage.clear();
+    localStorage.clear();
     navigate('/adminlogin');
     window.location.reload();
   }
@@ -215,6 +216,7 @@ export function Venueaccept(){
     e.preventDefault();
     sessionStorage.removeItem('token');
     sessionStorage.clear();
+    localStorage.clear();
     navigate('/adminlogin');
     window.location.reload();
   }
@@ -276,7 +278,7 @@ export function Venueaccept(){
           <tr key={index}>
           <th>{index+1}</th>
           <td>{item.venueName}</td>
-          <td className="view_detail" onClick={()=>handleDetail(item.email,item.id,index)}>Click to View</td>
+          <td className="view_detail" onClick={()=>handleDetail(item.email,item.id,index)}><Reacticontwentythree/></td>
           <td><button className='button_accept' onClick={()=>handleAccept(index)}>Accept</button></td>
           <td><button className='button_cancel' onClick={()=>handleCancel(index)}>Cancel</button></td>
         </tr>
@@ -325,6 +327,7 @@ export function Customerlist(){
     e.preventDefault();
     sessionStorage.removeItem('token');
     sessionStorage.clear();
+    localStorage.clear();
     navigate('/adminlogin');
     window.location.reload();
   }
@@ -433,6 +436,7 @@ export function Venuelist(){
     e.preventDefault();
     sessionStorage.removeItem('token');
     sessionStorage.clear();
+    localStorage.clear();
     navigate('/adminlogin');
     window.location.reload();
   }

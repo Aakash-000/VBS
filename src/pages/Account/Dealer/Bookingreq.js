@@ -45,6 +45,7 @@ export default function Bookingreq() {
   const logout = (e)=> {
     sessionStorage.removeItem('token');
     sessionStorage.clear();
+    localStorage.clear();
     navigate('/dealerlogin');
     window.location.reload();
   }
@@ -209,6 +210,7 @@ export function Bookingreqstatus(){
   const logout = (e)=> {
     sessionStorage.removeItem('token');
     sessionStorage.clear();
+    localStorage.clear();
     navigate('/dealerlogin');
     window.location.reload();
   }

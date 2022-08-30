@@ -19,3 +19,8 @@
 .grid_layout .grid_layout_col{
     cursor: pointer;
 }
+.grid_layout .grid_layout_col .isloading{
+    height: 100px;
+    color:black;
+    background-color: blanchedalmond;
+}

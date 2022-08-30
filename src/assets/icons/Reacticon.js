@@ -2,7 +2,7 @@ import {MdOutlineAddTask,MdExplore,MdCancel} from 'react-icons/md'
 import {BsBookmarkCheckFill,BsPersonCheckFill,BsClipboardData,BsBookmarkXFill} from 'react-icons/bs'
 import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiOutlineInfoCircle} from 'react-icons/ai'
-import {FaGlobe,FaTags,FaGem,FaFingerprint,FaHourglass,FaDotCircle,FaAlignLeft,FaRegTimesCircle,FaHome,FaUserEdit} from 'react-icons/fa'
+import {FaGlobe,FaTags,FaGem,FaEye,FaFingerprint,FaHourglass,FaDotCircle,FaAlignLeft,FaRegTimesCircle,FaHome,FaUserEdit} from 'react-icons/fa'
 import {CgUserList} from 'react-icons/cg'
 import {FiAlertCircle} from 'react-icons/fi'
 import {GrStatusPlaceholder} from 'react-icons/gr'
@@ -160,6 +160,13 @@ export  const Reacticontwentytwo =()=>{
     return (
         <div>
           <GrStatusPlaceholder />
+        </div>
+    )
+}
+export  const Reacticontwentythree =()=>{
+    return (
+        <div>
+          <FaEye size={22}/>
         </div>
     )
 }

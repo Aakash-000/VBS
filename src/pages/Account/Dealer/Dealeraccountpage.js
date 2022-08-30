@@ -58,6 +58,7 @@ export default function Dealeraccount() {
   const logout = (e)=> {
     sessionStorage.removeItem('token');
     sessionStorage.clear();
+    localStorage.clear();
     navigate('/dealerlogin');
     window.location.reload();
   }
@@ -191,12 +192,12 @@ export function Seteventdetail(){
   const navigate = useNavigate();
   const[noToken,setnoToken] = useState(false);
   const[focused,setFocused] = useState(false);
-  const[eventDetail,seteventDetail] = useState({
+  const[eventDetail,seteventDetail] = useState([{
     marriage:{marriagebasePayment:"",marriageRate:""},
   conclave:{conclavebasePayment:"",conclaveRate:""},
   collegefunction:{collegefunctionbasePayment:"",collegefunctionRate:""},
   annualmeet:{annualMeetbasePayment:"",annualMeetRate:""},
-  familyparty:{familyPartybasePayment:"",familyPartyrate:""}}) 
+  familyparty:{familyPartybasePayment:"",familyPartyrate:""}}]) 
   
 
   useEffect(() => {
@@ -215,9 +216,11 @@ export function Seteventdetail(){
 
     const handleChangeMarriage =(e) => {
       seteventDetail({marriage:{...eventDetail.marriage,[e.target.name]:e.target.value}})
+      console.log(eventDetail.marriage)
     }
     const handleChangeConclave =(e) => {
       seteventDetail({conclave:{...eventDetail.conclave,[e.target.name]:e.target.value}})
+      console.log(eventDetail.conclave)
     }
     const handleChangeFamilyParty =(e) => {
       seteventDetail({familyparty:{...eventDetail.familyparty,[e.target.name]:e.target.value}})
@@ -234,24 +237,25 @@ export function Seteventdetail(){
    }
     const handleSubmit = (e)=>{
         e.preventDefault()
-        // let formData = new FormData();
-        // formData.append('marriagebasePayment',{...eventDetail,marriagebasePayment})
-        // formData.append('marriageRate',{...eventDetail,marriageRate})
-        // formData.append('conclavebasePayment',{...eventDetail,conclavebasePayment})
-        // formData.append('conclaveRate',{...eventDetail,conclaveRate})
-        // formData.append('collegefunctionbasePayment',{...eventDetail,collegefunctionbasePayment})
-        // formData.append('collegefunctionRate',{...eventDetail,collegefunctionRate})
-        // formData.append('annualMeetbasePayment',{...eventDetail,annualMeetbasePayment})
-        // formData.append('annualMeetRate',{...eventDetail,annualMeetRate})
-        // formData.append('familyPartybasePayment',{...eventDetail,familypartybasePayment})
-        // formData.append('familyPartyRate',{...eventDetail,familyPartyRate})
-
-        const arrK = Object.values(eventDetail)
-        console.log(arrK)
+        let formData = new FormData();
+        formData.append('marriagebasePayment',eventDetail.marriage.marriagebasePayment)
+        formData.append('marriageRate',eventDetail.marriage,...eventDetail.marriage.marriageRate)
+        formData.append('conclavebasePayment',eventDetail.conclave.conclavebasePayment)
+        formData.append('conclaveRate',eventDetail.conclave.conclaveRate)
+        formData.append('collegefunctionbasePayment',eventDetail.collegefunction.collegefunctionbasePayment)
+        formData.append('collegefunctionRate',eventDetail.collegefunction.collegefunctionRate)
+        formData.append('annualMeetbasePayment',eventDetail.annualmeet.annualMeetbasePayment)
+        formData.append('annualMeetRate',eventDetail.annualmeet.annualMeetRate)
+        formData.append('familyPartybasePayment',eventDetail.familyparty.familypartybasePayment)
+        formData.append('familyPartyRate',eventDetail.familyparty.familyPartyRate)
+        for (const pair of formData.entries()) {
+          console.log(`${pair[0]}, ${pair[1]}`);
+        }
     }
     const logout = (e)=> {
       sessionStorage.removeItem('token');
       sessionStorage.clear();
+      localStorage.clear();
       navigate('/dealerlogin');
       window.location.reload();
     }
@@ -300,39 +304,30 @@ export function Seteventdetail(){
         <form className='dealer_event_form row g-3' onSubmit={handleSubmit}>
         <h1 className='heading_event_dlog'>Set Event Detail</h1>
          
-        <label htmlFor="marriage" >Marriage:</label>
-        <input autoComplete="off" type="text" name='marriagebasePayment' required={true} 
+        <input autoComplete="off" type="text" name="marriagebasePayment" required={true} 
         focused={focused.toString()} placeholder="Write Basecost for 100 guest in Marriage" onChange={handleChangeMarriage} />
         
         <input autoComplete="off" type="text" name='marriageRate' required={true} 
-        focused={focused.toString()} placeholder="Write rate to Increase after 100 guest in Marriage" onChange={handleChangeMarriage}/>
+        focused={focused.toString()} placeholder="Write rate to Increase after 100 guest in Marriage" onChange={handleChangeMarriage} />
       
-      
-        <label htmlFor="conclave" >Conclave:</label>
         <input autoComplete="off" type="text" name='conclavebasePayment' required={true} 
         focused={focused.toString()}  placeholder="Write Basecost for 100 guest in Conclave" onChange={handleChangeConclave} />
        
         <input autoComplete="off" type="text" name='conclaveRate' required={true} 
-        focused={focused.toString()}  placeholder="Write rate to Increase after 100 guest in Conclave" onChange={handleChangeConclave}/>   
+        focused={focused.toString()}  placeholder="Write rate to Increase after 100 guest in Conclave" onChange={handleChangeConclave} />   
       
-      
-        <label htmlFor="familyparty" >Family Party:</label>
         <input autoComplete="off" type="text" name='familyPartybasePayment' required={true} 
         focused={focused.toString()} placeholder="Write Basecost for 100 guest in Family Party" onChange={handleChangeFamilyParty}/>
        
         <input autoComplete="off" type="text" name='familyPartyrate' required={true} 
         focused={focused.toString()}  placeholder="Write rate to Increase after 100 guest in Family Party" onChange={handleChangeFamilyParty}/>
        
-      
-        <label htmlFor="annualmeet" >Annual Meet:</label>
         <input autoComplete="off" type="text" name='annualMeetbasePayment' required={true} 
         focused={focused.toString()} placeholder="Write Basecost for 100 guest in Annual Meet" onChange={handleChangeAnnualMeet}/>
        
         <input autoComplete="off" type="text" name='annualMeetRate' required={true} 
-        focused={focused.toString()} placeholder="Write rate for 100 guest in Annual Meet" onChange={handleChangeAnnualMeet} />
-       
-       
-        <label htmlFor="collegefunction" >College Functions:</label>
+        focused={focused.toString()} placeholder="Write rate for 100 guest in Annual Meet" onChange={handleChangeAnnualMeet}/>
+
         <input autoComplete="off" type="text" name='collegefunctionbasePayment' required={true} 
         focused={focused.toString()}  placeholder="Write Basecost for 100 guest in College Function" onChange={handleChangeCollegeFunction}/>
        
@@ -340,7 +335,7 @@ export function Seteventdetail(){
         focused={focused.toString()}  placeholder="Write rate for 100 guest in College Function" onChange={handleChangeCollegeFunction}/>
        
         <div className="form_event_field_dealer col-12">
-            <button type="submit">Submit</button>
+            <input type="submit" value="submit"/>
          </div>
        </form>
        </div>

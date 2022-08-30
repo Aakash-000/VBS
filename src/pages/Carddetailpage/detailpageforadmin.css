@@ -118,34 +118,20 @@
 .relative_path{
   position: relative;
 }
-.click_button_div .click_button{
-  position: absolute;
-  top:100px;
-  right:50px;
-  border: none;
-  border-radius: 20px;
-  padding:6px 15px;
-  background-color: springgreen;
-}
-.view_detail_admin{
-  padding-top: 30px;
-}
-.view_detail_admin_card{
-  height:20%;
-  width: 30%;
-}
-.view_detail_admin_card img{
-  height: 350px;
-  width:405px;
-}
-.view_detail_cus{
+
+.view_detail_adm{
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding-top: 100px;
-  padding-left:300px;
+  padding-left:230px;
 }
+.view_detail_adm img{
+  height: 400px;
+  width:800px;
+}
+
 .card_body_clickout{
     display: flex;
     flex-direction: row;
@@ -155,7 +141,7 @@
 .card_body_clickout button{
     border-radius: 20px;
     border: none;
-    background-color: rgb(193, 197, 188);
+    background-color: rgb(155, 153, 184);
     padding: 6px 10px;
 }
 .booking_button{

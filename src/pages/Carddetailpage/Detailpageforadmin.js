@@ -40,44 +40,12 @@ export default function Detailpageforadmin() {
               return id == item.id;
             })
             setviewDetail(findDetail[0])
-            console.log(findDetail)
         }catch(err){
           console.log(err)
         }
         },[])
     
-
-      const imagePath = JSON.parse(localStorage.getItem('imagePath'))
-
-    const b64toBlob = (b64Data , contentType , sliceSize = 512) => {
-    const byteCharacters = atob(b64Data);
-    const byteArrays = [];
-  
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      const slice = byteCharacters.slice(offset, offset + sliceSize);
-  
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-  
-      const byteArray = new Uint8Array(byteNumbers);
-
-      byteArrays.push(byteArray);
-    }
-  
-    const blob = new Blob(byteArrays, { type: contentType });
-    return blob;
-  };
-
-        const contentType = "image/jpeg";
-        const blob = b64toBlob(imagePath, contentType)
-
-        const blobUrl = URL.createObjectURL(blob);
-
           function handleClick(){
-            localStorage.removeItem('imagePath')
-            localStorage.clear()
             navigate(`/acceptvenue/${adminemail}`)
           }
           
@@ -127,14 +95,14 @@ export default function Detailpageforadmin() {
         </nav>
         </IconContext.Provider>
         </div>
-        <div className='view_detail_cus'>
-          <div class="card mb-3" style={{maxWidth:'1000px'}}>
+        <div className='view_detail_adm'>
+          <div class="view_detail_adm_sub card mb-3" style={{maxWidth:'1000px'}}>
             <div class="row g-0">
             <div class="col-md-4">
-            <img src={blobUrl} class="img-fluid rounded-start" alt="..."/>
+            <img src={`data:image/jpeg;base64,${viewDetail.filePath}`} class="img-fluid rounded-start" alt="..."/>
             </div>
            <div class="col-md-8">
-            <div class="card-body">
+            <div class="view_detail_cus_card_body card-body">
               <div className="card_body_clickout">
               <h5 class="regven card-title">{viewDetail.venueName}</h5>
               <button onClick={handleClick}>Go Back</button>

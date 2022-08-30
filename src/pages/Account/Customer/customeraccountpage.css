@@ -10,7 +10,7 @@
   }
 
 .sidemenuc-bars {
-    margin-left: 5vw;
+    margin-left: 50px;
     font-size: 20px;
     background: none;
     display: flex;
@@ -19,7 +19,7 @@
     gap:1vw;
   }
 .sidec-toggle .sidemenuc-bars{
-    margin-right:1vw;
+    margin-right:11px;
 }
 .sidec-menu {
     /* rgb(240, 244, 245); */
@@ -101,11 +101,11 @@
     transition: 350ms;
     width:100%;
     padding-top: 80px;
-    padding-left: 20px;
+    padding-left: 35px;
   }
   .body_content .pushexplore{
     transition: 400ms;
-    padding-left:273px; 
+    padding-left:330px; 
     padding-top: 80px;
   }
   .card_customer{
@@ -119,11 +119,12 @@
   }
   .body_content_sub_extend{
     transition: 350ms;
-    padding:20px;
+    padding-top:20px;
+    padding-left:35px;
   }
   .body_content_sub_push{
     transition: 400ms;
-    padding-left:20vw;
+    padding-left:330px;
     padding-right:20px;
     padding-top:10px;
     padding-bottom:10px;
@@ -243,8 +244,11 @@ tr th,tr td{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding-top: 300px;
+    padding-top: 150px;
     padding-left:300px;
+}.view_detail_cus img{
+    height:300px;
+    width:800px;
 }
 .card_body_clickout{
       display: flex;
