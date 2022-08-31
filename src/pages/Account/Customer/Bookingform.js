@@ -7,8 +7,8 @@ import axios from 'axios'
 
 export default function Bookingform() {
 
-    const {email,demail} = useParams();
-    const[bookingDetail,setbookingDetail] = useState({bookingDate:"",calculatedPayment:"",requiredCapacity:"",functionType:"Marriage"})
+    const {email,vemail} = useParams();
+    const[bookingDetail,setbookingDetail] = useState({bookingDate:"",requiredCapacity:"",functionType:"Marriage"})
     const[isdatevalid,setisdatevalid] = useState(true);
     const[booked,setBooked] = useState([]);
     const[noToken,setnoToken] = useState(false);
@@ -37,7 +37,7 @@ export default function Bookingform() {
       useEffect(()=>{
        async function getBookedDate(){
         try{
-          let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/bookedDate/${demail}`,config);
+          let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/bookedDate/${vemail}`,config);
           setBooked(response.data.data)
         
           const getDate = booked.filter((item,index)=>{
@@ -59,12 +59,12 @@ export default function Bookingform() {
 
       async function bookNow(){
         try{
-          let response = await axios.post(`https://venue-booking-system2.herokuapp.com/client-/book-venue/${demail}/${email}`
+          let response = await axios.post(`https://venue-booking-system2.herokuapp.com/client-/book-venue/${vemail}/${email}`
           ,JSON.stringify(bookingDetail),
           config
           );
           console.log(response);
-          setbookingDetail(()=>({...bookingDetail,bookingDate:"",calculatedPayment:"",requiredCapacity:"",functionType:""}))
+          setbookingDetail(()=>({...bookingDetail,bookingDate:"",requiredCapacity:"",functionType:""}))
           setisvalidS(false)
           const timeId = setTimeout(() => {
             setisvalidS(true)
@@ -73,15 +73,9 @@ export default function Bookingform() {
         return () => {
         clearTimeout(timeId)
         }
-          // setBooked(response.data.data)   
-          // if(booked.includes(bookingDetail.date)){
-          //   setisAvailable(false)
-          // }else{ 
-          //   prevBooked.push(bookingDetail.date);
-          // }
       }catch(err){
         console.log(err)
-       setbookingDetail(()=>({...bookingDetail,bookingDate:"",calculatedPayment:"",requiredCapacity:"",functionType:""}))
+       setbookingDetail(()=>({...bookingDetail,bookingDate:"",requiredCapacity:"",functionType:""}))
        setisvalid(false)
         const timeId = setTimeout(() => {
           setisvalid(true)
@@ -141,10 +135,6 @@ export default function Bookingform() {
       <option >College Functions</option>
       <option >Convention</option>
      </select>
-      </div>
-      <div className='booking_form'>
-      <label htmlFor='offeredPayment'>CalculatedPayment:</label>
-      <input autoComplete="off" type="text" name='offeredPayment'  placeholder={`0`} required={true}  onChange={e=>setbookingDetail({...bookingDetail,calculatedPayment:e.target.value})} value={bookingDetail.calculatedPayment}/>
       </div>
       <div className='booking_form'>
       <label htmlFor='requiredCapacity'>RequiredCapacity:</label>

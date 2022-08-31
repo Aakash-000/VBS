@@ -44,8 +44,7 @@ export default function Bookingreq() {
 
   const logout = (e)=> {
     sessionStorage.removeItem('token');
-    sessionStorage.clear();
-    localStorage.clear();
+    sessionStorage.clear(); 
     navigate('/dealerlogin');
     window.location.reload();
   }
@@ -113,7 +112,7 @@ export default function Bookingreq() {
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealername}</p>
+          <p>{dealerdetail.userName}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -257,7 +256,7 @@ export function Bookingreqstatus(){
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealername}</p>
+          <p>{dealerdetail.userName}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>

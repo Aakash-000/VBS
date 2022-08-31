@@ -13,6 +13,7 @@ import {Reacticonnineteen,Reacticontwenty,Reacticontwentyone} from '../../../ass
 export default function Dealeraccount() {
   const [sidebar, setSidebar] = useState(false);    
   const {dealeremail,dealername} = useParams();
+  const[dealerdetail,setdealerdetail] = useState([]);
   const showSidebar = () => setSidebar(!sidebar);                                                               
   const navigate = useNavigate();
   const[noToken,setnoToken] = useState(false);
@@ -32,6 +33,16 @@ export default function Dealeraccount() {
       Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
     }
     }
+
+    useEffect(async()=>{
+      try{
+        let response = await axios.get(`https://venue-booking-system2.herokuapp.com/venue-/${dealeremail}`,config);
+        console.log(response)
+        setdealerdetail(response.data.data)
+      }catch(err){
+        console.log(err)
+      }
+    },[])
 
     useEffect(async() => {
       try{
@@ -79,7 +90,7 @@ export default function Dealeraccount() {
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealername}</p>
+          <p>{dealerdetail.userName}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -192,12 +203,13 @@ export function Seteventdetail(){
   const navigate = useNavigate();
   const[noToken,setnoToken] = useState(false);
   const[focused,setFocused] = useState(false);
-  const[eventDetail,seteventDetail] = useState([{
-    marriage:{marriagebasePayment:"",marriageRate:""},
-  conclave:{conclavebasePayment:"",conclaveRate:""},
-  collegefunction:{collegefunctionbasePayment:"",collegefunctionRate:""},
-  annualmeet:{annualMeetbasePayment:"",annualMeetRate:""},
-  familyparty:{familyPartybasePayment:"",familyPartyrate:""}}]) 
+  const[dealerdetail,setdealerdetail] = useState([]);
+  const[eventDetail,seteventDetail] = useState({
+  marriage:"",
+  conclave:"",
+  collegeEvent:"",
+  annualMeet:"",
+  familyParty:"",rate:""}) 
   
 
   useEffect(() => {
@@ -210,52 +222,45 @@ export function Seteventdetail(){
 
   const config = {  
     headers:{
+      'Content-Type':'application/json',
       Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
     }
     }
+    useEffect(async()=>{
+      try{
+        let response = await axios.get(`https://venue-booking-system2.herokuapp.com/venue-/${dealeremail}`,config);
+        console.log(response)
+        setdealerdetail(response.data.data)
+      }catch(err){
+          console.log(err)
+      }
+    },[])
 
-    const handleChangeMarriage =(e) => {
-      seteventDetail({marriage:{...eventDetail.marriage,[e.target.name]:e.target.value}})
-      console.log(eventDetail.marriage)
-    }
-    const handleChangeConclave =(e) => {
-      seteventDetail({conclave:{...eventDetail.conclave,[e.target.name]:e.target.value}})
-      console.log(eventDetail.conclave)
-    }
-    const handleChangeFamilyParty =(e) => {
-      seteventDetail({familyparty:{...eventDetail.familyparty,[e.target.name]:e.target.value}})
-    }
-    const handleChangeAnnualMeet =(e) => {
-      seteventDetail({annualmeet:{...eventDetail.annualmeet,[e.target.name]:e.target.value}})
-    }
-    const handleChangeCollegeFunction =(e) => {
-      seteventDetail({collegefunction:{...eventDetail.collegefunction,[e.target.name]:e.target.value}})
+    const handleChange = (e)=>{
+      seteventDetail({...eventDetail,[e.target.name]:e.target.value})
     }
 
     function handleFocus(e){
       setFocused(true);
    }
-    const handleSubmit = (e)=>{
-        e.preventDefault()
-        let formData = new FormData();
-        formData.append('marriagebasePayment',eventDetail.marriage.marriagebasePayment)
-        formData.append('marriageRate',eventDetail.marriage,...eventDetail.marriage.marriageRate)
-        formData.append('conclavebasePayment',eventDetail.conclave.conclavebasePayment)
-        formData.append('conclaveRate',eventDetail.conclave.conclaveRate)
-        formData.append('collegefunctionbasePayment',eventDetail.collegefunction.collegefunctionbasePayment)
-        formData.append('collegefunctionRate',eventDetail.collegefunction.collegefunctionRate)
-        formData.append('annualMeetbasePayment',eventDetail.annualmeet.annualMeetbasePayment)
-        formData.append('annualMeetRate',eventDetail.annualmeet.annualMeetRate)
-        formData.append('familyPartybasePayment',eventDetail.familyparty.familypartybasePayment)
-        formData.append('familyPartyRate',eventDetail.familyparty.familyPartyRate)
-        for (const pair of formData.entries()) {
-          console.log(`${pair[0]}, ${pair[1]}`);
-        }
+
+    const handleSubmit = async()=>{
+        try{
+        let response = await axios.post(`https://venue-booking-system2.herokuapp.com/venue-/updateEventDetails/${dealerdetail.email}`,
+            JSON.stringify(eventDetail),config);
+      console.log(response)
+    }catch(err){
+      console.log(err)
+    }
+    }
+
+    const formHandler = (e)=>{
+      e.preventDefault();
+      handleSubmit();
     }
     const logout = (e)=> {
       sessionStorage.removeItem('token');
       sessionStorage.clear();
-      localStorage.clear();
       navigate('/dealerlogin');
       window.location.reload();
     }
@@ -273,7 +278,7 @@ export function Seteventdetail(){
           </div>
           </Link>
           <div className='right-group-de'>
-          <p>{dealername}</p>
+          <p>{dealerdetail.userName}</p>
           <button onClick={logout}>Logout</button>
           </div>
         </div>
@@ -301,41 +306,29 @@ export function Seteventdetail(){
           <div class='container-fluid'> 
         <div className='event_dealer container-fluid'>
         <div className='dealer_event_page'>
-        <form className='dealer_event_form row g-3' onSubmit={handleSubmit}>
+        <form className='dealer_event_form row g-3' onSubmit={formHandler}>
         <h1 className='heading_event_dlog'>Set Event Detail</h1>
          
-        <input autoComplete="off" type="text" name="marriagebasePayment" required={true} 
-        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Marriage" onChange={handleChangeMarriage} />
+        <input autoComplete="off" type="text" name="marriage" required={true} 
+        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Marriage" onChange={handleChange} value={eventDetail.marriage}/>
         
-        <input autoComplete="off" type="text" name='marriageRate' required={true} 
-        focused={focused.toString()} placeholder="Write rate to Increase after 100 guest in Marriage" onChange={handleChangeMarriage} />
-      
-        <input autoComplete="off" type="text" name='conclavebasePayment' required={true} 
-        focused={focused.toString()}  placeholder="Write Basecost for 100 guest in Conclave" onChange={handleChangeConclave} />
+        <input autoComplete="off" type="text" name='conclave' required={true} 
+        focused={focused.toString()}  placeholder="Write Basecost for 100 guest in Conclave" onChange={handleChange} value={eventDetail.conclave}/>
        
-        <input autoComplete="off" type="text" name='conclaveRate' required={true} 
-        focused={focused.toString()}  placeholder="Write rate to Increase after 100 guest in Conclave" onChange={handleChangeConclave} />   
-      
-        <input autoComplete="off" type="text" name='familyPartybasePayment' required={true} 
-        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Family Party" onChange={handleChangeFamilyParty}/>
+        <input autoComplete="off" type="text" name='familyParty' required={true} 
+        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Family Party" onChange={handleChange} value={eventDetail.familyParty}/>
        
-        <input autoComplete="off" type="text" name='familyPartyrate' required={true} 
-        focused={focused.toString()}  placeholder="Write rate to Increase after 100 guest in Family Party" onChange={handleChangeFamilyParty}/>
+        <input autoComplete="off" type="text" name='annualMeet' required={true} 
+        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Annual Meet" onChange={handleChange} value={eventDetail.annualMeet}/>
        
-        <input autoComplete="off" type="text" name='annualMeetbasePayment' required={true} 
-        focused={focused.toString()} placeholder="Write Basecost for 100 guest in Annual Meet" onChange={handleChangeAnnualMeet}/>
+        <input autoComplete="off" type="text" name='collegeEvent' required={true} 
+        focused={focused.toString()}  placeholder="Write Basecost for 100 guest in College Function" onChange={handleChange} value={eventDetail.collegeEvent}/>
        
-        <input autoComplete="off" type="text" name='annualMeetRate' required={true} 
-        focused={focused.toString()} placeholder="Write rate for 100 guest in Annual Meet" onChange={handleChangeAnnualMeet}/>
-
-        <input autoComplete="off" type="text" name='collegefunctionbasePayment' required={true} 
-        focused={focused.toString()}  placeholder="Write Basecost for 100 guest in College Function" onChange={handleChangeCollegeFunction}/>
-       
-        <input autoComplete="off" type="text" name='collegefunctionRate' required={true} 
-        focused={focused.toString()}  placeholder="Write rate for 100 guest in College Function" onChange={handleChangeCollegeFunction}/>
+        <input autoComplete="off" type="text" name='rate' required={true} 
+        focused={focused.toString()}  placeholder="Write rate to increase" onChange={handleChange} value={eventDetail.rate}/>
        
         <div className="form_event_field_dealer col-12">
-            <input type="submit" value="submit"/>
+            <button type="submit">Submit</button>
          </div>
        </form>
        </div>
