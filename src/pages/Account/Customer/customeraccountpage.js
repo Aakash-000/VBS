@@ -13,11 +13,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {Reacticonnineteen,Reacticontwenty,Reacticontwentyone} from '../../../assets/icons/Reacticon.js'
 import Bookingform from "./Bookingform.js";
-
+import {FiChevronLeft} from 'react-icons/fi'
 
 export function VenuecarddetailCustomer(){  
   const[getregvenue,setgetregvenue] = useState([]);
-  const[imagePath,setimagePath] = useState([]);
   const {vemail} = useParams();
   const[noToken,setnoToken] = useState(false);
   const navigate = useNavigate();
@@ -115,22 +114,25 @@ export function VenuecarddetailCustomer(){
           </IconContext.Provider>
           </div>
           <div className='view_detail_cus'>
-          <div class="card mb-3" style={{maxWidth:'1000px'}}>
+          <div class="card mb-3" style={{maxWidth:'1000px',boxShadow:'rgba(230, 225, 219, 0.979) 5px 5px 10px 2px'}}>
             <div class="row g-0">
-            <div class="col-md-4">
+            <div class="button_position col-md-7">
             <img src={`data:image/jpeg;base64,${getregvenue.filePath}`} class="img-fluid rounded-start" alt="..."/>
+            <div className="booking_button_display">
+            <Bookingform/>
+           </div>
             </div>
-           <div class="col-md-8">
+           <div class="col-md-5">
             <div class="card-body">
               <div className="card_body_clickout">
               <h5 class="regven card-title">{getregvenue.venueName}</h5>
-              <Bookingform/>
-              <button className="card_body_clickout_sub" onClick={handleOut}>Go Back</button>
+              <button className="card_body_clickout_sub" onClick={handleOut}><FiChevronLeft size={25}/></button>
               </div>
-              <p class="card-text">{getregvenue.userName}</p>
+              <p class="d_card_title card-text">{getregvenue.userName}</p>
               <p class="card-text">{getregvenue.address}</p>
               <p class="card-text">{getregvenue.contactNumber}</p>
-              <p class="card-text">{getregvenue.description}</p>
+              <p class="card-text">{getregvenue.email}</p>
+              <p class="d_card_desc card-text">{getregvenue.description}</p>
             </div>
           </div>
         </div>
@@ -170,7 +172,7 @@ export default function Customeraccount() {
 
     useEffect(async()=>{
       function getVenue(){
-        axios.get('https://venue-booking-system2.herokuapp.com/client-',config)
+        axios.get('https://venue-booking-system2.herokuapp.com/client-/clientHome',config)
         .then(response => {console.log(response)})                                                            
         .catch(err => {console.log(err)});                                                                     
       }
@@ -440,7 +442,7 @@ export function MybookedVenue(){
               {mybookedVenpen.map((val,index)=>(              
               <tr key={index+1}>
             <th>{index+1}</th>
-          <td>{val.functionType}</td>
+          <td>{val.eventType}</td>
           <td>{val.requiredCapacity}</td>
           <td>{val.bookingDate}</td>
           <td>{val.calculatedPayment}</td>
@@ -474,7 +476,7 @@ export function MybookedVenue(){
               {mybookedVenverify.map((val,index)=>(              
               <tr key={index+1}>
             <th>{index+1}</th>
-          <td>{val.functionType}</td>
+          <td>{val.eventType}</td>
           <td>{val.requiredCapacity}</td>
           <td>{val.bookingDate}</td>
           <td>{val.calculatedPayment}</td>
@@ -490,7 +492,7 @@ export function MybookedVenue(){
               {mybookedVenunsucc.map((val,index)=>(              
               <tr key={index}>
             <th>{index+100}</th>
-          <td>{val.functionType}</td>
+          <td>{val.eventType}</td>
           <td>{val.requiredCapacity}</td>
           <td>{val.bookingDate}</td>
           <td>{val.calculatedPayment}</td>

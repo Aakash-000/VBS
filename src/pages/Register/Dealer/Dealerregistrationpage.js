@@ -18,7 +18,7 @@ export default function Dealerregistrationpage() {
 
     const navigate = useNavigate();
     const[focused,setFocused] = useState(false);
-    const[dealerDetail,setDealerDetail] = useState({email:"",venueName:"",userName:"",address:"",contactNumber:"",password:"",description:""});
+    const[dealerDetail,setDealerDetail] = useState({email:"",venueName:"",userName:"",address:"",contactNumber:"",password:"",description:"",capacity:""});
     const[venueFile,setimageFile]=useState(null);
     const[isvalid,setisvalid] = useState(true);
     const[isvalidS,setisvalidS] = useState(true);
@@ -33,6 +33,7 @@ export default function Dealerregistrationpage() {
           formData.append('contactNumber', dealerDetail.contactNumber)
           formData.append('password',dealerDetail.password)
           formData.append('description',dealerDetail.description)
+          formData.append('capacity',dealerDetail.capacity)
           formData.append('venueFile',venueFile)
        let response = await axios.post('https://venue-booking-system2.herokuapp.com/register/venue',
             formData,
@@ -43,7 +44,7 @@ export default function Dealerregistrationpage() {
           setTimeout(()=>{
             navigate('/dealerlogin')
           },5000)
-          setDealerDetail(()=>({...dealerDetail,email:"",venueName:"",userName:"",address:"",contactNumber:"",password:"",description:""}));
+          setDealerDetail(()=>({...dealerDetail,email:"",venueName:"",capacity:"",userName:"",address:"",contactNumber:"",password:"",description:""}));
       console.log(response);
       setisvalidS(false)
       const timeId = setTimeout(() => {
@@ -55,7 +56,7 @@ export default function Dealerregistrationpage() {
     }
     }catch(err){
       console.log(err);
-      setDealerDetail(()=>({...dealerDetail,email:"",venueName:"",userName:"",address:"",contactNumber:"",password:"",description:""}));
+      setDealerDetail(()=>({...dealerDetail,email:"",venueName:"",userName:"",address:"",contactNumber:"",password:"",description:"",capacity:""}));
       setisvalid(false)
         const timeId = setTimeout(() => {
           setisvalid(true)
@@ -76,7 +77,7 @@ export default function Dealerregistrationpage() {
  }
  
   return (
-    <div > 
+    <div> 
       <Navbar/>
     <div className='dealer_reg_page container-fluid'>
       {isvalid ? <div></div> : <div className='invalid_req_book'>
@@ -134,6 +135,10 @@ export default function Dealerregistrationpage() {
     <label for="desc" class="form-label">Description</label>
     <textarea name='description' pattern='^[a-zA-Z ]{10,200}$' onBlur={handleFocus} focused={focused.toString()} required={true} id='desc' onChange={e=>setDealerDetail({...dealerDetail,description:e.target.value})} value={dealerDetail.description}/>
     <span>{errorMsg.map((item)=>(item.forComment))}</span>
+    </div>
+    <div class="dreg_field col-md-12">
+    <label for="desc" class="form-label">Venue Capacity</label>
+    <input type="text" name='capacity' id='capacity' required={true}  maxLength='10' onBlur={handleFocus} focused={focused.toString()}  onChange={e=>setDealerDetail({...dealerDetail,capacity:e.target.value})} value={dealerDetail.capacity}/>
     </div>
     <div class="dreg_field col-12">
      <button type="submit">Add Venue</button>

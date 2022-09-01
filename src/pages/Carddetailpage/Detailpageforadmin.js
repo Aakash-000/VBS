@@ -98,10 +98,10 @@ export default function Detailpageforadmin() {
         <div className='view_detail_adm'>
           <div class="view_detail_adm_sub card mb-3" style={{maxWidth:'1000px'}}>
             <div class="row g-0">
-            <div class="col-md-4">
+            <div class="col-md-7">
             <img src={`data:image/jpeg;base64,${viewDetail.filePath}`} class="img-fluid rounded-start" alt="..."/>
             </div>
-           <div class="col-md-8">
+           <div class="col-md-5">
             <div class="view_detail_cus_card_body card-body">
               <div className="card_body_clickout">
               <h5 class="regven card-title">{viewDetail.venueName}</h5>

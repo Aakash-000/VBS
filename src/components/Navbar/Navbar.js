@@ -11,6 +11,7 @@ import {Reacticonfive,Reacticonsix} from '../../assets/icons/Reacticon.js'
 export default function Navbar() {
   const navigate = useNavigate();
   const[MobileRes,SetMobileRes] = useState(false);
+  const[navbarColor,setnavbarColor] = useState(false);
 // const[isActive,setisActive] = useState({forAbout:false,forAdmin:false,forCustomer:false,forDealer:false});
   
   
@@ -30,7 +31,14 @@ export default function Navbar() {
 //     setisActive(()=>({...isActive,forAdmin:false,forAbout:false,forCustomer:false,forDealer:true}))
 //     SetMobileRes(false)
 //   }
-  
+    const changeBackground = ()=>{
+      if(window.scrollY >= 80){
+        setnavbarColor(true)
+      }else{
+        setnavbarColor(false)
+      }
+    }
+    window.addEventListener('scroll',changeBackground)
 
   return (
         <nav className={'navbar sticky-top'}>

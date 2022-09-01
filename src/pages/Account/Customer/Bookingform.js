@@ -2,18 +2,19 @@ import React,{useState,useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './bookingform.css'
-import { useParams } from 'react-router-dom';
+import { useParams ,useNavigate} from 'react-router-dom';
 import axios from 'axios'
 
 export default function Bookingform() {
-
-    const {email,vemail} = useParams();
+    const navigate = useNavigate();
+    const {email,vemail,cus} = useParams();
     const[bookingDetail,setbookingDetail] = useState({bookingDate:"",requiredCapacity:"",functionType:"Marriage"})
     const[isdatevalid,setisdatevalid] = useState(true);
     const[booked,setBooked] = useState([]);
     const[noToken,setnoToken] = useState(false);
     const[isvalid,setisvalid] = useState(true);
     const[isvalidS,setisvalidS] = useState(true);
+    const[getUser,setcurrUser] = useState([]);
     const date = new Date();
     const Year = date.getUTCFullYear();
     const Month = date.getUTCMonth()+1;
@@ -33,6 +34,15 @@ export default function Bookingform() {
         "Content-Type" : "application/json"
       }
     }
+    useEffect(async()=>{
+      try{
+        let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/${email}`,config)
+        setcurrUser(response.data.data)
+        console.log(response)
+      }catch(err){
+        console.log(err)
+      }
+    },[]) 
 
       useEffect(()=>{
        async function getBookedDate(){
@@ -65,6 +75,7 @@ export default function Bookingform() {
           );
           console.log(response);
           setbookingDetail(()=>({...bookingDetail,bookingDate:"",requiredCapacity:"",functionType:""}))
+          navigate(`/cabookingdata/${email}/${getUser.name}`)
           setisvalidS(false)
           const timeId = setTimeout(() => {
             setisvalidS(true)
@@ -106,7 +117,7 @@ export default function Bookingform() {
       <div className="book_model_content modal-content">
       <div className="book_model_header">
         <h5 className="book_model_title modal-title" id="staticBackdropLabel">Booking Form</h5>
-        <div className='book_model_button'><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+        <div className='book_model_button'><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style={{backgroundColor:'white'}}></button></div>
       </div>                                            
       <div className="book_model_body modal-body">
       {isvalid ? <div></div> : <div className='invalid_req_book'>
@@ -137,7 +148,7 @@ export default function Bookingform() {
      </select>
       </div>
       <div className='booking_form'>
-      <label htmlFor='requiredCapacity'>RequiredCapacity:</label>
+      <label htmlFor='capacity'>RequiredCapacity:</label>
       <input autoComplete="off" type="text" name='requiredCapacity'  required={true}  onChange={e=>setbookingDetail({...bookingDetail,requiredCapacity:e.target.value})} value={bookingDetail.requiredCapacity}/>
       </div>
       <div className="book_model_footer ">

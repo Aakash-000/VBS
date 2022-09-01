@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState,useEffect} from 'react'
 import './body.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -7,16 +7,71 @@ import Icongridelement from './Icongridelement.js'
 import Navbar from '../../components/Navbar/Navbar.js'
 import Accordionelement from './Accordionelement.js';
 import Footer from '../../components/Footer/Footer';
+import {Link} from 'react-router-dom'
+import {FaOdnoklassniki,FaChalkboardTeacher,FaLinkedin} from 'react-icons/fa'
+import {HiUserGroup} from 'react-icons/hi'
+import {Reacticonfive,Reacticonsix} from '../../assets/icons/Reacticon.js'
+import logo from '../../assets/images/navbar_logo_bgr.png'
+import axios from 'axios'
+
+
 
 export default function Body() {
+  
+  const[MobileRes,SetMobileRes] = useState(false);
+  const[navbarColor,setnavbarColor] = useState(false);
 
+  const changeBackground = ()=>{
+    if(window.scrollY >= 80){
+      setnavbarColor(true)
+    }else{
+      setnavbarColor(false)
+    }
+  }
+  window.addEventListener('scroll',changeBackground)
+
+  useEffect(async() => {
+      try{
+        let response = await axios.get('https://venue-booking-system2.herokuapp.com/home-')
+        console.log(response)
+      }catch(err){
+        console.log(err)
+      }
+  }, [])
   return (
            <>
            <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet"/>
+           
             <div className='landing_page'>
-              <Navbar/>
+            <nav className={navbarColor ? 'navbar_change sticky-top':'navbar_rest sticky-top'}>
+         <div className='navbar_logo'>
+        <Link to="/" style={{textDecoration:'none'}}><img src={logo} alt="Navbar Logo"/></Link>
+        </div>
+        <div className={MobileRes ? ('navbar_sub_mobile') : ('navbar_sub')}>
+            <Link to='/'>
+            <button  className='about_but'
+            onClick={()=>SetMobileRes(false)}><Reacticonfive style={{marginBottom:'10px'}}/>Aboutus</button>
+           </Link>
+            <Link to="/explorevenue/normal">       
+            <button className='styl_exp'><Reacticonsix className='buttonicon'/>Explore</button>
+            </Link>
+            
+            <Link to='/adminlogin'>
+            <button onClick={()=>SetMobileRes(false)}><FaChalkboardTeacher size={16} className='buttonicon'/>Admin</button>
+            </Link>
+            
+            <Link to="/customerlogin"><button onClick={()=>SetMobileRes(false)} ><FaOdnoklassniki size={16} className='buttonicon'/>Customer</button>
+            </Link>  
+            
+            <Link to="/dealerlogin"><button onClick={()=>SetMobileRes(false)} ><HiUserGroup size={16} className='buttonicon'/>Dealer</button>
+            </Link>
+        </div>
+        <button className='mobile-menu-icon' onClick={()=>SetMobileRes(!MobileRes)}>
+          {MobileRes ? (<i className='fas fa-times' ></i>):(<i className='fas fa-bars'></i>)}
+        </button> 
+        </nav>
             <div className='upper container-fluid'>
               <div className='row'>
               <div className='text_sec col-4 .col-md-2'>

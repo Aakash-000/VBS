@@ -1,23 +1,25 @@
+
 .navbar{
     z-index: 999;
-    padding-top:10px;
-    padding-bottom: 13px;
+    padding-top:8px;
+    padding-bottom: 11px;
     justify-content: space-between;
-    /* box-shadow: 0 1px 1px 1px rgb(206, 196, 196); */
-    background-color: #FDFFFC;
+    /* box-shadow: 0 1px 1px 2px rgb(250, 252, 252); */
+    background-color: white;
     font-family: Helvetica,Georgia,sans-serif;
 }
 .navbar .navbar_logo{
     position: relative;
 }
-.navbar_logo img{
+
+.navbar .navbar_logo img{
     border-radius: 15px;
     height: 60px;
     width:60px;
     position: absolute;
     margin:-20px 60px;
 }
-.navbar_sub{
+.navbar .navbar_sub{
     display: flex;    
     flex-direction: row;  
     align-items: center;
@@ -28,43 +30,45 @@
     margin-bottom: 4px;
 }
 
-.navbar_sub .about_but{
+.navbar .navbar_sub .about_but{
     display: flex;
     flex-direction: row;
 }
-.about_but:active{
+.navbar .navbar_sub .about_but:active{
     cursor: pointer;
     font-size: 20px;
     letter-spacing: 0.7px;
-    font-weight:450;
+    font-weight:500;
     padding: 8px 18px;
     background-color:#1D3557;
     border:none;
     border-radius:2vw;
     color:white;
 }
-.navbar_sub button{
+.navbar .navbar_sub button{
     cursor: pointer;
     font-size: 20px;
     letter-spacing: 0.7px;
-    font-weight:450;
+    font-weight:500;
     padding: 8px 18px;
-    background-color:#FDFFFC;
+    background-color:white;
     border:none;
     border-radius:2vw;
     color: rgb(11, 13, 32);
 }
 
-.navbar_sub .styl_exp{
+.navbar .navbar_sub .styl_exp{
     display: flex;
     flex-direction: row;
     background-color: #A8DADC;
 }
-.navbar_sub .styl_exp:hover{
+
+.navbar .navbar_sub .styl_exp:hover{
         background-color: #A8DADC;
-        color:rgb(11, 13, 32);
+        color:#F1FAEE;
 }
-.navbar_sub button:hover{
+
+.navbar .navbar_sub button:hover{
     background-color: #1D3557;
     color: #F1FAEE;
 }

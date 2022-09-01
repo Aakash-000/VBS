@@ -17,7 +17,7 @@ export default function Dealercardlist({filterSearch}) {
                                                                             
           useEffect(async()=>{
             try{
-              let response = await axios.get('https://venue-booking-system2.herokuapp.com/client-',config)
+              let response = await axios.get('https://venue-booking-system2.herokuapp.com/client-/clientHome',config)
               setregVenue(response.data.data)
               console.log(response.data.data.filePath)
             }catch(err){
