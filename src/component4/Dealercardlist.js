@@ -5,7 +5,7 @@ import './dealercardlist.css'
 
 
 export default function Dealercardlist({filterSearch}) {
-    
+    const[isLoading,setisLoading] = useState(true);
     const [getregVenue,setregVenue] = useState([]);
     const {email }= useParams();
     const navigate = useNavigate();
@@ -20,6 +20,7 @@ export default function Dealercardlist({filterSearch}) {
               let response = await axios.get('https://venue-booking-system2.herokuapp.com/client-/clientHome',config)
               setregVenue(response.data.data)
               console.log(response.data.data.filePath)
+              setisLoading(false)
             }catch(err){
               console.log(err)
             }
@@ -29,7 +30,8 @@ export default function Dealercardlist({filterSearch}) {
               navigate(`/venue/${cemail}/${demail}`)
             }
         return (
-    <div className='grid_layout'>                                                                      
+          <>
+    {isLoading?(<div style={{fontSize:'30px',textAlign:'center',fontFamily:'sans-serif,Raleway'}}><p>...Loading</p></div>):(<div className='grid_layout'>                                                                      
     <div className="grid_layout_row row row-cols-1 row-cols-md-3 row-cols-lg-4">                      
     {getregVenue.filter((item)=>{if(item.address.toLowerCase().substring(0,4).includes(filterSearch.toLowerCase().substring(0,4))){
         return item;
@@ -45,6 +47,7 @@ export default function Dealercardlist({filterSearch}) {
         </div>
          ))}
     </div>
-    </div>
+    </div>)}
+    </>
     )
 }

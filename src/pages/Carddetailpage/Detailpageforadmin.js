@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
+import {FiChevronLeft} from 'react-icons/fi'
 import { IconContext } from "react-icons";
 import { Link , useNavigate,useParams} from "react-router-dom";
 import { SidebarDataforadmin } from "../Account/Dealer/SidebarData.js";
@@ -11,6 +12,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import axios from 'axios'
 
 export default function Detailpageforadmin() {
+    const[isLoading,setisLoading] = useState(true);
     const[noToken,setnoToken] = useState(false);
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
@@ -39,7 +41,9 @@ export default function Detailpageforadmin() {
             const findDetail = response.data.data.filter((item)=>{
               return id == item.id;
             })
+            console.log(response)
             setviewDetail(findDetail[0])
+            setisLoading(false)
         }catch(err){
           console.log(err)
         }
@@ -96,7 +100,7 @@ export default function Detailpageforadmin() {
         </IconContext.Provider>
         </div>
         <div className='view_detail_adm'>
-          <div class="view_detail_adm_sub card mb-3" style={{maxWidth:'1000px'}}>
+          {isLoading?(<div className="detail_page_loading"><p>...Loading</p></div>):(<div class="view_detail_adm_sub card mb-3" style={{maxWidth:'1000px'}}>
             <div class="row g-0">
             <div class="col-md-7">
             <img src={`data:image/jpeg;base64,${viewDetail.filePath}`} class="img-fluid rounded-start" alt="..."/>
@@ -105,16 +109,17 @@ export default function Detailpageforadmin() {
             <div class="view_detail_cus_card_body card-body">
               <div className="card_body_clickout">
               <h5 class="regven card-title">{viewDetail.venueName}</h5>
-              <button onClick={handleClick}>Go Back</button>
+              <button onClick={handleClick}><FiChevronLeft size={25}/></button>
               </div>
               <p class="card-text">{viewDetail.userName}</p>
               <p class="card-text">{viewDetail.address}</p>
+              <p class="card-text">{viewDetail.email}</p>
               <p class="card-text">{viewDetail.contactNumber}</p>
               <p class="card-text">{viewDetail.description}</p>
             </div>
           </div>
         </div>
-        </div>
+        </div>)}
         </div>
         </>
         ):

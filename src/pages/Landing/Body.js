@@ -4,8 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Sliderbar from '../../components/SliderBar/Sliderbar';
 import Icongridelement from './Icongridelement.js'
-import Navbar from '../../components/Navbar/Navbar.js'
-import Accordionelement from './Accordionelement.js';
 import Footer from '../../components/Footer/Footer';
 import {Link} from 'react-router-dom'
 import {FaOdnoklassniki,FaChalkboardTeacher,FaLinkedin} from 'react-icons/fa'
@@ -77,7 +75,7 @@ export default function Body() {
               <div className='text_sec col-4 .col-md-2'>
               <h5 className="title card-title">Explore Best class venue of your fit!</h5>
               <p className="text card-text">Discover the list of legally registered venues and book match of your best fit.Our service of making your reach to top class Venue from any remote location safer,easier and faster is for free.Book venue right now.</p>
-              <button className='hero_button'>Book Now</button>
+             <Link to="/customerlogin"><button className='hero_button'>Book Now</button></Link>
               </div>
               <div className='slider_bar col-7 .col-md-4'>
                 <Sliderbar/>
@@ -105,7 +103,7 @@ export default function Body() {
                 </div>
               <div className='accordion_def container'>
                 <pre>About us</pre>
-                <div class="accordion" id="accordionExample">
+                <div class="accordion_main accordion" id="accordionExample">
               <div class="accordion_sub_one accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne">
                 <abbr class="accordion-header" id="headingOne">
                   <abbr  type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -141,6 +139,20 @@ export default function Body() {
                    <strong>You can contact us via our Hotline service or email us at our official email.</strong>
                   </div>
                </div>
+              </div>
+              <div class="accordion_sub_four accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-controls="collapseFour">
+                <abbr class="accordion-header" id="headingFour">
+                 <abbr type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                 How is the cost of Venue calculated?
+                 </abbr>
+                </abbr>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
+                 <div class="accordion-body">
+                    <strong>Venue Owner is responsible for defining base cost and rate of increase for venue capacity and type of event being conducted.
+                      Customer select event type and capacity necessary and add base cost with rate to increase depending upon the capacity customer provide.
+                    </strong>
+                  </div>
+                </div>
               </div>
             </div>
                 </div>  

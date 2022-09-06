@@ -6,9 +6,7 @@
     color:black;
     display: hidden;
 }
-.dealer_form .form_field_dealer input:invalid[focused=true]{
-    border:1px solid #E63946;
-}
+
 .dealer_form .form_field_dealer input{
     width:50%;
     border-radius: 0.4vw;
@@ -26,6 +24,8 @@
 .dealer_form .form_field_dealer input:invalid[focused=true] ~ span{
     display: block;
     width: 50%;
+    color:#E63946;
+    font-weight: bold;
 }
 .dealer_form h1{
     text-align: center;

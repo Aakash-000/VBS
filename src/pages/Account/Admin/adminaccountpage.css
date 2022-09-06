@@ -17,11 +17,12 @@
     align-items: center;
     gap:1vw;
   }
+
 .sidea-toggle .sidemenua-bars{
     margin-right:1vw;
 }
+
 .sidea-menu {
-    /* rgb(240, 244, 245); */
     background-color:  rgb(240, 244, 245);
     width: 250px;
     height: 100vh;
@@ -32,6 +33,7 @@
     left: -100%;
     transition: 400ms;
   }
+  
   .sidebara .sidea-logo img{
     height:60px;
     width:60px;
@@ -168,7 +170,7 @@ tr th,tr td{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .button_cancel:hover{
-    background-color:#c09f1c;
+    background-color:#ffd43b;
     color: rgb(14, 5, 31);
 }
 .button_accept:hover{

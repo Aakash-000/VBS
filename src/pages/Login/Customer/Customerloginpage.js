@@ -14,7 +14,7 @@ export default function Customerloginpage() {
   const navigate = useNavigate();
   const[cusres,setcusRes] = useState([]);
   const[CustomerDetail,setCustomerDetail] = useState({username:'',password:''});
-  const[focused,setFocused] = useState(false);
+  const[focused,setFocused] = useState({name:false,passw:false});
   const[invalid,setInvalid] = useState(false);
   const[isvalid,setisvalid] = useState(true);
  
@@ -51,15 +51,16 @@ export default function Customerloginpage() {
           }
         }
 
+        const handleFocus = (e)=>{
+          setFocused({...focused,
+            [e.target.focused]:true })
+        }
+
     const submitHandler = e => {
     e.preventDefault();
     login();
     }
 
-  function handleFocus(e){
-     setFocused(true);
-  }
-  
   return (
     <div>
       
@@ -75,12 +76,12 @@ export default function Customerloginpage() {
         <h1 className='heading_clog'><Reacticoneight/>Customer Login</h1>
         <div className='form_field_customer'>
       <label htmlFor='email'>Email:</label>
-      <input autoComplete="off" type="email" name='email' pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setCustomerDetail({...CustomerDetail,username:e.target.value})} value={CustomerDetail.username}/>
+      <input autoComplete="off" type="email" name='email' pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={()=>setFocused({...focused,name:true})} focused={focused.name.toString()} onChange={e=>setCustomerDetail({...CustomerDetail,username:e.target.value})} value={CustomerDetail.username}/>
       <span>{errorMsg.map((item)=>(item.forEmail))}</span>
       </div>
         <div className='form_field_customer'>
         <label htmlFor='password'>Password :</label>
-        <input type="password" name='password' onBlur={handleFocus} focused={focused.toString()}  pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} id="password" onChange={e=>setCustomerDetail({...CustomerDetail,password:e.target.value})} value={CustomerDetail.password}/>
+        <input type="password" name='password' onBlur={()=>setFocused({...focused,passw:true})} focused={focused.passw.toString()}  pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} id="password" onChange={e=>setCustomerDetail({...CustomerDetail,password:e.target.value})} value={CustomerDetail.password}/>
         <span>{errorMsg.map((item)=>(item.forPassword))}</span>
         </div>
         <div className="form_field_customer">

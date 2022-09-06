@@ -17,7 +17,7 @@
     height: 60px;
     width:60px;
     position: absolute;
-    margin:-20px 60px;
+    margin:-22px 60px;
 }
 .navbar .navbar_sub{
     display: flex;    
@@ -65,7 +65,7 @@
 
 .navbar .navbar_sub .styl_exp:hover{
         background-color: #A8DADC;
-        color:#F1FAEE;
+        color:black;
 }
 
 .navbar .navbar_sub button:hover{

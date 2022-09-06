@@ -344,7 +344,7 @@ export function Customerlist(){
               <img src={Logo} alt='logo'/>
           </div>
           </Link>
-          <div className='right-group-de'>
+          <div className='right-group-ad'>
           <p>{adminemail}</p>
           <button onClick={logout}>Logout</button>
           </div>
@@ -388,7 +388,7 @@ export function Customerlist(){
             <td>{item.mobile_no}</td>
           <div class="modal-body">
              <pre>FullName:{item.email}</pre>
-          <pre>Address:{item.address}</pre>
+          <pre>Address:{item.city_name}</pre>
           </div>
     </tr>
     ))}
@@ -454,7 +454,7 @@ export function Venuelist(){
               <img src={Logo} alt='logo'/>
           </div>
           </Link>
-          <div className='right-group-de'>
+          <div className='right-group-ad'>
           <p>{adminemail}</p>
           <button onClick={logout}>Logout</button>
           </div>

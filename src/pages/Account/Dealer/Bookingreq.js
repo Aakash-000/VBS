@@ -22,6 +22,7 @@ export default function Bookingreq() {
   const[noToken,setnoToken] = useState(false);
   const[accept,setAccept]=useState(false);
   const[cancel,setCancel ] =useState(false);
+  const[isLoading,setisLoading] = useState(true);
   const navigate = useNavigate();
   const[dealerdetail,setdealerdetail ] = useState([]);
   useEffect(() => {
@@ -60,6 +61,7 @@ export default function Bookingreq() {
       let response =await axios.get(`https://venue-booking-system2.herokuapp.com/venue-/requests/${dealeremail}`,config)
       console.log(response)
       setreqVen(response.data.data)
+      setisLoading(false)
       setAccept(false)
       setCancel(false)
       }catch(err){
@@ -136,6 +138,7 @@ export default function Bookingreq() {
         </nav>
         </IconContext.Provider>
         </div>
+        {isLoading?(<div className="isLoading_pending_req"><p>...Loading</p></div>):(
         <div className="table_t">
         <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
         <p className='table_container_req_title'>Booking Request of Customers</p>
@@ -158,13 +161,13 @@ export default function Bookingreq() {
       <th>{index+1}</th>
           <div class="modal-body">
           <pre>FullName:{item.client.name}</pre>
-          <pre>VenueName:{item.client.email}</pre>
-          <pre>Email:{item.client.mobile_no}</pre>
+          <pre>Email:{item.client.email}</pre>
+          <pre>ContactNumber:{item.client.mobile_no}</pre>
           </div>
-      <td>{item.functionType}</td>
+      <td>{item.eventType}</td>
     <td>{item.requiredCapacity}</td>
     <td>{item.bookingDate}</td>
-    <td>{item.calculatedPayment}</td>
+    <td>Rs {item.calculatedPayment}</td>
       <td><button className='button_accept' onClick={()=>handleAccept(index)}>Accept</button></td>
       <td><button className='button_cancel' onClick={()=>handleCancel(index)}>Cancel</button></td>
     </tr>
@@ -172,7 +175,7 @@ export default function Bookingreq() {
         </tbody>
         </table>
         </div>
-        </div>
+        </div>)}
         </div>):(<div>You are logged out of page.Please login and try again.</div>)}
         </>
     )
@@ -187,6 +190,7 @@ export function Bookingreqstatus(){
   const[reqVenunsucc,setreqVenunsucc] = useState([]);
   const[noToken,setnoToken] = useState(false);
   const[dealerdetail,setdealerdetail ] = useState([]);
+  const[isLoading,setisLoading] = useState(true);
 
   useEffect(() => {
     if(sessionStorage.length != 0){
@@ -236,6 +240,7 @@ export function Bookingreqstatus(){
       setreqVenpen(pendingdata)
       setreqVenverify(verifieddata)
       setreqVenunsucc(unsuccessfuldata)
+      setisLoading(false)
       }catch(err){
         console.log(err)
       }
@@ -280,6 +285,7 @@ export function Bookingreqstatus(){
         </nav>
         </IconContext.Provider>
         </div>
+        {isLoading?(<div className="isLoading_pending_req"><p>...Loading</p></div>):(
         <div className="table_t">
         <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
         <p className='table_container_req_title'>Pending Booking Request of Customers</p>
@@ -304,10 +310,10 @@ export function Bookingreqstatus(){
           <pre>Mobileno:{item.client.mobile_no}</pre>
           <pre>Email:{item.client.email}</pre>
           </div>
-      <td>{item.functionType}</td>
+      <td>{item.eventType}</td>
     <td>{item.requiredCapacity}</td>
     <td>{item.bookingDate}</td>
-    <td>{item.calculatedPayment}</td>
+    <td>Rs {item.calculatedPayment}</td>
     <td>{item.bookingStatus}</td>
     </tr>
     ))}
@@ -337,7 +343,7 @@ export function Bookingreqstatus(){
           <pre>Mobileno:{item.client.mobile_no}</pre>
           <pre>Email:{item.client.email}</pre>
           </div>
-      <td>{item.functionType}</td>
+      <td>{item.eventType}</td>
     <td>{item.requiredCapacity}</td>
     <td>{item.bookingDate}</td>
     <td>{item.calculatedPayment}</td>
@@ -355,14 +361,14 @@ export function Bookingreqstatus(){
       <td>{item.functionType}</td>
       <td>{item.requiredCapacity}</td>
       <td>{item.bookingDate}</td>
-      <td>{item.calculatedPayment}</td>
+      <td>Rs {item.calculatedPayment}</td>
       <td>{item.bookingStatus}</td>
       </tr>
     ))}
         </tbody>
         </table>
         </div>
-        </div>
+        </div>)}
         </div>):(<div>You are logged out of page.Please login and try again.</div>)}
         </>
        )

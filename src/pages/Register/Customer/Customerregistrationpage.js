@@ -17,7 +17,7 @@ export default function Customerregistrationpage() {
   {id:'7',forPassword:"*At least seven char long and Please include three letter one number one specialcharacter"}]
     
     const navigate = useNavigate();
-    const[focused,setFocused] = useState(false);
+    const[focused,setFocused] = useState({email:false,name:false,city:false,cnum:false,passw:false});
     const[customerDetail,setCustomerDetail] = useState({email:"",username:"",city_name:"",mobile_no:"",password:""});
     const[isvalid,setisvalid] = useState(true);
     const[isvalidS,setisvalidS] = useState(true);
@@ -29,8 +29,11 @@ export default function Customerregistrationpage() {
         }});
 
         console.log(response);
+        
         setCustomerDetail(()=>({...customerDetail,email:" ",username:" ",city_name:" ",mobile_no:" ",password:" "}));
-        navigate('/customerlogin');
+        setTimeout(()=>{
+          navigate('/customerlogin');
+        },5000)
         setisvalidS(false)
         const timeId = setTimeout(() => {
           setisvalidS(true)
@@ -90,30 +93,30 @@ export default function Customerregistrationpage() {
       
     <div class="creg_field col-md-6">
     <label for="email" class="form-label">Email</label>
-    <input autoComplete="off" type="text" name='email' pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,email:e.target.value})} value={customerDetail.email}/>
+    <input autoComplete="off" type="text" name='email' pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={()=> setFocused({...focused,email:true})} focused={focused.email.toString()} onChange={e=>setCustomerDetail({...customerDetail,email:e.target.value})} value={customerDetail.email}/>
     <span>*Please write valid email</span>
   </div>
   <div class="creg_field col-md-6">
   <label for="username" class="form-label">User Name</label>
-  <input autoComplete="off" type="text" name='name' id='username' required={true} pattern='^[a-zA-Z ]{3,50}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,username:e.target.value})} value={customerDetail.username}/>
+  <input autoComplete="off" type="text" name='name' id='username' required={true} pattern='^[a-zA-Z ]{3,50}$'  onBlur={()=>setFocused({...focused,name:true})} focused={focused.name.toString()} onChange={e=>setCustomerDetail({...customerDetail,username:e.target.value})} value={customerDetail.username}/>
     <span>{errorMsg.map((item)=>(item.forUserName))}</span>
     </div>
 
    
   <div class="creg_field col-md-6">
     <label for="password" class="form-label">Password</label>
-    <input type="password" name='password' id='password' onBlur={handleFocus} focused={focused.toString()} pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} onChange={e=>setCustomerDetail({...customerDetail,password:e.target.value})} value={customerDetail.password}/>
+    <input type="password" name='password' id='password' onBlur={()=>setFocused({...focused,passw:true})} focused={focused.passw.toString()} pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} onChange={e=>setCustomerDetail({...customerDetail,password:e.target.value})} value={customerDetail.password}/>
     <span>{errorMsg.map((item)=>(item.forPassword))}</span>
   </div>
    
   <div class="creg_field col-md-6">
     <label for="address" class="form-label">Address</label>
-    <input autoComplete="off" type="text" name='city_name'  required={true} id='address' pattern='^[a-zA-Z ]{5,200}$'  onBlur={handleFocus} focused={focused.toString()} onChange={e=>setCustomerDetail({...customerDetail,city_name:e.target.value})} value={customerDetail.city_name}/>
+    <input autoComplete="off" type="text" name='city_name'  required={true} id='address' pattern='^[a-zA-Z ]{5,200}$'  onBlur={()=>setFocused({...focused,city:true})} focused={focused.city.toString()} onChange={e=>setCustomerDetail({...customerDetail,city_name:e.target.value})} value={customerDetail.city_name}/>
     <span>{errorMsg.map((item)=>(item.forLocation))}</span>
     </div>
     <div class="creg_field col-md-6">
     <label for="contactnumber" class="form-label">Contact Number</label>
-    <input type="text" name='mobile_number' id='number' required={true} maxLength='10' onBlur={handleFocus} focused={focused.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setCustomerDetail({...customerDetail,mobile_no:e.target.value})} value={customerDetail.mobile_no}/>
+    <input type="text" name='mobile_number' id='number' required={true} maxLength='10' onBlur={()=>setFocused({...focused,cnum:true})} focused={focused.cnum.toString()} pattern='^[9][6-8]{1}[0-9]{8}$' onChange={e=>setCustomerDetail({...customerDetail,mobile_no:e.target.value})} value={customerDetail.mobile_no}/>
     <span>{errorMsg.map((item)=>(item.forConNum))}</span>
   </div>
 

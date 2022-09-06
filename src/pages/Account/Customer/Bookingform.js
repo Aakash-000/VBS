@@ -7,7 +7,7 @@ import axios from 'axios'
 
 export default function Bookingform() {
     const navigate = useNavigate();
-    const {email,vemail,cus} = useParams();
+    const {email,vemail} = useParams();
     const[bookingDetail,setbookingDetail] = useState({bookingDate:"",requiredCapacity:"",functionType:"Marriage"})
     const[isdatevalid,setisdatevalid] = useState(true);
     const[booked,setBooked] = useState([]);
@@ -16,9 +16,9 @@ export default function Bookingform() {
     const[isvalidS,setisvalidS] = useState(true);
     const[getUser,setcurrUser] = useState([]);
     const date = new Date();
-    const Year = date.getUTCFullYear();
-    const Month = date.getUTCMonth()+1;
-    const Day = date.getUTCDate();
+    const Year = date.getFullYear();
+    const Month = date.getMonth()+1;
+    const Day = date.getDate();
 
     useEffect(() => {
       if(sessionStorage.length != 0){
@@ -34,6 +34,7 @@ export default function Bookingform() {
         "Content-Type" : "application/json"
       }
     }
+
     useEffect(async()=>{
       try{
         let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/${email}`,config)
@@ -76,6 +77,7 @@ export default function Bookingform() {
           console.log(response);
           setbookingDetail(()=>({...bookingDetail,bookingDate:"",requiredCapacity:"",functionType:""}))
           navigate(`/cabookingdata/${email}/${getUser.name}`)
+          window.location.reload();
           setisvalidS(false)
           const timeId = setTimeout(() => {
             setisvalidS(true)
@@ -135,10 +137,10 @@ export default function Bookingform() {
       <form id='venue_booking_form' onSubmit={submitHandler}>
       <div className='booking_form'>
       <label htmlFor='date'>DateBooked:</label>
-      <input autoComplete="off" type="date" name='date' min={`${Year}-0${Month}-${Day}`} required={true}  onChange={e=>setbookingDetail({...bookingDetail,bookingDate:e.target.value})} value={bookingDetail.bookingDate}/>
+      <input autoComplete="off" type="date" name='bookingDate' min={`${Year}-0${Month}-0${Day}`} required={true}  onChange={e=>setbookingDetail({...bookingDetail,bookingDate:e.target.value})} value={bookingDetail.bookingDate}/>
       </div>
       <div className='booking_form'>
-      <label htmlFor='FunctionType'>FunctionType:</label>
+      <label htmlFor='functionType'>FunctionType:</label>
       <select value={bookingDetail.functionType} onChange={e=>setbookingDetail({...bookingDetail,functionType:e.target.value})}>
       <option >Marriage</option>
       <option >Family Party</option>

@@ -126,7 +126,7 @@ tr pre{
     font-size: 16px;
 }
 .button_accept{
-    background-color: #00A896;
+    background-color: #2A9D8F;
     color:rgb(8, 0, 29);
     padding: 5px 20px 5px 20px;
     border: none;
@@ -154,7 +154,8 @@ tr pre{
     color: rgb(14, 5, 31);
 }
 .button_accept:hover{
-    background-color:  rgb(3, 216, 198);
+    background-color:  #0F4C5C;
+    color:whitesmoke;
 }
 .right-group-de{
     display: flex;

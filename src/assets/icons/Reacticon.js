@@ -1,11 +1,12 @@
-import {MdOutlineAddTask,MdExplore,MdCancel} from 'react-icons/md'
+import {MdOutlineAddTask,MdExplore,MdCancel,MdSystemUpdateAlt} from 'react-icons/md'
 import {BsBookmarkCheckFill,BsPersonCheckFill,BsClipboardData,BsBookmarkXFill} from 'react-icons/bs'
 import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiOutlineInfoCircle} from 'react-icons/ai'
-import {FaGlobe,FaTags,FaGem,FaEye,FaFingerprint,FaHourglass,FaDotCircle,FaAlignLeft,FaRegTimesCircle,FaHome,FaUserEdit} from 'react-icons/fa'
+import {FaGlobe,FaUsers,FaTags,FaGem,FaEye,FaFingerprint,FaHourglass,FaDotCircle,FaAlignLeft,FaRegTimesCircle,FaHome,FaUserEdit} from 'react-icons/fa'
 import {CgUserList} from 'react-icons/cg'
 import {FiAlertCircle} from 'react-icons/fi'
 import {GrStatusPlaceholder} from 'react-icons/gr'
+import {GoLocation} from 'react-icons/go'
 import React from 'react'
 
 export  const Reacticonone =()=>{
@@ -167,6 +168,27 @@ export  const Reacticontwentythree =()=>{
     return (
         <div>
           <FaEye size={22}/>
+        </div>
+    )
+}
+export  const Reacticontwentyfour =()=>{
+    return (
+        <div>
+          <FaUsers size={22}/>
+        </div>
+    )
+}
+export  const Reacticontwentyfive =()=>{
+    return (
+        <div>
+          <MdSystemUpdateAlt size={22}/>
+        </div>
+    )
+}
+export  const Reacticontwentysix =()=>{
+    return (
+        <div>
+          <GoLocation size={22}/>
         </div>
     )
 }

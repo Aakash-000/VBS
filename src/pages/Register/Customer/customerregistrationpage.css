@@ -7,20 +7,14 @@ span{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: none;
 }
-.creg_form .creg_field input:invalid[focused="true"]{
-    border:1px solid #E63946;
-}
+
 .creg_form .creg_field input:invalid[focused="true"] ~ span{
     display:block;
     width: fit-content;
+    color:#E63946;
+    font-weight: bold;
 }
-.creg_form .creg_field textarea:invalid[focused="true"] ~ span { 
-    display: block;
-    width:fit-content;
-}
-.creg_form .creg_field textarea:invalid[focused="true"]{
-    border:1px solid #E63946;
-}
+
 .creg_form .heading_creg{
     font-size: 2.9vw;
     font-weight: 400;
@@ -48,7 +42,7 @@ span{
     align-items: center;
 }
 .creg_form .creg_field label{
-    font-size: 1.25vw;
+    font-size: 18px;
 }
 .creg_form .creg_field input{
     box-shadow: none;

@@ -1,12 +1,14 @@
 
 .landing_page{
     margin-top: 0px;
+    /* background-color: #FDFFFC; */
 }
 .upper{
     background-color: rgb(197, 188, 155);
     padding-top:35px;
     
 }
+
 .image_sec .img-fluid{
     width:95%;
     height: 85%;
@@ -72,8 +74,8 @@
     transition: 0.25s ease-in;
 }
 .box_card:hover{
-    background-color:#ffd43b;
-    color: rgb(3, 27, 27);
+    background-color:rgb(202, 168, 104);
+    color: black;
     cursor: pointer;
 }
 .icon_heading_new{
@@ -101,19 +103,21 @@
     letter-spacing: 0.7px;
     font-family: 'Comfortaa','Helvetica','Raleway',sans-serif;
 }
+
 .accordion_def pre{
     font-size: 40px;
     font-family: 'Raleway', sans-serif;
     border-bottom:1px solid rgb(207, 207, 214);
     text-align: center;
 }
-.accordion_sub_one,.accordion_sub_two,.accordion_sub_three{
-    background-color:#c3fae8;
-}
+
 .accordion_sub_one abbr{
     padding: 10px 10px;
     font-size: 25px;
     font-family: 'Quicksand',Helvetica,sans-serif;
+}
+.accordion-body{
+    background-color: rgb(202, 168, 104);
 }
 #accordionExample{
     margin-top:40px;
@@ -125,6 +129,11 @@
     font-family: 'Quicksand',Helvetica,sans-serif;
 }
 .accordion_sub_three abbr{
+    padding: 10px 10px;
+    font-size: 25px;
+    font-family: 'Quicksand',Helvetica,sans-serif;
+}
+.accordion_sub_four abbr{
     padding: 10px 10px;
     font-size: 25px;
     font-family: 'Quicksand',Helvetica,sans-serif;
@@ -142,8 +151,8 @@
     padding-top:6px;
     padding-bottom: 6px;
     justify-content: space-between;
-    box-shadow: rgba(245, 248, 247, 0.979) 0px 1px 0.5px;
-    background-color: rgb(255, 255, 255);
+    /* box-shadow: rgba(245, 248, 247, 0.979) 0px 1px 0.5px; */
+    background-color: rgb(212, 243, 216);
     font-family: Helvetica,Georgia,sans-serif;
     display: flex;
     flex-direction: row;
@@ -172,7 +181,7 @@
     height: 60px;
     width:60px;
     position: absolute;
-    margin:-20px 60px;
+    margin:-22px 60px;
 }
 .navbar_rest .navbar_sub,.navbar_change .navbar_sub{
     display: flex;    
@@ -217,7 +226,7 @@
     letter-spacing: 0.7px;
     font-weight:450;
     padding: 8px 18px;
-    background-color:white;
+    background-color:rgb(212, 243, 216);
     border:none;
     border-radius:2vw;
     color: rgb(11, 13, 32);
@@ -230,16 +239,9 @@
 .navbar_change .navbar_sub .styl_exp{
     display: flex;
     flex-direction: row;
-    background-color: #A8DADC;
+    /* background-color: #A8DADC; */
 }
-.navbar_rest .navbar_sub .styl_exp:hover{
-        /* background-color: #A8DADC; */
-        color:#F1FAEE;
-}
-.navbar_change .navbar_sub .styl_exp:hover{
-        background-color: #A8DADC;
-        color:black;
-}
+
 .navbar_rest .navbar_sub button:hover,.navbar_change .navbar_sub button:hover{
     background-color: #1D3557;
     color: #F1FAEE;

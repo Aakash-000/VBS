@@ -6,7 +6,6 @@ import { Link,useParams, useNavigate } from "react-router-dom";
 import { SidebarDataforDealer } from "./SidebarData";
 import "./dealeraccountpage.css";
 import Logo from '../../../assets/images/navbar_logo_bgr.png'
-import Avatar from '@mui/material/Avatar';
 import axios from 'axios'
 import {Reacticonnineteen,Reacticontwenty,Reacticontwentyone} from '../../../assets/icons/Reacticon.js'
 
@@ -20,6 +19,8 @@ export default function Dealeraccount() {
   const[reqVenverify,setreqVenverify] = useState([]);  
   const[reqVenpen,setreqVenpen] = useState([]);
   const[reqVenunsucc,setreqVenunsucc] = useState([]);
+
+  
   useEffect(() => {
     if(sessionStorage.length != 0){
       setnoToken(false)
@@ -65,8 +66,8 @@ export default function Dealeraccount() {
       }
       },[])
 
-
-  const logout = (e)=> {
+      
+    const logout = (e)=> {
     sessionStorage.removeItem('token');
     sessionStorage.clear();
     localStorage.clear();
@@ -204,6 +205,7 @@ export function Seteventdetail(){
   const[noToken,setnoToken] = useState(false);
   const[focused,setFocused] = useState(false);
   const[dealerdetail,setdealerdetail] = useState([]);
+  const[isvalid,setisvalid] = useState(true);
   const[eventDetail,seteventDetail] = useState({
   marriage:"",
   conclave:"",
@@ -240,17 +242,26 @@ export function Seteventdetail(){
       seteventDetail({...eventDetail,[e.target.name]:e.target.value})
     }
 
-    function handleFocus(e){
-      setFocused(true);
-   }
-
     const handleSubmit = async()=>{
         try{
         let response = await axios.post(`https://venue-booking-system2.herokuapp.com/venue-/updateEventDetails/${dealerdetail.email}`,
-            JSON.stringify(eventDetail),config);
+        JSON.stringify(eventDetail),config);
+        seteventDetail(()=>({...eventDetail,marriage:"",conclave:"",collegeEvent:"",familyParty:"",annualMeet:"",rate:""}))
+        setisvalid(false)
+        setTimeout(()=>{
+          navigate(`/dealeraccount/${dealeremail}/${dealername}`)
+        },5000) 
+        const timeId = setTimeout(() => {
+          setisvalid(true)
+           }, 5000)
+          
+         return () => {
+          clearTimeout(timeId)
+            }
       console.log(response)
-    }catch(err){
+      }catch(err){
       console.log(err)
+      
     }
     }
 
@@ -306,27 +317,51 @@ export function Seteventdetail(){
           <div class='container-fluid'> 
         <div className='event_dealer container-fluid'>
         <div className='dealer_event_page'>
+        {isvalid ? <div></div> : (<div className='valid_req_book_dealer'>
+        <pre className='valid_status_req_book_dealer'>
+           Update Successful!
+        </pre>
+        </div>)
+        }
         <form className='dealer_event_form row g-3' onSubmit={formHandler}>
         <h1 className='heading_event_dlog'>Set Event Detail</h1>
          
+        <div class="form_field_event_dealer col-md-6">
+        <label for="marriage" class="form-label">Marriage Base Cost</label>
         <input autoComplete="off" type="text" name="marriage" required={true} 
         focused={focused.toString()} placeholder="Write Basecost for 100 guest in Marriage" onChange={handleChange} value={eventDetail.marriage}/>
-        
+        </div>
+          
+        <div class="form_field_event_dealer col-md-6">
+        <label for="conclave" class="form-label">Conclave Base Cost</label>
         <input autoComplete="off" type="text" name='conclave' required={true} 
         focused={focused.toString()}  placeholder="Write Basecost for 100 guest in Conclave" onChange={handleChange} value={eventDetail.conclave}/>
-       
+        </div>
+
+        <div class="form_field_event_dealer col-md-6">
+        <label for="family party" class="form-label">Family Party Base Cost</label>
         <input autoComplete="off" type="text" name='familyParty' required={true} 
         focused={focused.toString()} placeholder="Write Basecost for 100 guest in Family Party" onChange={handleChange} value={eventDetail.familyParty}/>
-       
+        </div>
+        
+        <div class="form_field_event_dealer col-md-6">
+        <label for="annual meet" class="form-label">Annual Meet Base Cost</label>
         <input autoComplete="off" type="text" name='annualMeet' required={true} 
         focused={focused.toString()} placeholder="Write Basecost for 100 guest in Annual Meet" onChange={handleChange} value={eventDetail.annualMeet}/>
-       
+        </div>
+
+        <div class="form_field_event_dealer col-md-6">
+        <label for="college event" class="form-label">College Event Base Cost</label>
         <input autoComplete="off" type="text" name='collegeEvent' required={true} 
         focused={focused.toString()}  placeholder="Write Basecost for 100 guest in College Function" onChange={handleChange} value={eventDetail.collegeEvent}/>
-       
+        </div>
+
+        <div class="form_field_event_dealer col-md-6">
+        <label for="rate" class="form-label">Increase Rate</label>
         <input autoComplete="off" type="text" name='rate' required={true} 
         focused={focused.toString()}  placeholder="Write rate to increase" onChange={handleChange} value={eventDetail.rate}/>
-       
+        </div>
+
         <div className="form_event_field_dealer col-12">
             <button type="submit">Submit</button>
          </div>

@@ -10,5 +10,9 @@ export default [{
     id:3,
     question:'How can we contact you?',
     answer:'You can contact us via our call service or email us at our official email.'
+},{
+    id:4,
+    question:'How is the cost of Venue calculated?',
+    answer:'Venue Owner is responsible for defining base cost and rate of increase for venue capacity and type of event being conducted.Customer select event type and capacity necessary and add base cost with rate to increase depending upon the capacity customer provide.'
 }
 ]

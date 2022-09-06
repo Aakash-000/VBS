@@ -1,5 +1,5 @@
 import React from 'react'
-import {Reacticontwelve,Reacticonthree,Reacticontwentytwo,Reacticonsix,Reacticonthirteen,Reacticonone,Reacticonfourteen,Reacticoneighteen} from '../../../assets/icons/Reacticon.js'
+import {Reacticontwelve,Reacticonthree,Reacticontwentytwo,Reacticontwentyfive,Reacticonsix,Reacticonthirteen,Reacticonone,Reacticonfourteen,Reacticoneighteen} from '../../../assets/icons/Reacticon.js'
 export const SidebarDataforDealer = [
     
     {fordealer:{
@@ -29,7 +29,7 @@ export const SidebarDataforDealer = [
     {  fordealer:{
         title:'Set Event Detail',
         path:'/vaeventdetail',
-        icon:<Reacticontwentytwo/>
+        icon:<Reacticontwentyfive/>
         ,cName: 'sided-text'
     }}
    ]
@@ -57,11 +57,6 @@ export const SidebarDataforadmin =[
             title:'Home',
                 path:'/adminaccount',
                 icon:<Reacticontwelve/>
-        }},
-        {foradmin:{
-            title:'Explore Venue',
-                path:'/explorevenue',
-                icon:<Reacticonsix/>
         }},
         {foradmin:{
             title:'Venue List',

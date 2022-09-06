@@ -7,9 +7,6 @@
     display: hidden;
 }
 
-.admin_control_form .form_field_admin input:invalid[focused=true]{
-    border:1px solid #E63946;
-}
 .admin_control_form .form_field_admin input{
     width:50%;
     border-radius: 0.4vw;
@@ -20,6 +17,8 @@
 .admin_control_form .form_field_admin input:invalid[focused=true] ~ span{
     display: block;
     width: 50%;
+    color: #E63946;
+    font-weight: bold;
 }
 .admin_control_form h1{
     text-align: center;

@@ -13,7 +13,7 @@ export default function Dealerloginpage() {
   {id:'4',forConNum:"*Should be ten digit long"},{id:'5',forEmail:"*Please write valid email"}]   
 
   const[dealerDetail,setDealerDetail] = useState({username:"",password:""});
-  const[focused,setFocused] = useState(false);
+  const[focused,setFocused] = useState({name:false,passw:false});
   const[isvalid,setisvalid] = useState(true);
     
     async function login(){
@@ -44,10 +44,6 @@ export default function Dealerloginpage() {
       }
         }
     }
-    
-    function handleFocus(e){
-    setFocused(true);
-    }
      
 
     const submitHandler =(e)=>{
@@ -70,12 +66,12 @@ export default function Dealerloginpage() {
     <h1 className='heading_dlog'><Reacticoneight/>Dealer Login</h1>
     <div className='form_field_dealer'>
       <label htmlFor='email'>Email:</label>
-      <input autoComplete="off" type="text" name='email' pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={(e)=> setFocused(true)} focused={focused.toString()} onChange={e=>setDealerDetail({...dealerDetail,username:e.target.value})} value={dealerDetail.username}/>
+      <input autoComplete="off" type="text" name='email' pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' id='email' required={true} onBlur={()=> setFocused({...focused,name:true})} focused={focused.name.toString()} onChange={e=>setDealerDetail({...dealerDetail,username:e.target.value})} value={dealerDetail.username}/>
       <span>{errorMsg.map((item)=>(item.forEmail))}</span>
       </div>
     <div className='form_field_dealer'>
     <label htmlFor='password'>Password :</label>
-    <input type="password" name='password' onBlur={handleFocus} focused={focused.toString()}  pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} id="password" onChange={e=>setDealerDetail({...dealerDetail,password:e.target.value})} value={dealerDetail.password}/>
+    <input type="password" name='password' onBlur={()=>setFocused({...focused,passw:true})} focused={focused.passw.toString()}  pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} id="password" onChange={e=>setDealerDetail({...dealerDetail,password:e.target.value})} value={dealerDetail.password}/>
     <span>{errorMsg.map((item)=>(item.forPassword))}</span>
     </div>
     <div className="form_field_dealer">

@@ -1,0 +1,44 @@
+.grid_layout_norm{
+    background-color: #FFFFFC;
+}
+.grid_layout_norm .grid_layout_row_norm{
+    gap:15px;
+}
+.grid_layout_norm .grid_layout_row_norm .grid_layout_col_norm{
+    width:311px;
+}  
+.grid_layout_norm .grid_layout_row_norm .grid_layout_link{
+    width:325px;
+} 
+.card_list{
+    box-shadow: rgba(230, 225, 219, 0.979) 0px 2px 10px;
+    background-color: #FDFFFC;
+}
+.card_list_sub_norm .card_list_title_norm{
+    color:rgb(30, 3, 43);
+}
+.card_list_sub_norm pre{
+    font-weight: bold;
+    color: rgb(30, 3, 43);
+    display: inline-flex;
+    gap:5px;
+    font-size: 17px;
+}
+.grid_layout_norm .grid_layout_col_norm{
+    cursor: pointer;
+    box-shadow: rgba(163, 162, 160, 0.979) 0px 2px 10px;
+    background-color: #FDFFFC;
+}
+.grid_layout_norm .grid_layout_col_norm .isloading{
+    height: 100px;
+    color:black;
+    background-color: blanchedalmond;
+}
+.grid_layout_norm{
+    padding:30px;
+}
+.grid_layout_col_norm .main_page_pre{
+    display: flex;
+    flex-direction: row;
+    
+}

@@ -10,25 +10,29 @@ span{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: none;
 }
+.dreg_field input[type=file]:invalid[focused="true"]{
+    border:1px solid #E63946;
+}
 .dreg_field input[type=file]:invalid[focused="true"] ~ span{
     display:block;
     width: fit-content;
     color:#E63946;
+    font-weight: bold;
 }
-.dreg_form .dreg_field input:invalid[focused="true"]{
-    border:1px solid #E63946;
-}
+
 .dreg_form .dreg_field input:invalid[focused="true"] ~ span{
     display:block;
     width: fit-content;
+    color: #E63946;
+    font-weight: bold;
 }
 .dreg_form .dreg_field textarea:invalid[focused="true"] ~ span { 
     display: block;
     width:fit-content;
+    color: #E63946;
+    font-weight: bold;
 }
-.dreg_form .dreg_field textarea:invalid[focused="true"]{
-    border:1px solid #E63946;
-}
+
 .dreg_form .heading_dreg{
     font-size: 2.9vw;
     font-weight: 400;

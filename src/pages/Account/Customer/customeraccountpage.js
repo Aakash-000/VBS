@@ -11,12 +11,14 @@ import Logo from '../../../assets/images/navbar_logo_bgr.png'
 import Explorevenue from '../../../component4/Explorevenue.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import {Reacticonnineteen,Reacticontwenty,Reacticontwentyone} from '../../../assets/icons/Reacticon.js'
+import {Reacticonnineteen,Reacticontwenty,Reacticontwentyone, Reacticontwentyfour, Reacticontwentysix} from '../../../assets/icons/Reacticon.js'
 import Bookingform from "./Bookingform.js";
 import {FiChevronLeft} from 'react-icons/fi'
 
 export function VenuecarddetailCustomer(){  
   const[getregvenue,setgetregvenue] = useState([]);
+  const[getFunctionlist,setFunctionlist] = useState([]);
+  const[isLoading,setisLoading] = useState(true);
   const {vemail} = useParams();
   const[noToken,setnoToken] = useState(false);
   const navigate = useNavigate();
@@ -42,7 +44,6 @@ export function VenuecarddetailCustomer(){
   }
 
   const handleOut =()=>{
-    localStorage.removeItem('imageitemarr')
     localStorage.clear()
     navigate(`/customeraccount/${email}/${currUser.name}`)
   }
@@ -68,7 +69,10 @@ export function VenuecarddetailCustomer(){
         try{
           let response = await axios.get(`https://venue-booking-system2.herokuapp.com/client-/venue/${vemail}`,config)
           setgetregvenue(response.data.data)
+          setFunctionlist(response.data.data.functionList[0])
+          setisLoading(false)
           console.log(response)
+          console.log(response.data.data.functionList[0])
         }catch(err){
           console.log(err)
         }
@@ -113,31 +117,40 @@ export function VenuecarddetailCustomer(){
           </nav>
           </IconContext.Provider>
           </div>
-          <div className='view_detail_cus'>
-          <div class="card mb-3" style={{maxWidth:'1000px',boxShadow:'rgba(230, 225, 219, 0.979) 5px 5px 10px 2px'}}>
+          {isLoading?(<div style={{fontSize:'30px',display:'flex',marginTop:'300px',marginLeft:'270px',justifyContent:'center',alignItems:'center',textAlign:'center',fontFamily:'sans-serif,Raleway'}}><p>...Loading</p></div>):(<div className='view_detail_cus'>
+          <div class="view_detail_cus_sub card mb-3" style={{maxWidth:'1000px',boxShadow:'rgba(230, 225, 219, 0.979) 5px 5px 10px 2px'}}>
             <div class="row g-0">
-            <div class="button_position col-md-7">
+            <div class="button_position col-md-8">
             <img src={`data:image/jpeg;base64,${getregvenue.filePath}`} class="img-fluid rounded-start" alt="..."/>
+            </div>
             <div className="booking_button_display">
             <Bookingform/>
            </div>
-            </div>
-           <div class="col-md-5">
+           <div class="col-md-4">
             <div class="card-body">
               <div className="card_body_clickout">
               <h5 class="regven card-title">{getregvenue.venueName}</h5>
               <button className="card_body_clickout_sub" onClick={handleOut}><FiChevronLeft size={25}/></button>
               </div>
               <p class="d_card_title card-text">{getregvenue.userName}</p>
-              <p class="card-text">{getregvenue.address}</p>
+              <p class="card-text" style={{display:'flex'}}><Reacticontwentysix/>{getregvenue.address}</p>
               <p class="card-text">{getregvenue.contactNumber}</p>
               <p class="card-text">{getregvenue.email}</p>
               <p class="d_card_desc card-text">{getregvenue.description}</p>
+              <p class="card-text" style={{display:'flex'}}><Reacticontwentyfour/>{getregvenue.capacity}</p>
+              <h4>Base Cost Payment for 100 Guests </h4>
+              <li>Marriage:{getFunctionlist.marriageCost}</li>
+              <li>Conclave:{getFunctionlist.conclaveCost}</li>
+              <li>College Event:{getFunctionlist.collegeEventCost}</li>
+              <li>Annual Meet:{getFunctionlist.annualMeetCost}</li>
+              <li>Family Function:{getFunctionlist.familyFunctionCost}</li>
+              <br/>
+              <h4>Price Increase Rate after 100 guests is {getFunctionlist.rate}</h4>
             </div>
           </div>
         </div>
         </div>
-        </div>
+        </div>)}
         </div>
         ):(<div>You are logged out of page.Please login to continue.</div>)}
         </>
@@ -335,6 +348,7 @@ export default function Customeraccount() {
 export function MybookedVenue(){
   const[noToken,setnoToken] = useState(false);
   const [sidebar, setSidebar] = useState(true);
+  const[isLoading,setisLoading] = useState(true);
   const showSidebar = () => setSidebar(!sidebar);
   const[mybookedVenverify,setmybookedVenverify] = useState([]);
   const[mybookedVenpen,setmybookedVenpen] = useState([]);
@@ -370,6 +384,7 @@ export function MybookedVenue(){
     setmybookedVenverify(verifiedData)
     setmybookedVenunsucc(unsuccessfuldata)
     setmybookedVenpen(pendingdata)
+    setisLoading(false)
     }catch(err){
       console.log(err)
     }
@@ -423,6 +438,7 @@ export function MybookedVenue(){
           </nav>
           </IconContext.Provider>
           </div>
+          {isLoading?(<div class="isLoading_pending_req"><p>...Loading</p></div>):(
           <div className="table_t">
           <div className={sidebar ? 'table_container_push container-fluid' : 'table_container_extend container-fluid'}>
             <p className='table_container_title'>Pending Venue of My Booking List</p>
@@ -445,7 +461,7 @@ export function MybookedVenue(){
           <td>{val.eventType}</td>
           <td>{val.requiredCapacity}</td>
           <td>{val.bookingDate}</td>
-          <td>{val.calculatedPayment}</td>
+          <td>Rs {val.calculatedPayment}</td>
           <td>{val.bookingStatus}</td>
           <div class="modal-body">
           <pre>FullName:{val.venue.userName}</pre>
@@ -479,7 +495,7 @@ export function MybookedVenue(){
           <td>{val.eventType}</td>
           <td>{val.requiredCapacity}</td>
           <td>{val.bookingDate}</td>
-          <td>{val.calculatedPayment}</td>
+          <td>Rs {val.calculatedPayment}</td>
           <td>{val.bookingStatus}</td>
           <div class="modal-body">
           <pre>FullName:{val.venue.userName}</pre>
@@ -495,7 +511,7 @@ export function MybookedVenue(){
           <td>{val.eventType}</td>
           <td>{val.requiredCapacity}</td>
           <td>{val.bookingDate}</td>
-          <td>{val.calculatedPayment}</td>
+          <td>Rs {val.calculatedPayment}</td>
           <td>{val.bookingStatus}</td>
           <div class="modal-body">
           <pre>FullName:{val.venue.userName}</pre>
@@ -508,7 +524,7 @@ export function MybookedVenue(){
             </tbody>
             </table>
             </div>
-            </div>
+            </div>)}
             </div>
           ):(<div>You are logged out of page please login and try again.</div>)}
           </>

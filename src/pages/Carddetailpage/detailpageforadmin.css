@@ -127,11 +127,24 @@
   padding-top: 120px;
   padding-left:230px;
 }
+
 .view_detail_adm img{
   height: 450px;
   width:800px;
 }
 
+.view_detail_adm .detail_page_loading{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 150px;
+}
+.view_detail_adm .detail_page_loading p{
+  font-family: 'Helvetica',sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+}
 .card_body_clickout{
     display: flex;
     flex-direction: row;

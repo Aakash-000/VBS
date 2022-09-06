@@ -8,12 +8,12 @@ import Navbar from '../../../components/Navbar/Navbar.js'
 import axios from 'axios'
 
 export default function Adminloginpage() {
-  const errorMsg = [{id:'1',forName: "*Please include at least five letter with no special characters in your name"},
+  const errorMsg = [{id:'1',forName: "*Please write valid email"},
   {id:'2',forPassword:"*At least one uppercase character ,seven char long and Please include three letter one number one specialcharacter"},
   {id:'3',forConfirmPassword:"*Password should match!"}]
 
   const[AdminDetail,setAdminDetail] = useState({username:'',password:''});
-  const[focused,setFocused] = useState(false);
+  const[focused,setFocused] = useState({name:false,passw:false});
   const navigate = useNavigate();
   const[isvalid,setisvalid] = useState(true);
   
@@ -69,12 +69,12 @@ export default function Adminloginpage() {
         <h1 className='heading_alog'><Reacticoneight/>Admin Login</h1>
         <div className='form_field_admin'>
         <label htmlFor='username'>Email :</label>
-        <input autocomplete="off" type="text" required={true} pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' name='username' id="username" onBlur={handleFocus} focused={focused.toString()} onChange={e=>setAdminDetail({...AdminDetail,username:e.target.value})} value={AdminDetail.username} aria-expanded="false"/>
+        <input autocomplete="off" type="text" required={true} pattern='^\w.+@[a-z.A-Z_].+?\.[a-zA-Z]{2,3}$' name='username' id="username" onBlur={()=>setFocused({...focused,name:true})} focused={focused.name.toString()} onChange={e=>setAdminDetail({...AdminDetail,username:e.target.value})} value={AdminDetail.username} aria-expanded="false"/>
         <span>{errorMsg.map((item)=>(item.forName))}</span>
         </div>
         <div className='form_field_admin'>
         <label htmlFor='password'>Password :</label>
-        <input  type="password" name='password' onBlur={handleFocus} focused={focused.toString()}  pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} id="password" onChange={e=>setAdminDetail({...AdminDetail,password:e.target.value})} value={AdminDetail.password} aria-expanded="false"/>
+        <input  type="password" name='password' onBlur={()=>setFocused({...focused,passw:true})} focused={focused.passw.toString()}  pattern='^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$' required={true} id="password" onChange={e=>setAdminDetail({...AdminDetail,password:e.target.value})} value={AdminDetail.password} aria-expanded="false"/>
         <span>{errorMsg.map((item)=>(item.forPassword))}</span>
         </div>
         {/* <div className='form_field'>
