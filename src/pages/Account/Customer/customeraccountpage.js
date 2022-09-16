@@ -137,7 +137,7 @@ export function VenuecarddetailCustomer(){
               <p class="car d-text">{getregvenue.contactNumber}</p>
               <p class="card-text">{getregvenue.email}</p>
               <p class="d_card_desc card-text">{getregvenue.description}</p>
-              <p class="card-text" style={{display:'flex'}}><Reacticontwentyfour/>Venue Capacity is{getregvenue.capacity}</p>
+              <p class="card-text" style={{display:'flex'}}><Reacticontwentyfour/>Venue Capacity is {getregvenue.capacity}</p>
               <h4>Base Cost Payment for 100 Guests </h4>
               <li>Marriage:{getFunctionlist.marriageCost}</li>
               <li>Conclave:{getFunctionlist.conclaveCost}</li>

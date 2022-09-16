@@ -36,7 +36,7 @@
     margin-left:16px;
 }
 .text_sec{
-    padding-top: 100px;
+    padding-top: 90px;
     margin-left:65px;
 }
 .text_sec .hero_button{
@@ -138,6 +138,8 @@
 .accordion_sub_one abbr{
     padding: 10px 10px;
     font-size: 17px;
+    letter-spacing: 0.3px;
+    word-spacing: 2px;
     font-family: 'Quicksand',Helvetica,sans-serif;
 }
 .accordion-body{
@@ -150,16 +152,22 @@
 .accordion_sub_two abbr{
     padding: 10px 10px;
     font-size: 17px;
+    letter-spacing: 0.3px;
+    word-spacing: 2px;
     font-family: 'Quicksand',Helvetica,sans-serif;
 }
 .accordion_sub_three abbr{
     padding: 10px 10px;
     font-size: 17px;
+    letter-spacing: 0.3px;
+    word-spacing: 2px;
     font-family: 'Quicksand',Helvetica,sans-serif;
 }
 .accordion_sub_four abbr{
     padding: 10px 10px;
     font-size: 17px;
+    letter-spacing: 0.3px;
+    word-spacing: 2px;
     font-family: 'Quicksand',Helvetica,sans-serif;
 }
 .accordion_sub_one strong,.accordion_sub_two strong,.accordion_sub_three strong,.accordion_sub_four strong{

@@ -201,16 +201,17 @@ tr .view_detail{
     border-radius: 20px;
 }   
 .sidea-text .showCountAdmin{
-    background-color: rgb(80, 74, 85);
+    background-color: #E63946;
     color:white;
     font-size: 10px;
     font-weight: 800;
-    padding:3px 5px;
+    padding:1px 5px;
+    border-radius: 100px;
     margin-top: 20px;
     margin-left:0px;
 }
 .sidea-text .showCountAdmin:hover{
-  background-color: rgb(80, 74, 85);
+  background-color: #E63946;
   color:white;
 }
 .sidea-text .hideCountAdmin{

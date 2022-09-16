@@ -11,7 +11,7 @@ export default function () {
           >
      
     <section
-             class="d-flex justify-content-between p-4 text-white"
+             class="d-flex justify-content-between p-3 text-white"
              style={{backgroundColor: '#00A896'}}
              >
        

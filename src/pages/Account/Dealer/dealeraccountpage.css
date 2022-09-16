@@ -83,16 +83,18 @@
     border-radius: 20px;
   }
 .sided-text .showCountDealer{
-    background-color: rgb(80, 74, 85);
+    background-color: #E63946;
     color:white;
     font-size: 10px;
     font-weight: 800;
-    padding:3px 5px;
+    padding:1px 5px;
+    border-radius: 100px;
     margin-top: 20px;
     margin-left:0px;
+    border: none;
 }
 .sided-text .showCountDealer:hover{
-  background-color: rgb(80, 74, 85);
+  background-color: #E63946;
   color:white;
 }
 .sided-text .hideCountDealer{
