@@ -1,6 +1,6 @@
 .customer_reg_page{
-    margin-top:2vw;
-    padding:1vw;
+    margin-top:22px;
+    padding:12px;
 }
 span{
     color:rgb(29, 28, 28);
@@ -12,27 +12,30 @@ span{
     display:block;
     width: fit-content;
     color:#E63946;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    word-spacing: 3px;
 }
 
 .creg_form .heading_creg{
-    font-size: 2.9vw;
-    font-weight: 400;
-    margin-top:1.5vw;
-    margin-bottom:3vw;
-    border-radius: 1vw;
-    height:4.5vw;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top:18px;
+    margin-bottom:35px;
+    border-radius: 12px;
+    height:52px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap:0.4vw;
+    gap:8px;
 }
 .creg_form{
-    margin:0 20vw;
-    border-radius: 2vw;
+    margin:0 24vw;
+    border-radius: 22px;
     box-shadow: 0 0 0 1.5px rgb(171, 180, 178);
-    padding:1vw;
+    padding:12px;
     background-color:rgb(253, 254, 255);
 }
 .creg_field{
@@ -42,15 +45,16 @@ span{
     align-items: center;
 }
 .creg_form .creg_field label{
-    font-size: 18px;
+    font-size: 14px;
 }
 .creg_form .creg_field input{
     box-shadow: none;
     width: 100%;
-    height:2.6vw;
+    height:32px;
     border:1px solid grey;
-    padding:0.2vw;
-    border-radius: 0.4vw;
+    padding:8px;
+    border-radius: 7px;
+    font-size:14px;
 }
 .creg_form .creg_field textarea{
     width: 100%;
@@ -58,18 +62,19 @@ span{
     border:1px solid grey;
     border-radius: 0.4vw;
     padding:0.2vw;
+    font-size:14px;
 }
 .creg_form .creg_field button{
     border:none;
-    font-size: 1.7vw;
-    width:30%;
+    font-size: 20px;
+    width:28%;
     background-color: #1D3557;
     color: #F1FAEE;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 350;
-    padding:0.2vw;
-    margin:1vw;
-    border-radius: 2vw;
+    padding:3px;
+    margin:12px;
+    border-radius: 22px;
     border:none;
 }
 .creg_form .creg_field button:hover{

@@ -5,6 +5,7 @@ import {FiChevronLeft} from 'react-icons/fi'
 import { IconContext } from "react-icons";
 import { Link , useNavigate,useParams} from "react-router-dom";
 import { SidebarDataforadmin } from "../Account/Dealer/SidebarData.js";
+import {Reacticontwentysix} from '../../assets/icons/Reacticon.js'
 import "./detailpageforadmin.css";
 import Logo from '../../assets/images/navbar_logo_bgr.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,11 +15,12 @@ import axios from 'axios'
 export default function Detailpageforadmin() {
     const[isLoading,setisLoading] = useState(true);
     const[noToken,setnoToken] = useState(false);
-    const [sidebar, setSidebar] = useState(false);
+    const [sidebar, setSidebar] = useState(true);
     const showSidebar = () => setSidebar(!sidebar);
     const[viewDetail,setviewDetail] = useState([]);
     const navigate = useNavigate();
     const {adminemail,id,demail} = useParams();
+
 
     const config = {  
         headers:{
@@ -57,7 +59,7 @@ export default function Detailpageforadmin() {
             e.preventDefault();
             sessionStorage.removeItem('token');
             sessionStorage.clear();
-            navigate('/adminlogin');
+            navigate('/login');
             window.location.reload();
           }
 
@@ -69,7 +71,7 @@ export default function Detailpageforadmin() {
         <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebara">
           <Link to="#" className="sidemenua-bars">
-            <FaIcons.FaBars onClick={showSidebar} />
+            <FaIcons.FaBars onClick={showSidebar} style={{fontSize:'17px'}}/>
             <div className='sidea-logo'>
               <img src={Logo} alt='logo'/>
           </div>
@@ -106,13 +108,13 @@ export default function Detailpageforadmin() {
             <img src={`data:image/jpeg;base64,${viewDetail.filePath}`} class="img-fluid rounded-start" alt="..."/>
             </div>
            <div class="col-md-5">
-            <div class="view_detail_cus_card_body card-body">
+            <div class="view_detail_adm_card_body card-body">
               <div className="card_body_clickout">
               <h5 class="regven card-title">{viewDetail.venueName}</h5>
-              <button onClick={handleClick}><FiChevronLeft size={25}/></button>
+              <button onClick={handleClick}><FiChevronLeft size={18}/></button>
               </div>
               <p class="card-text">{viewDetail.userName}</p>
-              <p class="card-text">{viewDetail.address}</p>
+              <p class="card-text" style={{display:'flex'}}><Reacticontwentysix/>{viewDetail.address}</p>
               <p class="card-text">{viewDetail.email}</p>
               <p class="card-text">{viewDetail.contactNumber}</p>
               <p class="card-text">{viewDetail.description}</p>

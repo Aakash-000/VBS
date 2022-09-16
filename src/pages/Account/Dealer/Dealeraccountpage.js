@@ -10,7 +10,7 @@ import axios from 'axios'
 import {Reacticonnineteen,Reacticontwenty,Reacticontwentyone} from '../../../assets/icons/Reacticon.js'
 
 export default function Dealeraccount() {
-  const [sidebar, setSidebar] = useState(false);    
+  const [sidebar, setSidebar] = useState(true);    
   const {dealeremail,dealername} = useParams();
   const[dealerdetail,setdealerdetail] = useState([]);
   const showSidebar = () => setSidebar(!sidebar);                                                               
@@ -19,8 +19,9 @@ export default function Dealeraccount() {
   const[reqVenverify,setreqVenverify] = useState([]);  
   const[reqVenpen,setreqVenpen] = useState([]);
   const[reqVenunsucc,setreqVenunsucc] = useState([]);
-
-  
+  const[showNote,setshowNote] = useState(false);
+  const[countReq,setcountReq] = useState(0);
+  const[showCount,setshowCount] = useState(false);
   useEffect(() => {
     if(sessionStorage.length != 0){
       setnoToken(false)
@@ -38,8 +39,20 @@ export default function Dealeraccount() {
     useEffect(async()=>{
       try{
         let response = await axios.get(`https://venue-booking-system2.herokuapp.com/venue-/${dealeremail}`,config);
+        let nextResponse  = await axios.get(`https://venue-booking-system2.herokuapp.com/venue-/bookingRequest/${dealeremail}`,config);
+        setcountReq(nextResponse.data.data)
+        if(nextResponse.data.data != 0){
+          setshowCount(true)
+        }else{
+          setshowCount(false)
+        }
         console.log(response)
         setdealerdetail(response.data.data)
+        if(response.data.data.functionList.length == 0){
+          setshowNote(true)
+        }else{
+          setshowNote(false)
+        }
       }catch(err){
         console.log(err)
       }
@@ -71,7 +84,7 @@ export default function Dealeraccount() {
     sessionStorage.removeItem('token');
     sessionStorage.clear();
     localStorage.clear();
-    navigate('/dealerlogin');
+    navigate('/login');
     window.location.reload();
   }
     
@@ -106,7 +119,8 @@ export default function Dealeraccount() {
               return (
                 <li key={index} className={item.fordealer.cName}>
                   <Link to={`${item.fordealer.path}`+`/${dealeremail}`+`/${dealername}`} className='sidebard-pa'>
-                    <p>{item.fordealer.icon}{item.fordealer.title}</p>
+                  {item.fordealer.title == "Booking Request"?(<p>{item.fordealer.icon}
+                    {item.fordealer.title}<p className={showCount?"showCountDealer":"hideCountDealer"}>{countReq}</p></p>):(<p>{item.fordealer.icon}{item.fordealer.title}</p>)}
                   </Link>
                 </li>
               );
@@ -116,7 +130,13 @@ export default function Dealeraccount() {
         </IconContext.Provider>
         </div>
         <div className="body_b">
-        {sidebar ? (<div className="body_content_sub_push container-fluid ">
+        {sidebar ? (
+          <div>
+        <div className={showNote?"alert_text_push alert-light":
+        "alert_text_push_hide alert-light"} role="alert">
+        <h4>Note:Please update your venue cost detail at SET EVENT DETAIL menu of Dashboard.In case of updated detail only customer is allowed to BOOK your venue!</h4>
+        </div>
+        <div className="body_content_sub_push container-fluid ">
         <div class="row">
         <div class="col-sm-8 col-lg-4 col-xl-4">
             <div class="card_c card">
@@ -152,7 +172,11 @@ export default function Dealeraccount() {
       </div>
       </div>
         </div>
-        </div>):(
+        </div></div>):(<div>
+          <div className={showNote?"alert_text_extend alert-light":
+        "alert_text_extend_hide alert-light"} role="alert">
+        <h4>Note:Please update your venue cost detail at SET EVENT DETAIL menu of Dashboard.In case of updated detail only customer is allowed to BOOK your venue!</h4>
+        </div>
           <div className="body_content_sub_extend container-fluid">
           <div class="row">
           <div class="col-sm-8 col-lg-6 col-xl-4">
@@ -189,6 +213,7 @@ export default function Dealeraccount() {
       </div>
           </div>
           </div>
+          </div>
           </div>)}
         </div>
         </div>
@@ -198,7 +223,7 @@ export default function Dealeraccount() {
 }
 
 export function Seteventdetail(){
-  const [sidebar, setSidebar] = useState(false);    
+  const [sidebar, setSidebar] = useState(true);    
   const {dealeremail,dealername} = useParams();
   const showSidebar = () => setSidebar(!sidebar);                                                               
   const navigate = useNavigate();
@@ -272,7 +297,7 @@ export function Seteventdetail(){
     const logout = (e)=> {
       sessionStorage.removeItem('token');
       sessionStorage.clear();
-      navigate('/dealerlogin');
+      navigate('/login');
       window.location.reload();
     }
       return (

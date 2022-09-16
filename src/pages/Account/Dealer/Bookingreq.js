@@ -15,7 +15,7 @@ import axios from 'axios'
 
 
 export default function Bookingreq() {
-  const [sidebar, setSidebar] = useState(false);    
+  const [sidebar, setSidebar] = useState(true);    
   const {dealeremail,dealername} = useParams();
   const showSidebar = () => setSidebar(!sidebar);
   const[reqVen,setreqVen]=useState([]);  
@@ -34,19 +34,20 @@ export default function Bookingreq() {
   }, [noToken])
 
   
-  useEffect(()=>{
-    async function getVenue(){
+  useEffect(async()=>{
+    try{
       let response = await axios.get(`https://venue-booking-system2.herokuapp.com/venue-/${dealeremail}`,config);
       console.log(response)
       setdealerdetail(response.data.data)
+    }catch(err){
+      console.log(err)
     }
-    getVenue()
   },[])
 
   const logout = (e)=> {
     sessionStorage.removeItem('token');
     sessionStorage.clear(); 
-    navigate('/dealerlogin');
+    navigate('/login');
     window.location.reload();
   }
 
@@ -182,14 +183,14 @@ export default function Bookingreq() {
 }
 export function Bookingreqstatus(){
   const navigate = useNavigate();
-  const [sidebar, setSidebar] = useState(false);    
+  const [sidebar, setSidebar] = useState(true);    
   const {dealeremail,dealername} = useParams();
   const showSidebar = () => setSidebar(!sidebar);
   const[reqVenverify,setreqVenverify] = useState([]);  
   const[reqVenpen,setreqVenpen] = useState([]);
   const[reqVenunsucc,setreqVenunsucc] = useState([]);
   const[noToken,setnoToken] = useState(false);
-  const[dealerdetail,setdealerdetail ] = useState([]);
+  const[dealerdetail,setdealerdetail] = useState([]);
   const[isLoading,setisLoading] = useState(true);
 
   useEffect(() => {
@@ -214,7 +215,7 @@ export function Bookingreqstatus(){
     sessionStorage.removeItem('token');
     sessionStorage.clear();
     localStorage.clear();
-    navigate('/dealerlogin');
+    navigate('/login');
     window.location.reload();
   }
 

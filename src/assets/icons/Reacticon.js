@@ -7,12 +7,13 @@ import {CgUserList} from 'react-icons/cg'
 import {FiAlertCircle} from 'react-icons/fi'
 import {GrStatusPlaceholder} from 'react-icons/gr'
 import {GoLocation} from 'react-icons/go'
+import {VscSignIn,VscSignOut} from 'react-icons/vsc'
 import React from 'react'
 
 export  const Reacticonone =()=>{
     return (
         <div>
-            <MdOutlineAddTask size={20} />
+            <MdOutlineAddTask size={17} style={{marginBottom:'4px'}}/>
         </div>
     )
 }
@@ -26,28 +27,28 @@ export  const Reacticontwo =()=>{
 export  const Reacticonthree =()=>{
     return (
         <div>
-            <BsBookmarkCheckFill size={20}/>
+            <BsBookmarkCheckFill size={16} style={{marginBottom:'4px'}}/>
         </div>
     )
 }
 export  const Reacticonfour =()=>{
     return (
         <div>
-            <HiOutlineUserAdd size={35}/>
+            <HiOutlineUserAdd size={27}/>
         </div>
     )
 }
 export  const Reacticonfive =()=>{
     return (
         <div>
-            <AiOutlineInfoCircle size={17}/>
+            <AiOutlineInfoCircle size={15} style={{marginBottom:'2px'}}/>
         </div>
     )
 }
 export  const Reacticonsix =()=>{
     return (
         <div>
-            <FaGlobe size={17} />
+            <FaGlobe size={15} style={{marginBottom:'2px'}}/>
         </div>
     )
 }
@@ -61,7 +62,7 @@ export  const Reacticonseven =()=>{
 export  const Reacticoneight =()=>{
     return (
         <div>
-            <FaFingerprint size={30}/>
+            <FaFingerprint size={27}/>
         </div>
     )
 }
@@ -89,21 +90,21 @@ export  const Reacticoneleven =()=>{
 export  const Reacticontwelve =()=>{
     return (
         <div>
-            <FaHome/>
+            <FaHome size={15} style={{marginBottom:'4px'}}/>
         </div>
     )
 }
 export  const Reacticonthirteen =()=>{
     return (
         <div>
-            <FaUserEdit/>
+            <FaUserEdit style={{marginBottom:'4px'}}/>
         </div>
     )
 }
 export  const Reacticonfourteen =()=>{
     return (
         <div>
-           <CgUserList size={25}/>
+           <CgUserList size={20} style={{marginBottom:'4px'}}/>
         </div>
     )
 }
@@ -117,21 +118,21 @@ export  const Reacticonfifteen =()=>{
 export  const Reacticonsixteen =()=>{
     return (
         <div>
-           <BsPersonCheckFill size={30}/>
+           <BsPersonCheckFill size={20}/>
         </div>
     )
 }
 export  const Reacticonseventeen =()=>{
     return (
         <div>
-           <MdCancel size={30}/>
+           <MdCancel size={20}/>
         </div>
     )
 }
 export  const Reacticoneighteen =()=>{
     return (
         <div>
-           <BsClipboardData />
+           <BsClipboardData style={{marginBottom:'4px'}} />
         </div>
     )
 }
@@ -160,14 +161,14 @@ export  const Reacticontwentyone =()=>{
 export  const Reacticontwentytwo =()=>{
     return (
         <div>
-          <GrStatusPlaceholder />
+          <GrStatusPlaceholder size={15} style={{marginBottom:'4px'}}/>
         </div>
     )
 }
 export  const Reacticontwentythree =()=>{
     return (
         <div>
-          <FaEye size={22}/>
+          <FaEye size={18}/>
         </div>
     )
 }
@@ -181,7 +182,7 @@ export  const Reacticontwentyfour =()=>{
 export  const Reacticontwentyfive =()=>{
     return (
         <div>
-          <MdSystemUpdateAlt size={22}/>
+          <MdSystemUpdateAlt size={18} style={{marginBottom:'4px'}}/>
         </div>
     )
 }
@@ -189,6 +190,20 @@ export  const Reacticontwentysix =()=>{
     return (
         <div>
           <GoLocation size={22}/>
+        </div>
+    )
+}
+export  const Reacticontwentyseven =()=>{
+    return (
+        <div>
+          <VscSignIn size={15} style={{marginBottom:'2px'}}/>
+        </div>
+    )
+}
+export  const Reacticontwentyeight =()=>{
+    return (
+        <div>
+          <VscSignOut size={15} style={{marginBottom:'2px'}}/>
         </div>
     )
 }

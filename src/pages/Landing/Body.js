@@ -8,7 +8,7 @@ import Footer from '../../components/Footer/Footer';
 import {Link} from 'react-router-dom'
 import {FaOdnoklassniki,FaChalkboardTeacher,FaLinkedin} from 'react-icons/fa'
 import {HiUserGroup} from 'react-icons/hi'
-import {Reacticonfive,Reacticonsix} from '../../assets/icons/Reacticon.js'
+import {Reacticonfive,Reacticonsix,Reacticontwentyseven, Reacticontwentyeight} from '../../assets/icons/Reacticon.js'
 import logo from '../../assets/images/navbar_logo_bgr.png'
 import axios from 'axios'
 
@@ -50,21 +50,30 @@ export default function Body() {
         <div className={MobileRes ? ('navbar_sub_mobile') : ('navbar_sub')}>
             <Link to='/'>
             <button  className='about_but'
-            onClick={()=>SetMobileRes(false)}><Reacticonfive style={{marginBottom:'10px'}}/>Aboutus</button>
+            onClick={()=>SetMobileRes(false)}><Reacticonfive style={{marginBottom:'10px'}}/>About us</button>
            </Link>
             <Link to="/explorevenue/normal">       
             <button className='styl_exp'><Reacticonsix className='buttonicon'/>Explore</button>
             </Link>
             
-            <Link to='/adminlogin'>
-            <button onClick={()=>SetMobileRes(false)}><FaChalkboardTeacher size={16} className='buttonicon'/>Admin</button>
+            <Link to="/login">
+            <button onClick={()=>SetMobileRes(false)}
+            style={{display:'flex'}}
+           >
+            <Reacticontwentyseven/>SignIn</button>
             </Link>
-            
-            <Link to="/customerlogin"><button onClick={()=>SetMobileRes(false)} ><FaOdnoklassniki size={16} className='buttonicon'/>Customer</button>
-            </Link>  
-            
-            <Link to="/dealerlogin"><button onClick={()=>SetMobileRes(false)} ><HiUserGroup size={16} className='buttonicon'/>Dealer</button>
-            </Link>
+
+            <div class="dropdown">
+            <button onClick={()=>SetMobileRes(false)}
+            style={{display:'flex'}}
+            href="#" id="navbarDropdown" role="button" 
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <Reacticontwentyeight/>SignUp</button>
+            <ul class="dropdown_navbar_signup dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><Link to="/customerregistration" class="dropdown-item">As Customer</Link></li>
+            <li><Link to="/dealerregistration" class="dropdown-item">As Dealer</Link></li>
+            </ul>
+            </div>             
         </div>
         <button className='mobile-menu-icon' onClick={()=>SetMobileRes(!MobileRes)}>
           {MobileRes ? (<i className='fas fa-times' ></i>):(<i className='fas fa-bars'></i>)}
@@ -74,8 +83,10 @@ export default function Body() {
               <div className='row'>
               <div className='text_sec col-4 .col-md-2'>
               <h5 className="title card-title">Explore Best class venue of your fit!</h5>
-              <p className="text card-text">Discover the list of legally registered venues and book match of your best fit.Our service of making your reach to top class Venue from any remote location safer,easier and faster is for free.Book venue right now.</p>
-             <Link to="/customerlogin"><button className='hero_button'>Book Now</button></Link>
+              <p className="text card-text">Discover the list of legally registered venues and book match 
+              of your best fit.Our service of making your reach to top class Venue from any remote 
+              location safer,easier and faster is for free.Book venue right now.</p>
+             <Link to="/login"><button className='hero_button'>Book Now</button></Link>
               </div>
               <div className='slider_bar col-7 .col-md-4'>
                 <Sliderbar/>
@@ -128,7 +139,7 @@ export default function Body() {
                   </div>
                 </div>
               </div>
-              <div class=" accordion_sub_three accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-controls="collapseThree">
+              <div class="accordion_sub_three accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-controls="collapseThree">
                 <abbr class="accordion-header" id="headingThree">
                  <abbr type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                  How can we contact you?

@@ -69,7 +69,9 @@
     padding:6px 30px 6px 30px;
     background-color: #23013f;
     color: rgb(234, 255, 226);
-    font-size: 20px;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
     margin-top: 10px;
 }
 .book_model_footer abbr{
@@ -86,11 +88,12 @@
     z-index: 999;
 }
 .invalid_req_book .invalid_status_req_book{
- font-size: 20px;
+ font-size: 15px;
  color:#f1eff3;
  background-color:  #E63946;
  padding:5px;
  border-radius: 15px;
+ font-weight: 700;
 }
 .valid_req_book{
     margin: 5px;
@@ -100,11 +103,12 @@
     z-index: 999;
 }
 .valid_req_book .valid_status_req_book{
-    font-size: 20px;
+    font-size: 15px;
     color:#150029;
     background-color: #ffd43b;
-    padding:5px;
+    padding:10px;
     border-radius: 15px;
+    font-weight: 700;
    }
 .book_button .book_button_sub{
     border-radius: 20px;
@@ -112,7 +116,8 @@
     border:none;
     background-color: #23013f;
     color:white;
-    font-size: 18px;
-    font-family:'Poppins','Helvetica',sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    /* font-family:'Poppins','Helvetica',sans-serif; */
     font-weight:500;
 }

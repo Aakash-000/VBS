@@ -101,7 +101,7 @@ export function Adminregisterpage(){
 
       console.log(response);
       setCustomerDetail(()=>({...customerDetail,email:" ",name:" ",password:" "}));
-      navigate('/adminlogin');
+      navigate('/login');
     }
 
      function submitHandler(e){

@@ -20,29 +20,33 @@
     font-family: 'Montserrat', sans-serif;
     font-family: 'Quicksand', sans-serif;
     font-family: 'Raleway', sans-serif;
-    font-weight:300;
+    font-weight:500;
     margin-top:0px;
     width:fit-content;
-    font-size: 20px;
+    font-size: 15px;
+    margin-left: 30px;
+    letter-spacing: 0.5px;
+    word-spacing: 2px;
 }
 .text_sec .title{
     font-family: 'Raleway', sans-serif;
-    font-size: 50px;
-    font-weight: 300;
+    font-size: 30px;
+    font-weight: 550;
     width:fit-content;
+    margin-left:16px;
 }
 .text_sec{
-    padding-top: 30px;
+    padding-top: 100px;
     margin-left:65px;
 }
 .text_sec .hero_button{
     cursor: pointer;
-    font-size: 19px;
+    font-size: 15px;
     letter-spacing: 1px;
     padding: 6.5px 10px;
     font-family:'Poppins','Helvetica',sans-serif;
     font-weight:700;
-    margin:7px 0;
+    margin:7px 30px;
     border:none;
     border-radius:25px;
     background-color: #1D3557;
@@ -70,18 +74,17 @@
     font-weight: 490;
 }
 .box_card{  
-    box-shadow: 0 0 0 1.5px rgb(208, 218, 216);
     transition: 0.25s ease-in;
 }
 .box_card:hover{
-    background-color:rgb(202, 168, 104);
     color: black;
     cursor: pointer;
+    box-shadow: 0 0 0 1.5px rgb(208, 218, 216);
 }
 .icon_heading_new{
-    font-size: 40px;
+    font-size: 25px;
     font-family: 'Raleway', sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     text-align: center;
 }
 .gicon{
@@ -97,23 +100,44 @@
     display:flex;
     flex-direction: column;
 }
+.card_body_sub .card_head{
+    font-size: 20px;
+    font-weight: 500;
+}
 .card_body_sub p{
-    font-size: 19.5px;
+    font-size: 14px;
     font-weight: 470;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.5px;
+    word-spacing: 2px;
     font-family: 'Comfortaa','Helvetica','Raleway',sans-serif;
 }
-
+.dropdown .dropdown_navbar_signin{
+    border-radius: 10px;
+    background-color:#FDFFFC;
+}
+.dropdown .dropdown_navbar_signin li{
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+.dropdown .dropdown_navbar_signup{
+    border-radius: 10px;
+    background-color:#FDFFFC;
+}
+.dropdown .dropdown_navbar_signup li{
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
 .accordion_def pre{
-    font-size: 40px;
+    font-size: 25px;
     font-family: 'Raleway', sans-serif;
     border-bottom:1px solid rgb(207, 207, 214);
     text-align: center;
+    font-weight: 550;
 }
 
 .accordion_sub_one abbr{
     padding: 10px 10px;
-    font-size: 25px;
+    font-size: 17px;
     font-family: 'Quicksand',Helvetica,sans-serif;
 }
 .accordion-body{
@@ -125,21 +149,22 @@
 }
 .accordion_sub_two abbr{
     padding: 10px 10px;
-    font-size: 25px;
+    font-size: 17px;
     font-family: 'Quicksand',Helvetica,sans-serif;
 }
 .accordion_sub_three abbr{
     padding: 10px 10px;
-    font-size: 25px;
+    font-size: 17px;
     font-family: 'Quicksand',Helvetica,sans-serif;
 }
 .accordion_sub_four abbr{
     padding: 10px 10px;
-    font-size: 25px;
+    font-size: 17px;
     font-family: 'Quicksand',Helvetica,sans-serif;
 }
-.accordion_sub_one strong,.accordion_sub_two strong,.accordion_sub_three strong{
-    font-size: 17px;
+.accordion_sub_one strong,.accordion_sub_two strong,.accordion_sub_three strong,.accordion_sub_four strong{
+    font-size: 14px;
+    font-weight: 700;
 }
 
 
@@ -198,38 +223,30 @@
     display: flex;
     flex-direction: row;
 }
-.navbar_rest .navbar_sub .about_but:active,.navbar_change .navbar_sub .about_but:active{
-    cursor: pointer;
-    font-size: 20px;
-    letter-spacing: 0.7px;
-    font-weight:500;
-    padding: 8px 18px;
-    background-color:#1D3557;
-    border:none;
-    border-radius:2vw;
-    color:white;
-}
+
 .navbar_rest .navbar_sub button{
     cursor: pointer;
-    font-size: 20px;
+    font-size: 15px;
     letter-spacing: 0.7px;
-    font-weight:500;
+    font-weight:700;
     padding: 8px 18px;
     background-color:rgb(197, 188, 155);
     border:none;
     border-radius:2vw;
     color: rgb(11, 13, 32);
+    gap:5px
 }
 .navbar_change .navbar_sub button{
     cursor: pointer;
-    font-size: 20px;
+    font-size: 15px;
     letter-spacing: 0.7px;
-    font-weight:450;
+    font-weight:700;
     padding: 8px 18px;
     background-color:rgb(212, 243, 216);
     border:none;
     border-radius:2vw;
     color: rgb(11, 13, 32);
+    gap:5px;
 }
 .navbar_rest .navbar_sub .styl_exp{
     display: flex;

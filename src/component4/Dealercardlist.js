@@ -31,7 +31,7 @@ export default function Dealercardlist({filterSearch}) {
             }
         return (
           <>
-    {isLoading?(<div style={{fontSize:'30px',textAlign:'center',fontFamily:'sans-serif,Raleway'}}><p>...Loading</p></div>):(<div className='grid_layout'>                                                                      
+    {isLoading?(<div style={{fontSize:'15px',textAlign:'center',fontFamily:'sans-serif,Raleway'}}><p style={{fontSize:'20px',fontWeight:'500'}}>...Loading</p></div>):(<div className='grid_layout'>                                                                      
     <div className="grid_layout_row row row-cols-1 row-cols-md-3 row-cols-lg-4">                      
     {getregVenue.filter((item)=>{if(item.address.toLowerCase().substring(0,4).includes(filterSearch.toLowerCase().substring(0,4))){
         return item;

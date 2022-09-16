@@ -16,13 +16,16 @@
 }
 .card_list_sub_norm .card_list_title_norm{
     color:rgb(30, 3, 43);
+    font-size: 16px;
+    font-weight: 700;
 }
 .card_list_sub_norm pre{
     font-weight: bold;
     color: rgb(30, 3, 43);
     display: inline-flex;
     gap:5px;
-    font-size: 17px;
+    font-size: 14px;
+    font-weight: 500;
 }
 .grid_layout_norm .grid_layout_col_norm{
     cursor: pointer;

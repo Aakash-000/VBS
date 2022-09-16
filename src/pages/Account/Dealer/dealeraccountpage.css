@@ -2,7 +2,6 @@
     background-color:rgb(250, 251, 253);
     display: flex;
     position: fixed;
-    padding:0.5vw 0 ;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgb(220, 226, 228);
@@ -83,7 +82,22 @@
     padding: 0px 16px;
     border-radius: 20px;
   }
-
+.sided-text .showCountDealer{
+    background-color: rgb(80, 74, 85);
+    color:white;
+    font-size: 10px;
+    font-weight: 800;
+    padding:3px 5px;
+    margin-top: 20px;
+    margin-left:0px;
+}
+.sided-text .showCountDealer:hover{
+  background-color: rgb(80, 74, 85);
+  color:white;
+}
+.sided-text .hideCountDealer{
+    display: none;
+}
 .sidebard-pa p:hover{
     color:#00A896;
 }
@@ -192,6 +206,41 @@
     justify-content: center;
     align-items: center;
     gap:20px;
+  }
+  .alert_text_push{
+    display: flex;
+    flex-direction: row;
+    margin-left: 330px;
+    margin-top: 20px;
+    margin-right: 30px;
+    align-items: center;
+   
+  }
+  .alert_text_push h4{
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    word-spacing: 1px;
+  }
+  .alert_text_extend h4{
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    word-spacing: 1px;
+  }
+  .alert_text_extend{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+    margin-right: 30px;
+    margin-left: 40px;
+  }
+  .alert_text_push_hide{
+    display: none;
+  }
+  .alert_text_extend_hide{
+    display: none;
   }
   .body_content_sub_push .card_body_sub_push{
     display: flex;

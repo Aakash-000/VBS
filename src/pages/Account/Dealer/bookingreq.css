@@ -1,7 +1,6 @@
 .sidebard {
     background-color:rgb(250, 251, 253);
     display: flex;
-    padding:0.5vw 0 ;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgb(220, 226, 228);
@@ -15,7 +14,9 @@
     flex-direction: row;
     align-items: center;
     gap:1vw;
+    font-size: 17px;
   }
+
 .sided-toggle .sidemenud-bars{
     margin-right:1vw;
 }
@@ -35,19 +36,24 @@
     position: fixed;
     left: -100%;
     transition: 850ms;
+    top:60px;
   }
   .sidebard .sided-logo img{
     height:60px;
     width:60px;
   }
   .sidebard button{
-    font-size:20px;
-    padding:0.5vw 1.5vw;
     background-color: #1D3557;
-    color:#F1FAEE;
-    border-radius: 2vw;
+    color: #F1FAEE;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    font-size: 17px;
+    padding:5px 15px;
+    margin:12px;
+    margin-right: 20px;
+    border-radius: 20px;
     border:none;
-    margin-right:3vw;
     }
 .sided-menu.active {
     left: 0;
@@ -69,10 +75,11 @@
     margin-left: 16px;
     color:#383a44;
     gap:10px;
+    font-size: 15px;
 }
 .sided-text a {
     text-decoration: none;
-    font-size: 18px;
+    font-size: 14.5px;
     width: 95%;
     display: flex;
     align-items: center;
@@ -115,9 +122,14 @@
     border-collapse: collapse;
 }
 tr th{
-    font-size:20px;
-    font-weight:500;
+  font-size:14px;
+  font-weight:500;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+tr td{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size:14px;
+  font-weight:500;
 }
 tr th,tr td{
     text-align:center;
@@ -128,19 +140,19 @@ tr pre{
 .button_accept{
     background-color: #2A9D8F;
     color:rgb(8, 0, 29);
-    padding: 5px 20px 5px 20px;
+    padding: 4px 17px 4px 17px;
     border: none;
     border-radius: 20px;
-    font-size: 17px;
+    font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .button_cancel{
     background-color: #ffd43b;
     color:#23013f;
-    padding: 5px 20px 5px 20px;
+    padding: 4px 17px 4px 17px;
     border-radius: 20px;
     border: none;
-    font-size: 17px;
+    font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .table_container_req_title{
@@ -163,7 +175,7 @@ tr pre{
     align-items: center;
 }
 .right-group-de p{
-    font-weight: 500;
+    font-weight: 700;
     font-size:15px;
 }
 .right-group-de button:hover{

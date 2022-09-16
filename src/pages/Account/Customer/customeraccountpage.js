@@ -39,7 +39,7 @@ export function VenuecarddetailCustomer(){
     sessionStorage.removeItem('token');
     sessionStorage.clear();
     localStorage.clear();
-    navigate('/customerlogin');
+    navigate('/login');
     window.location.reload();
   }
 
@@ -117,7 +117,7 @@ export function VenuecarddetailCustomer(){
           </nav>
           </IconContext.Provider>
           </div>
-          {isLoading?(<div style={{fontSize:'30px',display:'flex',marginTop:'300px',marginLeft:'270px',justifyContent:'center',alignItems:'center',textAlign:'center',fontFamily:'sans-serif,Raleway'}}><p>...Loading</p></div>):(<div className='view_detail_cus'>
+          {isLoading?(<div style={{fontSize:'20px',display:'flex',marginTop:'300px',marginLeft:'270px',justifyContent:'center',alignItems:'center',textAlign:'center',fontFamily:'sans-serif,Raleway'}}><p style={{fontWeight:'500'}}>...Loading</p></div>):(<div className='view_detail_cus'>
           <div class="view_detail_cus_sub card mb-3" style={{maxWidth:'1000px',boxShadow:'rgba(230, 225, 219, 0.979) 5px 5px 10px 2px'}}>
             <div class="row g-0">
             <div class="button_position col-md-8">
@@ -127,17 +127,17 @@ export function VenuecarddetailCustomer(){
             <Bookingform/>
            </div>
            <div class="col-md-4">
-            <div class="card-body">
+            <div class="card_body_detail_cus card-body">
               <div className="card_body_clickout">
               <h5 class="regven card-title">{getregvenue.venueName}</h5>
-              <button className="card_body_clickout_sub" onClick={handleOut}><FiChevronLeft size={25}/></button>
+              <button className="card_body_clickout_sub" onClick={handleOut}><FiChevronLeft size={20}/></button>
               </div>
               <p class="d_card_title card-text">{getregvenue.userName}</p>
               <p class="card-text" style={{display:'flex'}}><Reacticontwentysix/>{getregvenue.address}</p>
-              <p class="card-text">{getregvenue.contactNumber}</p>
+              <p class="car d-text">{getregvenue.contactNumber}</p>
               <p class="card-text">{getregvenue.email}</p>
               <p class="d_card_desc card-text">{getregvenue.description}</p>
-              <p class="card-text" style={{display:'flex'}}><Reacticontwentyfour/>{getregvenue.capacity}</p>
+              <p class="card-text" style={{display:'flex'}}><Reacticontwentyfour/>Venue Capacity is{getregvenue.capacity}</p>
               <h4>Base Cost Payment for 100 Guests </h4>
               <li>Marriage:{getFunctionlist.marriageCost}</li>
               <li>Conclave:{getFunctionlist.conclaveCost}</li>
@@ -217,7 +217,7 @@ export default function Customeraccount() {
     const logout = (e)=> {
       sessionStorage.removeItem('token');
       sessionStorage.clear();
-      navigate('/customerlogin');
+      navigate('/login');
       window.location.reload();
     }
     
@@ -394,7 +394,7 @@ export function MybookedVenue(){
     sessionStorage.removeItem('token');
     sessionStorage.clear();
     localStorage.clear();
-    navigate('/customerlogin');
+    navigate('/login');
     window.location.reload();
 }
   

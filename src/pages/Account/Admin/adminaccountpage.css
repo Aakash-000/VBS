@@ -1,25 +1,24 @@
-.sidebara {
+.sidebara{
     background-color:rgb(250, 251, 253);
     display: flex;
     position: fixed;
-    padding:0.5vw 0 ;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgb(220, 226, 228);
   }
 
 .sidemenua-bars {
-    margin-left: 5vw;
-    font-size: 20px;
+    margin-left: 55px;
+    font-size: 15px;
     background: none;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap:1vw;
+    gap:12px;
   }
 
 .sidea-toggle .sidemenua-bars{
-    margin-right:1vw;
+    margin-right:12px;
 }
 
 .sidea-menu {
@@ -45,14 +44,18 @@
       gap:10px;
   }
   
-  .sidebara button{
-    font-size:20px;
-    padding:0.5vw 1.5vw;
+  .sidebara .right-group-ad button{
+    width: 30%;
     background-color: #1D3557;
-    color:#F1FAEE;
-    border-radius: 2vw;
+    color: #F1FAEE;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    font-size: 17px;
+    padding:5px 15px;
+    margin:12px;
+    border-radius: 20px;
     border:none;
-    margin-right:3vw;
     }
     
 .sidea-menu.active {
@@ -74,11 +77,12 @@
     align-items: center;
     margin-left: 16px;
     color:#383a44;
-    gap:0.5vw;
+    gap:10px;
+    font-size: 16px;
 }
 .sidea-text a {
     text-decoration: none;
-    font-size: 18px;
+    font-size: 14.5px;
     width: 95%;
     display: flex;
     align-items: center;
@@ -94,14 +98,15 @@
     padding: 0;
   }
   
-.sidea-toggle {
+.sidea-toggle{
     width: 100%;
     height: 80px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-right: 20px;
-  }
+}
+
 .table_t{
       padding-top:50px;
 }
@@ -120,8 +125,9 @@
 }
 .table_container_accept_title{
     text-align: center;
-    font-size: 30px;
+    font-size: 16px;
     padding:5px 0px;
+    font-weight: 600;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .table_container_accept_body.table{
@@ -132,13 +138,17 @@
     justify-content: center;
     align-items: center;
 }
-tr th{
-    font-size:20px;
-    font-weight:500;
+tr th ,tr td{
+    font-size:14px;
+    font-weight:700;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .table_container_accept_body.table tr{
     align-items: center;
+}
+.table_t .table_container_req_title{
+    font-size: 16px;
+    font-weight: 500;
 }
 tr th,tr td{
     text-align:center;
@@ -148,25 +158,26 @@ tr th,tr td{
 .button_accept{
     background-color: #00A896;
     color:rgb(8, 0, 29);
-    padding: 5px 20px 5px 20px;
+    padding: 4px 17px 4px 17px;
     border: none;
     border-radius: 20px;
-    font-size: 17px;
+    font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .button_cancel{
     background-color: #ffd43b;
     color:#23013f;
-    padding: 5px 20px 5px 20px;
+    padding: 4px 17px 4px 17px;
     border-radius: 20px;
     border: none;
-    font-size: 17px;
+    font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .table_container_title{
     text-align: center;
-    font-size: 30px;
+    font-size: 15px;
     padding:5px 0px;
+    font-weight: 600;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .button_cancel:hover{
@@ -178,6 +189,8 @@ tr th,tr td{
 }
 .right-group-ad p{
     margin-top: 15px;
+    font-size: 14px;
+    font-weight: 700;
 }
 tr .view_detail{
     border: none;
@@ -186,6 +199,20 @@ tr .view_detail{
     color:rgb(58, 47, 28);
     font-weight: 600;
     border-radius: 20px;
-    font-size: 18px;
 }   
-
+.sidea-text .showCountAdmin{
+    background-color: rgb(80, 74, 85);
+    color:white;
+    font-size: 10px;
+    font-weight: 800;
+    padding:3px 5px;
+    margin-top: 20px;
+    margin-left:0px;
+}
+.sidea-text .showCountAdmin:hover{
+  background-color: rgb(80, 74, 85);
+  color:white;
+}
+.sidea-text .hideCountAdmin{
+    display: none;
+}

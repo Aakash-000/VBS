@@ -137,7 +137,7 @@ export default function Bookingform() {
       <form id='venue_booking_form' onSubmit={submitHandler}>
       <div className='booking_form'>
       <label htmlFor='date'>DateBooked:</label>
-      <input autoComplete="off" type="date" name='bookingDate' min={`${Year}-0${Month}-0${Day}`} required={true}  onChange={e=>setbookingDetail({...bookingDetail,bookingDate:e.target.value})} value={bookingDetail.bookingDate}/>
+      <input autoComplete="off" type="date" name='bookingDate' min={`${Year}-0${Month}-${Day}`} required={true}  onChange={e=>setbookingDetail({...bookingDetail,bookingDate:e.target.value})} value={bookingDetail.bookingDate}/>
       </div>
       <div className='booking_form'>
       <label htmlFor='functionType'>FunctionType:</label>

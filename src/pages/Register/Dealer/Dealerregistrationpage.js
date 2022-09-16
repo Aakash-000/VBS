@@ -42,7 +42,7 @@ export default function Dealerregistrationpage() {
         }
       }); 
           setTimeout(()=>{
-            navigate('/dealerlogin')
+            navigate('/login')
           },5000)
           window.scrollTo(0,0)
           setDealerDetail(()=>({...dealerDetail,email:"",venueName:"",capacity:"",userName:"",address:"",contactNumber:"",password:"",description:""}));

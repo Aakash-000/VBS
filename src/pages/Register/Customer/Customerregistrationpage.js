@@ -32,7 +32,7 @@ export default function Customerregistrationpage() {
         
         setCustomerDetail(()=>({...customerDetail,email:" ",username:" ",city_name:" ",mobile_no:" ",password:" "}));
         setTimeout(()=>{
-          navigate('/customerlogin');
+          navigate('/login');
         },5000)
         setisvalidS(false)
         const timeId = setTimeout(() => {

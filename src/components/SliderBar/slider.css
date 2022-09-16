@@ -135,6 +135,8 @@ article h4 {
   text-transform: uppercase;
   color: var(--clr-primary-5);
   margin-bottom: 0.25rem;
+  font-size: 14px;
+  
 }
 .title {
   text-transform: capitalize;

@@ -14,12 +14,14 @@ import axios from 'axios'
 
 export default function Adminaccount() {
   const[noToken,setnoToken] = useState(false);
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(true);
   const showSidebar = () => setSidebar(!sidebar);
   const navigate = useNavigate();
   const {adminemail} = useParams();
   const[getFilepath,setFilepath] = useState([]);
-  
+  const[countReq,setcountReq] = useState(0);
+  const[showCount,setshowCount] = useState(false);
+
   const config = {  
     headers:{
       Authorization : 'Bearer' +" "+ JSON.parse(sessionStorage.getItem('token'))
@@ -29,7 +31,15 @@ export default function Adminaccount() {
   useEffect(async()=>{
     try{
       let response = await axios.get('https://venue-booking-system2.herokuapp.com/admin-/registerRequests',config)
-        setFilepath(response.data.data.filePath)
+      let nextResponse = await axios.get(`https://venue-booking-system2.herokuapp.com/admin-/newRegistration`,config); 
+      console.log(nextResponse)
+      setcountReq(nextResponse.data.data)
+      if(nextResponse.data.data != 0){
+        setshowCount(true)
+      }else{
+        setshowCount(false)
+      }
+      setFilepath(response.data.data.filePath)
     }catch(err){
       console.log(err)
     }
@@ -50,7 +60,7 @@ export default function Adminaccount() {
     sessionStorage.removeItem('token');
     sessionStorage.clear();
     localStorage.clear();
-    navigate('/adminlogin');
+    navigate('/login');
     window.location.reload();
   }
   return (
@@ -60,7 +70,7 @@ export default function Adminaccount() {
       <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebara">
           <Link to="#" className="sidemenua-bars">
-            <FaIcons.FaBars onClick={showSidebar} />
+            <FaIcons.FaBars onClick={showSidebar} style={{fontSize:'17px'}}/>
             <div className='sidea-logo'>
               <img src={Logo} alt='logo'/>
           </div>
@@ -81,7 +91,8 @@ export default function Adminaccount() {
               return (
                 <li key={index} className='sidea-text'>
                   <Link to={`${item.foradmin.path}`+`/${adminemail}`} className='sidebara-pa'>
-                    <p>{item.foradmin.icon}{item.foradmin.title}</p>
+                  {item.foradmin.title == "Venue Add Request"?(<p>{item.foradmin.icon}
+                    {item.foradmin.title}<p className={showCount?"showCountAdmin":"hideCountAdmin"}>{countReq}</p></p>):(<p>{item.foradmin.icon}{item.foradmin.title}</p>)}
                   </Link>
                 </li>
               );
@@ -135,7 +146,7 @@ export default function Adminaccount() {
 
 export function Venueaccept(){
   const[noToken,setnoToken] = useState(false);
-  const [sidebar, setSidebar] = useState(false);    
+  const [sidebar, setSidebar] = useState(true);    
   const [pendingVenuelist,setpendingVenuelist] = useState([]);
   const {adminemail} = useParams();
   const[accept,setAccept] = useState(false);
@@ -217,7 +228,7 @@ export function Venueaccept(){
     sessionStorage.removeItem('token');
     sessionStorage.clear();
     localStorage.clear();
-    navigate('/adminlogin');
+    navigate('/login');
     window.location.reload();
   }
 
@@ -230,7 +241,7 @@ export function Venueaccept(){
       <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebara">
           <Link to="#" className="sidemenua-bars">
-            <FaIcons.FaBars onClick={showSidebar} />
+            <FaIcons.FaBars onClick={showSidebar} style={{fontSize:'17px'}}/>
             <div className='sidea-logo'>
               <img src={Logo} alt='logo'/>
           </div>
@@ -294,7 +305,7 @@ export function Venueaccept(){
 
 export function Customerlist(){
   const[noToken,setnoToken] = useState(false);
-  const [sidebar, setSidebar] = useState(false);    
+  const [sidebar, setSidebar] = useState(true);    
   const [customerlist,setcustomerlist] = useState([]);
   const {adminemail} = useParams();
   const showSidebar = () => setSidebar(!sidebar); 
@@ -328,7 +339,7 @@ export function Customerlist(){
     sessionStorage.removeItem('token');
     sessionStorage.clear();
     localStorage.clear();
-    navigate('/adminlogin');
+    navigate('/login');
     window.location.reload();
   }
 
@@ -339,7 +350,7 @@ export function Customerlist(){
            <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebara">
           <Link to="#" className="sidemenua-bars">
-            <FaIcons.FaBars onClick={showSidebar} />
+            <FaIcons.FaBars onClick={showSidebar} style={{fontSize:'17px'}}/>
             <div className='sidea-logo'>
               <img src={Logo} alt='logo'/>
           </div>
@@ -387,7 +398,7 @@ export function Customerlist(){
             <td>{item.name}</td>
             <td>{item.mobile_no}</td>
           <div class="modal-body">
-             <pre>FullName:{item.email}</pre>
+             <pre>Email:{item.email}</pre>
           <pre>Address:{item.city_name}</pre>
           </div>
     </tr>
@@ -403,7 +414,7 @@ export function Customerlist(){
 
 export function Venuelist(){
   const[noToken,setnoToken] = useState(false);
-  const [sidebar, setSidebar] = useState(false);    
+  const [sidebar, setSidebar] = useState(true);    
   const [venuelist,setvenuelist] = useState([]);
   const {adminemail} = useParams();
   const showSidebar = () => setSidebar(!sidebar); 
@@ -437,7 +448,7 @@ export function Venuelist(){
     sessionStorage.removeItem('token');
     sessionStorage.clear();
     localStorage.clear();
-    navigate('/adminlogin');
+    navigate('/login');
     window.location.reload();
   }
 
@@ -449,7 +460,7 @@ export function Venuelist(){
            <IconContext.Provider value={{ color: "#011627" }}>
         <div className="sidebara">
           <Link to="#" className="sidemenua-bars">
-            <FaIcons.FaBars onClick={showSidebar} />
+            <FaIcons.FaBars onClick={showSidebar} style={{fontSize:'17px'}}/>
             <div className='sidea-logo'>
               <img src={Logo} alt='logo'/>
           </div>
@@ -463,7 +474,7 @@ export function Venuelist(){
           <ul className="sidea-menu-items" onClick={showSidebar}>
             <li className="sidea-toggle">
               <Link to="#" className="sidemenua-bars">
-                <AiIcons.AiOutlineClose/>
+                <AiIcons.AiOutlineClose />
               </Link>
             </li>
             {SidebarDataforadmin.map((item, index) => {

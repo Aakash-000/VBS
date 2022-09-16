@@ -1,5 +1,4 @@
 import React, { useState,useEffect} from 'react';
-import axios from 'axios'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Body from './pages/Landing/Body.js'
@@ -29,11 +28,11 @@ export default function App() {
         <Route path="/" element={<Body/>}/>
         <Route path="/explorevenue" element={<Explorevenue/>}/>
         <Route path="/explorevenue/normal" element={<Explorevenuenormal/>}/>
-        <Route path="/adminlogin" element={<Adminloginpage/>}/>
+        <Route path="/login" element={<Customerloginpage/>}/>
         <Route path='/adminregistration' element={<Adminregisterpage/>}/>
-        <Route path="/customerlogin" element={<Customerloginpage/>}/>
+        <Route path="/login" element={<Customerloginpage/>}/>
         <Route path="/dealerregistration" element={<Dealerregistrationpage/>}/>
-        <Route path="/dealerlogin" element={<Dealerloginpage/>}/>
+        <Route path="/login" element={<Customerloginpage/>}/>
         <Route path="/customerregistration" element={<Customerregistrationpage/>}/>
         <Route path="/explorevenue/venue/:id" element={ <Venuecarddetailpage/>}/>
         <Route path="/dealeraccount/:dealeremail/:dealername"  element={<Dealeraccountpage/>}/>
